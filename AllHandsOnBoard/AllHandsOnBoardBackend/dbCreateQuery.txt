@@ -1,0 +1,38 @@
+-- Database: all_hands_on_board
+
+-- DROP DATABASE all_hands_on_board;
+--DROP TABLE task_aggregation;
+--DROP TABLE tasks;
+--DROP TABLE users;
+CREATE TABLE users(
+	user_ID SERIAL PRIMARY KEY,
+	name varchar(20) NOT NULL,
+	surname varchar(30) NOT NULL,
+	email varchar(30),
+	occupation varchar(20) NOT NULL,
+	index_no int,
+	academic_title varchar(20),
+	department varchar(30),
+	points int
+);
+
+CREATE TABLE tasks(
+	task_ID SERIAL PRIMARY KEY,
+	stateOfTask varchar(4) DEFAULT('TODO'),
+	uploader_ID int REFERENCES users(user_ID) ON DELETE SET NULL,
+	task_description varchar(400),
+	short_description varchar(50),
+	points_gained int NOT NULL,
+	tag varchar(30),
+	work_start_date TIMESTAMP NOT NULL,
+	work_finish_date TIMESTAMP,
+	signing_finish_date TIMESTAMP,
+	upload_date TIMESTAMP default CURRENT_TIMESTAMP,
+	no_of_students int NOT NULL
+);
+
+CREATE TABLE task_aggregation(
+	aggegation_ID SERIAL PRIMARY KEY,
+	user_ID int REFERENCES users(user_ID) ON DELETE CASCADE,
+	task_ID int REFERENCES tasks(task_ID) ON DELETE CASCADE
+);
