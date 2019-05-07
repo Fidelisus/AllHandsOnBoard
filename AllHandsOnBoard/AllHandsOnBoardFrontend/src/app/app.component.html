@@ -1,0 +1,22 @@
+<div class="login-frame">
+  <form>
+    <h3>ID number:</h3>
+    <div class="input-wrapper">
+      <input type="text" placeholder="Your ID" #login
+             (keypress)="enterHandler(login, pass, $event)">
+    </div>
+    <h3>Password:</h3>
+    <div class="input-wrapper">
+      <input type="password" placeholder="Password" #pass
+             (keypress)="enterHandler(login, pass, $event)">
+    </div>
+    <br>
+    <div class="input-wrapper">
+      <button type="button" class="login-button"
+              (click)="clickHandler(login, pass)">
+        Login
+      </button>
+    </div>
+  </form>
+  {{getErrorMessages(login, pass)}}
+</div>
