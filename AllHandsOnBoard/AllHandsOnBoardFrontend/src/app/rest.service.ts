@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
 
-  endpoint = 'https://localhost:5001';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  // testUrl = 'https://jsonplaceholder.typicode.com/users';
+  apiUrl = 'localhost:5001/api';
 
   constructor(private http: HttpClient) { }
 
-  private extractData(res: Response) {
-    let body = res;
-    return body || { };
+  /* TEST FUNCTION FROM THE PLACEHOLDER API - REQUIRES UNCOMMENTING APPCOMPONENT.TS STUFF
+  getUserData(): Observable<any> {
+    return this.http.get(this.testUrl);
+  }
+  */
+
+  getData(): Observable<any> {
+    return this.http.get(this.apiUrl + '/Login');
   }
 }
