@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   loginAuth(login: HTMLInputElement, pass: HTMLInputElement): boolean {
     console.log(this.restService.getData()
       .subscribe(data => this.values = data));
+    console.log(this.values);
     if (login.value === 'admin' && pass.value === 'admin') {
       console.log(true);
       return true;
