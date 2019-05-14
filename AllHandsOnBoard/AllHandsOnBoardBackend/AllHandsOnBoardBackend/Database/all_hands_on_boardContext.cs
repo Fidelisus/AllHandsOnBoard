@@ -141,6 +141,10 @@ namespace AllHandsOnBoardBackend
                     .IsRequired()
                     .HasColumnName("surname")
                     .HasMaxLength(30);
+
+                entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.Token).HasColumnName("token");
             });
         }
     }

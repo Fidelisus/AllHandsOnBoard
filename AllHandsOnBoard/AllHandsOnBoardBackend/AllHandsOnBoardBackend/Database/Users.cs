@@ -21,6 +21,8 @@ namespace AllHandsOnBoardBackend
         public string Department { get; set; }
         public int? Points { get; set; }
 
+        public string Token {get;set;}
+        public string Password {get;set;}
         public ICollection<TaskAggregation> TaskAggregation { get; set; }
         public ICollection<Tasks> Tasks { get; set; }
     }
