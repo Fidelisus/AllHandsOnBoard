@@ -7,15 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RestService } from './rest.service';
 import { TaskListComponent } from './task-list/task-list.component';
-import {RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './login/login.component';
-
-const appRoutes: Routes = [
-  { path: 'task-list', component: TaskListComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
-];
 
 @NgModule({
   declarations: [
@@ -28,7 +20,6 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true })
   ],
   providers: [RestService],
   bootstrap: [AppComponent]

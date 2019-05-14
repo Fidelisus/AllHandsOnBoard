@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
+import { Router } from '@angular/router';
 import { User } from '../user.model';
 
 @Component({
@@ -12,19 +13,28 @@ export class LoginComponent implements OnInit {
   // users: User[];
   values: string[];
 
-  constructor(private restService: RestService) { }
+  constructor(private restService: RestService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
   enterHandler(login: HTMLInputElement, pass: HTMLInputElement, event: KeyboardEvent): boolean {
     if (event.keyCode === 13) {
-      return this.loginAuth(login, pass);
+      if (this.loginAuth(login, pass)) {
+        this.router.navigateByUrl('home');
+      } else {
+        return false;
+      }
     }
   }
 
   clickHandler(login: HTMLInputElement, pass: HTMLInputElement): boolean {
-    return this.loginAuth(login, pass);
+    if (this.loginAuth(login, pass)) {
+      this.router.navigateByUrl('home');
+    } else {
+      return false;
+    }
   }
 
   loginAuth(login: HTMLInputElement, pass: HTMLInputElement): boolean {
