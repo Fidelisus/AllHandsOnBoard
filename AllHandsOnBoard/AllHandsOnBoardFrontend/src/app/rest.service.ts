@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
 import { User } from './user.model';
 
 @Injectable({
@@ -19,7 +18,8 @@ export class RestService {
     return this.http.get(this.testUrl);
   }
   */
-  /*--for the testing
+  
+  //for the testing
   getUser(): User{
     return {
       user_id: 41234,
@@ -32,10 +32,12 @@ export class RestService {
       department: 'IFE',
       points: 10};
   }
-  */
+  
+  /*
   getUser():Observable<User>{
     return this.http.get(this.apiUrl + '/Users').map(resp => resp.json() as User);
   }
+  */
 
   getData(): Observable<any> {
     return this.http.get(this.apiUrl + '/Login');
