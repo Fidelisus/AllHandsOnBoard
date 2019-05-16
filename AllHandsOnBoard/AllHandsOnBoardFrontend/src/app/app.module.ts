@@ -21,8 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true })
+    HttpClientModule
   ],
   providers: [RestService],
   bootstrap: [AppComponent]
