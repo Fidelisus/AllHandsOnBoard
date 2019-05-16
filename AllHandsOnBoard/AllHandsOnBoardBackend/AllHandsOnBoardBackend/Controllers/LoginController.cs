@@ -23,23 +23,13 @@ namespace AllHandsOnBoardBackend.Controllers
 
                 userService = userServiceParam;
             }
-
+        
             // GET: api/Login
             [EnableCors("AllowAll")]
             [HttpGet]
-            public IEnumerable<string> Get()
+            public JsonResult Get()
             {
-
-                Console.WriteLine("Get request Invoked");
-                return new string[] { "value1", "value2" };
-            }
-
-            // GET: api/Login/5
-            [AllowAnonymous]
-            [HttpGet("{id}", Name = "Get")]
-            public string Get(int id)
-            {
-                return "value";
+            return new JsonResult("Get request Invoked");
             }
 
             // POST: api/Login
@@ -54,17 +44,6 @@ namespace AllHandsOnBoardBackend.Controllers
 
                 return Ok(user);
             }
-
-            // PUT: api/Login/5
-            [HttpPut("{id}")]
-            public void Put(int id, [FromBody] string value)
-            {
-            }
-
-            // DELETE: api/ApiWithActions/5
-            [HttpDelete("{id}")]
-            public void Delete(int id)
-            {
-            }
+           
         }
 }
