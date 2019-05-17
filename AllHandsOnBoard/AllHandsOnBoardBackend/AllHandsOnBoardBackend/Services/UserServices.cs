@@ -15,7 +15,7 @@ namespace AllHandsOnBoardBackend.Services
 
     public interface IUserService
     {
-        Users Authenticate(int userID, string password);
+        Users Authenticate(string email, string password);
         
         
     }
@@ -33,9 +33,9 @@ namespace AllHandsOnBoardBackend.Services
 
        
 
-        public Users Authenticate(int userIDParam, string password){
+        public Users Authenticate(string userIDParam, string password){
             DbSet<Users> usersDB = context.Users;
-            var user = context.Users.SingleOrDefault(x => x.UserId == userIDParam);
+            var user = context.Users.SingleOrDefault(x => x.Email == userIDParam);
             if(user != null){
                 if(user.Password == password){
                     //The user exists and the password is correct
@@ -51,7 +51,7 @@ namespace AllHandsOnBoardBackend.Services
                     {
                         Subject = new ClaimsIdentity(new Claim[] 
                         {
-                            new Claim(ClaimTypes.Name, Convert.ToString(user.UserId))
+                            new Claim(ClaimTypes.Name, user.Email)
                         }),
                         Expires = DateTime.UtcNow.AddDays(7),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

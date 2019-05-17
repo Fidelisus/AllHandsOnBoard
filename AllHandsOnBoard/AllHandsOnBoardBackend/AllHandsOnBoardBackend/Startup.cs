@@ -129,7 +129,9 @@ namespace AllHandsOnBoardBackend
             {
                 Name = "Lukasz",
                 Surname = "Sobocinski",
-                Occupation = "admin"
+                Occupation = "admin",
+                Email = "whatever@p.lodz.pl",
+                Password = "admin"
             };
 
             using (var context = new all_hands_on_boardContext())

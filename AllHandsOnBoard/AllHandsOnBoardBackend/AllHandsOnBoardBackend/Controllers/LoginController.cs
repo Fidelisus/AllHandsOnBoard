@@ -34,11 +34,12 @@ namespace AllHandsOnBoardBackend.Controllers
 
             // POST: api/Login
             [AllowAnonymous]
-            [HttpPost("authenticate")]
+            //[HttpPost("/authenticate")]
+            [HttpPost]
             public IActionResult Authenticate([FromBody] Users userParam)
             {
-                var user = userService.Authenticate(userParam.UserId, userParam.Password);
-
+                var user = userService.Authenticate(userParam.Email, userParam.Password);
+                Console.WriteLine("Authenticate request Invoked");
                 if(user == null)
                     return BadRequest(new {message = "Username or password is incorrect"});
 

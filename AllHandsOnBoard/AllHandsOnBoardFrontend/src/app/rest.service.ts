@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
 
@@ -8,16 +8,9 @@ import { User } from './user.model';
 })
 export class RestService {
 
-  // testUrl = 'https://jsonplaceholder.typicode.com/users';
   apiUrl = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient) { }
-
-  /* TEST FUNCTION FROM THE PLACEHOLDER API - REQUIRES UNCOMMENTING APPCOMPONENT.TS STUFF
-  getUserData(): Observable<any> {
-    return this.http.get(this.testUrl);
-  }
-  */
   
   //for the testing
   getUser(): User{
@@ -32,14 +25,21 @@ export class RestService {
       department: 'IFE',
       points: 10};
   }
-  
-  /*
-  getUser():Observable<User>{
-    return this.http.get(this.apiUrl + '/Users').map(resp => resp.json() as User);
-  }
-  */
 
   getData(): Observable<any> {
     return this.http.get(this.apiUrl + '/Login');
+  }
+
+  getToken(id: string, pass: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.patch(this.apiUrl + '/Login',
+      {
+        Email: id,
+        Password: pass
+      });
   }
 }

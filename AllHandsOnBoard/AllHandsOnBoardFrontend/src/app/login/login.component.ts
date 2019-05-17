@@ -10,7 +10,6 @@ import { User } from '../user.model';
 })
 export class LoginComponent implements OnInit {
 
-  // users: User[];
   values: string[];
 
   constructor(private restService: RestService,
@@ -38,9 +37,11 @@ export class LoginComponent implements OnInit {
   }
 
   loginAuth(login: HTMLInputElement, pass: HTMLInputElement): boolean {
-    console.log(this.restService.getData()
+    //console.log(this.restService.getData()
+    //  .subscribe(data => this.values = data));
+    //console.log(this.values);
+    console.log(this.restService.getToken(login.value, pass.value)
       .subscribe(data => this.values = data));
-    console.log(this.values);
     if (login.value === 'admin' && pass.value === 'admin') {
       console.log(true);
       return true;
@@ -55,11 +56,7 @@ export class LoginComponent implements OnInit {
       return 'Fields cannot be empty.';
     }
   }
-  /* TEST API FUNCTION
-  getinfo() {
-    console.log(this.users);
-  }
-  */
+  
   getinfo() {
     console.log(this.values);
   }

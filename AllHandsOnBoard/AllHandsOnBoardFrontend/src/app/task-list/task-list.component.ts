@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskListComponent implements OnInit {
 
+  taskData = [];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  searchFor(parameter: string) {
+    console.log(parameter);
+  }
 }
