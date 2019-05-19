@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Json;
 using Newtonsoft.Json;
+using AllHandsOnBoardBackend.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AllHandsOnBoardBackend.Controllers
 {
@@ -14,49 +16,41 @@ namespace AllHandsOnBoardBackend.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        IUserService userService;
+
+        public UsersController(IUserService userServiceParam)
+        {
+            userService = userServiceParam;
+        }
+        
         // GET: api/Users
         [HttpGet]
         public JsonResult Get()
         {
-            var user = new List<Users>();
+            var users = userService.getUsers();
 
-            using (var context = new all_hands_on_boardContext())
+            if (users != null)
             {
-                Log.Information("User GET Invoked");
-                try
-                {
-                    user = context.Users.ToList<Users>();
-                }
-                catch (InvalidOperationException e)
-                {
-                    Log.Error(String.Concat("While getting all users", e.Message));
-                    return new JsonResult(false);
-                }
+                return new JsonResult(users);
             }
-
-            return new JsonResult(user);
+            else
+            {
+                return new JsonResult(false);
+            }
         }
-
+        
         // GET: api/Users/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
-            var user = new Users();
-
-            using (var context = new all_hands_on_boardContext())
+            var user = userService.getUser(id);
+            if (user != null)
             {
-                try
-                {
-                    user  = context.Users.First(a => a.UserId == id);
-                }
-                catch(InvalidOperationException e)
-                {
-                    Log.Error(String.Concat("While getting single user", e.Message));
-                    return new JsonResult(false);
-                }
+                return new JsonResult(user);
             }
-
-            return new JsonResult(user);
+            else{
+                return new JsonResult(false);
+            }
         }
     }
 }

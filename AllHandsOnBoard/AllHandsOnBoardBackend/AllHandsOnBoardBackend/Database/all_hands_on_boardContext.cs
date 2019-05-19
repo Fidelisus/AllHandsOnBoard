@@ -23,8 +23,8 @@ namespace AllHandsOnBoardBackend
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=all_hands_on_board;Username=admin;Password=admin");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=all_hands_on_board;Username=admin;Password=admin");
             }
         }
 
@@ -32,26 +32,22 @@ namespace AllHandsOnBoardBackend
         {
             modelBuilder.Entity<TaskAggregation>(entity =>
             {
-                entity.HasKey(e => e.AggegationId);
+                entity.HasKey(e => new { e.UserId, e.TaskId });
 
                 entity.ToTable("task_aggregation");
 
-                entity.Property(e => e.AggegationId).HasColumnName("aggegation_id");
+                entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.Property(e => e.TaskId).HasColumnName("task_id");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.HasOne(d => d.Task)
                     .WithMany(p => p.TaskAggregation)
                     .HasForeignKey(d => d.TaskId)
-                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("task_aggregation_task_id_fkey");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.TaskAggregation)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("task_aggregation_user_id_fkey");
             });
 
@@ -109,6 +105,10 @@ namespace AllHandsOnBoardBackend
 
                 entity.ToTable("users");
 
+                entity.HasIndex(e => e.Email)
+                    .HasName("users_email_key")
+                    .IsUnique();
+
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.Property(e => e.AcademicTitle)
@@ -135,6 +135,10 @@ namespace AllHandsOnBoardBackend
                     .HasColumnName("occupation")
                     .HasMaxLength(20);
 
+                entity.Property(e => e.Password)
+                    .HasColumnName("password")
+                    .HasMaxLength(50);
+
                 entity.Property(e => e.Points).HasColumnName("points");
 
                 entity.Property(e => e.Surname)
@@ -142,9 +146,9 @@ namespace AllHandsOnBoardBackend
                     .HasColumnName("surname")
                     .HasMaxLength(30);
 
-                entity.Property(e => e.Password).HasColumnName("password");
-
-                entity.Property(e => e.Token).HasColumnName("token");
+                entity.Property(e => e.Token)
+                    .HasColumnName("token")
+                    .HasMaxLength(50);
             });
         }
     }

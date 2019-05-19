@@ -85,7 +85,8 @@ namespace AllHandsOnBoardBackend
             // configure DI for application services
             services.AddSingleton(appSettingsConfig);
             services.AddScoped<IUserService, UserServices>();
-            
+            services.AddScoped<ITasksService, TasksService>();
+
 
         }
 
