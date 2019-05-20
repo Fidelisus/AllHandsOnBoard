@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,11 @@ import { User } from './user.model';
 export class RestService {
 
   apiUrl = 'http://localhost:5000/api';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private http: HttpClient) { }
   
@@ -24,22 +30,5 @@ export class RestService {
       academic_title: '-',
       department: 'IFE',
       points: 10};
-  }
-
-  getData(): Observable<any> {
-    return this.http.get(this.apiUrl + '/Login');
-  }
-
-  getToken(id: string, pass: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.patch(this.apiUrl + '/Login',
-      {
-        Email: id,
-        Password: pass
-      });
   }
 }

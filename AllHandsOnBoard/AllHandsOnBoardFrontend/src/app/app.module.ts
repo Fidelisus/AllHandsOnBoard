@@ -9,6 +9,7 @@ import { RestService } from './rest.service';
 import { TaskListComponent } from './task-list/task-list.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ProfileComponent } from './profile/profile.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RestService],
+  providers: [RestService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

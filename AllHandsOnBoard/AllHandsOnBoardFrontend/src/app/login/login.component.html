@@ -21,4 +21,5 @@
   {{getErrorMessages(login, pass)}}
 </div>
 
-<button class="login-button" (click)="getinfo()">getinfo</button>
+<button class="login-button" (click)="checkIfLogged()">Check</button>
+<button class="login-button" (click)="authService.logout()">Logout</button>

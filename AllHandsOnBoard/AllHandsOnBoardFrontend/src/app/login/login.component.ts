@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
 import { User } from '../user.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,21 +10,28 @@ import { User } from '../user.model';
 })
 export class LoginComponent implements OnInit {
 
-  values: string[];
-
-  constructor(private restService: RestService,
+  constructor(private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
+    console.log('login on init');
+    this.authService.logout();
   }
 
-  enterHandler(login: HTMLInputElement, pass: HTMLInputElement, event: KeyboardEvent): boolean {
+  enterHandler(login: HTMLInputElement, pass: HTMLInputElement, event: KeyboardEvent) {
     if (event.keyCode === 13) {
-      if (this.loginAuth(login, pass)) {
+      /*if (this.loginAuth(login, pass)) {
         this.router.navigateByUrl('home');
       } else {
         return false;
-      }
+      }*/
+
+      this.authService.login(login.value, pass.value)
+        .subscribe(res => this.authService.setSession(res),
+                   err => console.error(err),
+                () => { if (this.authService.isLoggedIn()) {
+                  this.router.navigateByUrl('home');
+                }});
     }
   }
 
@@ -37,16 +44,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginAuth(login: HTMLInputElement, pass: HTMLInputElement): boolean {
-    //console.log(this.restService.getData()
-    //  .subscribe(data => this.values = data));
-    //console.log(this.values);
-    console.log(this.restService.getToken(login.value, pass.value)
-      .subscribe(data => this.values = data));
-    if (login.value === 'admin' && pass.value === 'admin') {
-      console.log(true);
+    console.log(this.authService.login(login.value, pass.value));
+    if(this.authService.isLoggedIn()) {
       return true;
     } else {
-      console.log(false);
       return false;
     }
   }
@@ -56,8 +57,8 @@ export class LoginComponent implements OnInit {
       return 'Fields cannot be empty.';
     }
   }
-  
-  getinfo() {
-    console.log(this.values);
+
+  checkIfLogged() {
+    console.log(this.authService.isLoggedIn());
   }
 }
