@@ -15,7 +15,9 @@ namespace AllHandsOnBoardBackend
         {
         }
 
+        public virtual DbSet<Tags> Tags { get; set; }
         public virtual DbSet<TaskAggregation> TaskAggregation { get; set; }
+        public virtual DbSet<TaskTags> TaskTags { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
@@ -30,9 +32,27 @@ namespace AllHandsOnBoardBackend
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+
+            modelBuilder.Entity<Tags>(entity =>
+            {
+                entity.HasKey(e => e.TagId)
+                    .HasName("tags_pkey");
+
+                entity.ToTable("tags");
+
+                entity.Property(e => e.TagId).HasColumnName("tag_id");
+
+                entity.Property(e => e.TagDescription)
+                    .IsRequired()
+                    .HasColumnName("tag_description")
+                    .HasMaxLength(255);
+            });
+
             modelBuilder.Entity<TaskAggregation>(entity =>
             {
-                entity.HasKey(e => new { e.UserId, e.TaskId });
+                entity.HasKey(e => new { e.UserId, e.TaskId })
+                    .HasName("task_aggregation_pkey");
 
                 entity.ToTable("task_aggregation");
 
@@ -51,9 +71,32 @@ namespace AllHandsOnBoardBackend
                     .HasConstraintName("task_aggregation_user_id_fkey");
             });
 
+            modelBuilder.Entity<TaskTags>(entity =>
+            {
+                entity.HasKey(e => new { e.TaskId, e.TagId })
+                    .HasName("task_tags_pkey");
+
+                entity.ToTable("task_tags");
+
+                entity.Property(e => e.TaskId).HasColumnName("task_id");
+
+                entity.Property(e => e.TagId).HasColumnName("tag_id");
+
+                entity.HasOne(d => d.Tag)
+                    .WithMany(p => p.TaskTags)
+                    .HasForeignKey(d => d.TagId)
+                    .HasConstraintName("task_tags_tag_id_fkey");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.TaskTags)
+                    .HasForeignKey(d => d.TaskId)
+                    .HasConstraintName("task_tags_task_id_fkey");
+            });
+
             modelBuilder.Entity<Tasks>(entity =>
             {
-                entity.HasKey(e => e.TaskId);
+                entity.HasKey(e => e.TaskId)
+                    .HasName("tasks_pkey");
 
                 entity.ToTable("tasks");
 
@@ -73,10 +116,6 @@ namespace AllHandsOnBoardBackend
                     .HasColumnName("stateoftask")
                     .HasMaxLength(4)
                     .HasDefaultValueSql("'TODO'::character varying");
-
-                entity.Property(e => e.Tag)
-                    .HasColumnName("tag")
-                    .HasMaxLength(30);
 
                 entity.Property(e => e.TaskDescription)
                     .HasColumnName("task_description")
@@ -101,13 +140,10 @@ namespace AllHandsOnBoardBackend
 
             modelBuilder.Entity<Users>(entity =>
             {
-                entity.HasKey(e => e.UserId);
+                entity.HasKey(e => e.UserId)
+                    .HasName("users_pkey");
 
                 entity.ToTable("users");
-
-                entity.HasIndex(e => e.Email)
-                    .HasName("users_email_key")
-                    .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 

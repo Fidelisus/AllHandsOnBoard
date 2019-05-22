@@ -23,7 +23,7 @@ namespace AllHandsOnBoardBackend
         public string Password { get; set; }
         public string Token { get; set; }
 
-        public ICollection<TaskAggregation> TaskAggregation { get; set; }
-        public ICollection<Tasks> Tasks { get; set; }
+        public virtual ICollection<TaskAggregation> TaskAggregation { get; set; }
+        public virtual ICollection<Tasks> Tasks { get; set; }
     }
 }

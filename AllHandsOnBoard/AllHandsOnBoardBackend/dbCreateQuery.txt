@@ -4,8 +4,11 @@
 
 -- DROP DATABASE all_hands_on_board;
 --DROP TABLE task_aggregation;
+--DROP TABLE task_Tags;
 --DROP TABLE tasks;
 --DROP TABLE users;
+--DROP TABLE tags;
+
 CREATE TABLE users(
 	user_ID SERIAL PRIMARY KEY,
 	name varchar(20) NOT NULL,
@@ -27,18 +30,29 @@ CREATE TABLE tasks(
 	task_description varchar(400),
 	short_description varchar(50),
 	points_gained int NOT NULL,
-	tag varchar(30),
 	work_start_date TIMESTAMP NOT NULL,
 	work_finish_date TIMESTAMP,
 	signing_finish_date TIMESTAMP,
 	upload_date TIMESTAMP default CURRENT_TIMESTAMP,
-	no_of_students int NOT NULL
+	no_of_students int NOT NULL DEFAULT(0)
 );
 
 CREATE TABLE task_aggregation(
-	aggegation_ID SERIAL PRIMARY KEY,
 	user_ID int REFERENCES users(user_ID) ON DELETE CASCADE,
-	task_ID int REFERENCES tasks(task_ID) ON DELETE CASCADE
+	task_ID int REFERENCES tasks(task_ID) ON DELETE CASCADE,
+	PRIMARY KEY(user_ID,task_ID)
+);
+
+
+CREATE TABLE tags(
+	tag_ID SERIAL PRIMARY KEY,
+	tag_description varchar(255) NOT NULL
+);
+
+CREATE TABLE task_Tags(
+	task_ID int REFERENCES tasks(task_ID) ON DELETE CASCADE,
+	tag_ID int REFERENCES tags(tag_id) ON DELETE CASCADE,
+	PRIMARY KEY(task_ID,tag_ID)
 );
 
 insert into users values (1, 'Lukasz', 'Sobocinski', '217737@edu.p.lodz.pl', 'student', 217737, 'student', 'IFE', 0, 'abc', null);
@@ -48,6 +62,13 @@ insert into users values (4, 'Sonny', 'Miel', 'sm@p.lodz.pl', 'teacher', null, '
 insert into users values (5, 'Jan', 'Schyling', '344567@edu.p.lodz.pl', 'student', 344567, 'student', 'FTIMS', 0, '123', null);
 insert into users values (6, 'Kozlarz', 'Babka', 'admin',  'admin', null, null, null, null, 'admin', null);
 
-insert into tasks values (1, 'TODO', 3, 'Clean room number 334', 'Room cleaning', 12, 'Clean');
-insert into tasks values (2, 'TODO', 3, 'Magic tricks', 'Magic', 3, 'Magic');
-insert into tasks values (3, 'TODO', 4, 'Make a cake', 'Cake', 40, 'Cooking');
+insert into tasks values (1, 'TODO', 3, 'Clean room number 334', 'Room cleaning', 12,NOW());
+insert into tasks values (2, 'TODO', 3, 'Magic tricks', 'Magic', 3,NOW());
+insert into tasks values (3, 'TODO', 4, 'Make a cake', 'Cake', 40,NOW());
+
+
+insert into tags values (1,'IT');
+insert into tags values (2,'Maths');
+insert into tags values (3,'Physics');
+
+

@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AllHandsOnBoardBackend.Controllers
 {
+
+  
+
     [Route("api/[controller]")]
     [ApiController]
     public class TaskListController : ControllerBase
@@ -33,6 +36,42 @@ namespace AllHandsOnBoardBackend.Controllers
                 return new JsonResult(false);
             }
         }
+
+        //Would have to change the userId here so that people cant apply with other account 
+        //api/TaskList/1&2
+        [HttpGet("{taskId}&{userId}")]
+        public JsonResult applyToTask(int taskId, int userId ){
+            bool result = tasksService.applyToTask(taskId,userId);
+            return new JsonResult(result);
+        }
+
+        
+        [HttpGet("validation/{id}")]
+        public JsonResult validateTask(int id){
+            Tasks result = tasksService.validateTask(id);
+            return new JsonResult(result);
+        }
+
+
+        /*Json should look like 
+        {
+            "numberOfTasks":1,
+            "listTags":[],
+            "pageNumber":1
+        }
+             */
+        [HttpPost]
+        public JsonResult GetXTasks([FromBody] GetTasksRequest request){
+            var listOfTasks = tasksService.getTasks(request.numberOfTasks,request.listTags,request.pageNumber);
+            if(listOfTasks != null){
+                return new JsonResult(listOfTasks);
+            }
+            else{
+                return new JsonResult(false);
+            }
+        }
+
+
     }
 }
 

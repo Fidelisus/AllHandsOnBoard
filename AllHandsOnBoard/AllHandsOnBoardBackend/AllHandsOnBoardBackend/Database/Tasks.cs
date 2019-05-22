@@ -8,6 +8,7 @@ namespace AllHandsOnBoardBackend
         public Tasks()
         {
             TaskAggregation = new HashSet<TaskAggregation>();
+            TaskTags = new HashSet<TaskTags>();
         }
 
         public int TaskId { get; set; }
@@ -15,15 +16,15 @@ namespace AllHandsOnBoardBackend
         public int? UploaderId { get; set; }
         public string TaskDescription { get; set; }
         public string ShortDescription { get; set; }
-        public int? PointsGained { get; set; }
-        public string Tag { get; set; }
-        public DateTime? WorkStartDate { get; set; }
+        public int PointsGained { get; set; }
+        public DateTime WorkStartDate { get; set; }
         public DateTime? WorkFinishDate { get; set; }
         public DateTime? SigningFinishDate { get; set; }
         public DateTime? UploadDate { get; set; }
-        public int? NoOfStudents { get; set; }
+        public int NoOfStudents { get; set; }
 
-        public Users Uploader { get; set; }
-        public ICollection<TaskAggregation> TaskAggregation { get; set; }
+        public virtual Users Uploader { get; set; }
+        public virtual ICollection<TaskAggregation> TaskAggregation { get; set; }
+        public virtual ICollection<TaskTags> TaskTags { get; set; }
     }
 }
