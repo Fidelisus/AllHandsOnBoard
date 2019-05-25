@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AllHandsOnBoardBackend.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace AllHandsOnBoardBackend.Controllers
 {
@@ -62,13 +63,24 @@ namespace AllHandsOnBoardBackend.Controllers
              */
         [HttpPost]
         public JsonResult GetXTasks([FromBody] GetTasksRequest request){
-            var listOfTasks = tasksService.getTasks(request.numberOfTasks,request.listTags,request.pageNumber);
-            if(listOfTasks != null){
-                return new JsonResult(listOfTasks);
+            try
+            {
+                var listOfTasks = tasksService.getTasks(request.numberOfTasks, request.listTags, request.pageNumber);
+                if (listOfTasks != null)
+                {
+                    return new JsonResult(listOfTasks);
+                }
+                else
+                {
+                    return new JsonResult(false);
+                }
             }
-            else{
+            catch (Exception e)
+            {
+                Log.Error(String.Concat("Failed to get tasks : ", e.Message));
                 return new JsonResult(false);
             }
+
         }
 
 

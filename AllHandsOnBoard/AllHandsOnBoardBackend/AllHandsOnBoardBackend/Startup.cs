@@ -18,13 +18,13 @@ using AllHandsOnBoardBackend.Helpers;
 using AllHandsOnBoardBackend.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
+using Microsoft.Extensions.Logging;
 
 namespace AllHandsOnBoardBackend
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
         }

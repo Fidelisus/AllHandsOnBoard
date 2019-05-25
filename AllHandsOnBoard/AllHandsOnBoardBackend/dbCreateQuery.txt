@@ -71,4 +71,7 @@ insert into tags values (1,'IT');
 insert into tags values (2,'Maths');
 insert into tags values (3,'Physics');
 
+insert into task_Tags values (1,3);
+insert into task_Tags values (2,2);
+
 
