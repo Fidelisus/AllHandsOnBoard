@@ -1,46 +1,35 @@
-.login-frame {
-  width: 500px;
-  height: 300px;
-  margin: 10% auto;
-  padding: 15px;
-  border: 4px solid #bada55;
-  border-radius: 8px;
-  background: #beeb64;
+.login-background {
+  width: auto;
+  height: 100vh;
+  /*background-image: url('../assets/logo.png');*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  padding: 0;
 }
 
-.login-frame h3 {
-  font-size: 24px;
-  font-family: sans-serif;
-  font-weight: bold;
-  font-style: italic;
-  margin: 10px;
-}
-
-.input-wrapper {
+.custom-center{
+  position: absolute;
+  margin-top:0;
+  top: 58%;
   width: 100%;
-  height: 60px;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   text-align: center;
 }
 
-.login-frame input {
-  width: 400px;
-  height: 30px;
-  margin: 3px auto;
-  padding: 10px;
-  border-radius: 4px;
-  border: 2px solid #bada55;
-  background: #d6f2a2;
+.input-wrapper {
+  margin-top: 2vh;
 }
 
 .login-button {
-  margin: 15px auto;
-  padding: 10px 40px;
+  padding: 1vh 4vh;
   border: none;
-  background: #90b252;
-  opacity: 0.6;
+  background: #000000;
+  opacity: 0.4;
   transition: 0.3s;
 }
 
 .login-button:hover {
-  opacity: 1;
+  opacity: 0.6;
 }

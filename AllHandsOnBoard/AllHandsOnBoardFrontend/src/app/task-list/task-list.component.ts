@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -9,9 +11,13 @@ export class TaskListComponent implements OnInit {
 
   taskData = [];
 
-  constructor() { }
+  constructor(private auth: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
+    if (!this.auth.isLoggedIn()) {
+      this.router.navigateByUrl('login');
+    }
   }
 
   searchFor(parameter: string) {

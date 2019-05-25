@@ -1,13 +1,35 @@
-table {
-  width: 800px;
-  height: 800px;
-  border: 2px solid black;
-  margin: 10%;
+.emp-profile{
+  padding: 1%;
+  border-radius: 0.5rem;
+  background: #fff;
 }
 
-tr, td {
-  width: 50%;
-  height: 50%;
-  border: 2px solid black;
-  padding: 5%;
+.col-md-6 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  transition: all 200ms ease-in-out;
+}
+
+.col-md-6:hover {
+  transform: scale(1.08);
+}
+
+.block-red {
+  height: 400px;
+  background: #ed553b;
+}
+
+.block-yellow {
+  height: 400px;
+  background: #f6d55c;
+}
+
+.block-blue {
+  height: 400px;
+  background-color: #20639b;
+}
+
+.block-green {
+  height: 400px;
+  background: #3caea3;
 }

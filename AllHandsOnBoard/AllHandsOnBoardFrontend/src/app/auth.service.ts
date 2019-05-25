@@ -21,7 +21,13 @@ export class AuthService {
       Email: email,
       Password: pass
     };
-    return this.http.post(this.apiUrl + '/Login', JSON.stringify(body), this.httpOptions);
+
+    this.http.post(this.apiUrl + '/Login', JSON.stringify(body), this.httpOptions)
+      .subscribe(res => {
+        if(typeof res !== 'string') {
+          this.setSession(res);
+        }
+      });
   }
 
   logout() {
@@ -31,7 +37,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     //return moment().isBefore(this.getExpirationDate());
-    if (localStorage.getItem('token') === null) {
+    if (localStorage.getItem('token') === null || localStorage.getItem('token') === undefined) {
       return false;
     } else {
       return true;
@@ -43,6 +49,12 @@ export class AuthService {
 
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('role', authResult.occupation);
+    if(authResult.occupation === 'student') {
+      localStorage.setItem('userId', authResult.index_no);
+    } else {
+      localStorage.setItem('userId', authResult.email);
+    }
   }
 
   getExpirationDate() {

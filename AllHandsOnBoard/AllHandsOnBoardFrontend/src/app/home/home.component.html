@@ -1,18 +1,27 @@
-<table>
-  <tr>
-    <td>
-      <a routerLink="/profile">Profile</a>
-    </td>
-    <td>
-      <a routerLink="/task-list">Task List</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Rewards
-    </td>
-    <td>
-      Sth else, I don't know yet what
-    </td>
-  </tr>
-</table>
+<div class="container emp-profile">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="block-red">
+        <a routerLink="/profile">Profile</a>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="block-yellow">
+        <a routerLink="/task-list">Task List</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="block-blue">
+        <h1>{{blueContent}}</h1>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="block-green">
+        Sth else
+      </div>
+    </div>
+  </div>
+  <button (click)="logout()">Logout</button>
+</div>

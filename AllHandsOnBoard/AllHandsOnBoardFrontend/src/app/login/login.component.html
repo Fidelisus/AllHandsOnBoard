@@ -1,16 +1,13 @@
-<div class="login-frame">
-  <form>
-    <h3>ID number:</h3>
+<div class="login-background">
+  <form class="custom-center">
     <div class="input-wrapper">
       <input type="text" placeholder="Your ID" #login
              (keypress)="enterHandler(login, pass, $event)">
     </div>
-    <h3>Password:</h3>
-    <div class="input-wrapper">
+    <div class="input-wrapper" >
       <input type="password" placeholder="Password" #pass
              (keypress)="enterHandler(login, pass, $event)">
     </div>
-    <br>
     <div class="input-wrapper">
       <button type="button" class="login-button"
               (click)="clickHandler(login, pass)">
@@ -18,8 +15,4 @@
       </button>
     </div>
   </form>
-  {{getErrorMessages(login, pass)}}
 </div>
-
-<button class="login-button" (click)="checkIfLogged()">Check</button>
-<button class="login-button" (click)="authService.logout()">Logout</button>
