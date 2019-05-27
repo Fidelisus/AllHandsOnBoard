@@ -10,6 +10,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from './auth.service';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AuthService } from './auth.service';
     HomeComponent,
     TaskListComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    ScoreboardComponent
   ],
   imports: [
     BrowserModule,

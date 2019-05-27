@@ -58,14 +58,16 @@ namespace AllHandsOnBoardBackend.Controllers
         {
             "numberOfTasks":1,
             "listTags":[],
-            "pageNumber":1
+            "pageNumber":1,
+            "columnToSearch":"ShortDescription",
+            "keyword":"cake"
         }
              */
         [HttpPost]
         public JsonResult GetXTasks([FromBody] GetTasksRequest request){
             try
             {
-                var listOfTasks = tasksService.getTasks(request.numberOfTasks, request.listTags, request.pageNumber);
+                var listOfTasks = tasksService.getTasks(request.numberOfTasks, request.listTags, request.pageNumber, request.columnToSearch, request.keyword);
                 if (listOfTasks != null)
                 {
                     return new JsonResult(listOfTasks);

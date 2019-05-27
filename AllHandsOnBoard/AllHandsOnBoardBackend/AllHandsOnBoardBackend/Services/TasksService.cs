@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Linq.Dynamic;
 
 namespace AllHandsOnBoardBackend.Services
 {
@@ -14,7 +15,7 @@ namespace AllHandsOnBoardBackend.Services
         TaskWithUploader getTask(int id);
         bool applyToTask(int taskId, int userId);
         Tasks validateTask(int taskId);
-        List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber);
+        List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber, string columnToSearch, string keyword);
     }
 
     public class GetTasksRequest
@@ -22,6 +23,9 @@ namespace AllHandsOnBoardBackend.Services
         public int numberOfTasks { get; set; }
         public List<int> listTags { get; set; }
         public int pageNumber { get; set; }
+
+        public string columnToSearch { get; set; }
+        public string keyword { get; set; }
 
         public GetTasksRequest() {; }
     }
@@ -102,7 +106,7 @@ namespace AllHandsOnBoardBackend.Services
                 {
                     if (oneTask.task.TaskId == tagList[j].task_Tags.TaskId)
                     {
-                    oneTask.tags.Add(tagList[j].tags.TagDescription);
+                        oneTask.tags.Add(tagList[j].tags.TagDescription);
                     }
                 }
                 return oneTask;
@@ -157,13 +161,22 @@ namespace AllHandsOnBoardBackend.Services
             return task;
         }
 
-        public List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tagsList, int pageNumber)
+        public List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tagsList, int pageNumber, string columnToSearch, string keyword)
         {
             IQueryable<TaskWithUploader> table_join;
-
-            if (tagsList.Count() > 0)
+            if (columnToSearch == "")
             {
-               table_join = (
+                columnToSearch = "ShortDescription";
+                keyword = "";
+            }
+            keyword = keyword.ToLower();
+            columnToSearch = "task." + columnToSearch;
+            try
+            {
+                if (tagsList.Count() > 0)
+                {
+
+                    table_join = (
                     from taskAgrr in context.TaskTags
                     join tasks in context.Tasks
                     on taskAgrr.TaskId equals tasks.TaskId
@@ -171,8 +184,7 @@ namespace AllHandsOnBoardBackend.Services
                     on taskAgrr.TagId equals tags.TagId
                     join users in context.Users
                     on tasks.UploaderId equals users.UserId
-                    //where tagsList.Contains(tags.TagId) || tags.TagId is null
-                    where  tagsList.Contains(tags.TagId)
+                    where tagsList.Contains(tags.TagId)
                     select new TaskWithUploader()
                     {
                         task = tasks,
@@ -181,27 +193,32 @@ namespace AllHandsOnBoardBackend.Services
                         UploaderEmail = users.Email,
                         tags = new List<string>()
                     }
-                ).Distinct();
+                    ).Where(columnToSearch + ".ToLower().Contains" + "(\"" + keyword + "\")").Distinct();
+                }
+                else
+                {
+                    table_join = (
+                        from tasks in context.Tasks
+                        join users in context.Users
+                        on tasks.UploaderId equals users.UserId
+                        //where { columnToSearch + ".Contains" + "(\"" + keyword.ToLower() + "\")" }
+                        select new TaskWithUploader()
+                        {
+                            task = tasks,
+                            UploaderName = users.Name,
+                            UploaderSurname = users.Surname,
+                            UploaderEmail = users.Email,
+                            tags = new List<string>()
+                        }
+                    ).Where(columnToSearch + ".ToLower().Contains" + "(\"" + keyword + "\")").Distinct();
+                }
             }
-            else
+            catch (Exception e)
             {
-                table_join = (
-                    from tasks in context.Tasks
-                    join users in context.Users
-                    on tasks.UploaderId equals users.UserId
-                    select new TaskWithUploader()
-                    {
-                        task = tasks,
-                        UploaderName = users.Name,
-                        UploaderSurname = users.Surname,
-                        UploaderEmail = users.Email,
-                        tags = new List<string>()
-                    }
-                ).Distinct();
+                Log.Error(String.Concat("No such a column : ", e.Message));
+                return null;
             }
-
             var taskList = table_join.Skip((pageNumber - 1) * numberOfTasks).Take(numberOfTasks).ToList();
-            //return taskList;
             var tag_table = (
                                     from task_Tags in context.TaskTags
                                     join tags in context.Tags
