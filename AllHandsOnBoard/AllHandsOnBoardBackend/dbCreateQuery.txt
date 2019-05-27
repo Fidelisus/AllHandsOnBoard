@@ -57,10 +57,12 @@ CREATE TABLE task_Tags(
 
 insert into users values (1, 'Lukasz', 'Sobocinski', '217737@edu.p.lodz.pl', 'student', 217737, 'student', 'IFE', 0, 'abc', null);
 insert into users values (2, 'Jakub', 'Stepaniak', '456576@edu.p.lodz.pl', 'student', 456576, 'student', 'EEIA', 0, 'good123', null);
-insert into users values (3, 'Ada', 'Warkoczewska', 'aw@p.lodz.pl', 'teacher', null, 'doctor', 'EEIA', null, 'Hello', null);
-insert into users values (4, 'Sonny', 'Miel', 'sm@p.lodz.pl', 'teacher', null, 'master', 'IFE', 0, 'dif#@', null);
+insert into users values (3, 'Ada', 'Warkoczewska', 'aw@p.lodz.pl', 'teacher', null, 'PhD', 'EEIA', null, 'Hello', null);
+insert into users values (4, 'Sonny', 'Miel', 'sm@p.lodz.pl', 'teacher', null, 'MSc', 'IFE', 0, 'dif#@', null);
 insert into users values (5, 'Jan', 'Schyling', '344567@edu.p.lodz.pl', 'student', 344567, 'student', 'FTIMS', 0, '123', null);
 insert into users values (6, 'Kozlarz', 'Babka', 'admin',  'admin', null, null, null, null, 'admin', null);
+insert into users values (7, 'Marcin', 'Kowalski', 'marcin.kowalski@p.lodz.pl', 'teacher',  'null', 'MSc', 'BiNoZ',  0, '1234', null);
+insert into users values (8, 'Bartosz', 'Stemplewski', '217789@edu.p.lodz.pl', 'student', 217789, 'student', 'IFE', 0, 'abcd', null);
 
 insert into tasks values (1, 'TODO', 3, 'Clean room number 334', 'Room cleaning', 12,NOW());
 insert into tasks values (2, 'TODO', 3, 'Magic tricks', 'Magic', 3,NOW());
