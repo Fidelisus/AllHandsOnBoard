@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
-import {catchError} from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class RestService {
   apiUrl = 'http://localhost:5000/api';
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authentication': 'Bearer ' + localStorage.getItem('token')
     })
   };
 
@@ -30,5 +31,14 @@ export class RestService {
       academic_title: '-',
       department: 'IFE',
       points: 10};
+  }
+
+  getNTasks(n: number, tags = [], page: number) {
+    const body = {
+      'numberOfTasks': n,
+      'listTags': tags,
+      'pageNumber': page
+    };
+    return this.http.post(this.apiUrl + '/TaskList', body, this.httpOptions);
   }
 }

@@ -1,7 +1,7 @@
 .login-background {
   width: auto;
   height: 100vh;
-  /*background-image: url('../assets/logo.png');*/
+  background-image: url('../../assets/logo_full.png');
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0 auto;
@@ -11,7 +11,7 @@
 .custom-center{
   position: absolute;
   margin-top:0;
-  top: 58%;
+  top: 57%;
   width: 100%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -19,7 +19,7 @@
 }
 
 .input-wrapper {
-  margin-top: 2vh;
+  margin-top: 1vh;
 }
 
 .login-button {

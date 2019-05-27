@@ -1,8 +1,49 @@
-<div class="filter">
-  Search: <input #parameter (keyup)="searchFor(parameter.value)">
-</div>
-<div class="list">
-  <div *ngFor="let task of taskData">
-
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-info">
+          Search options
+        </li>
+        <li class="list-group-item">
+          <input class="search-input" placeholder="Search" #search (keyup)="updateSearch(search.value)">
+        </li>
+        <li class="list-group-item">
+          <h6>Tags</h6>
+          <div *ngFor="let tag of tags">
+            <input type="checkbox" #state (click)="searchTag(state.checked, tag)"> {{tag}}
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10">
+      <ul class="list-group" *ngFor="let task of tasksData">
+        <li class="list-group-item" *ngIf="searchMatch(task.taskShortDescription)">
+          <div class="row">
+            <div class="col-1">
+              {{task.taskId}}
+            </div>
+            <div class="col-8">
+              {{task.taskShortDescription}}
+            </div>
+            <div class="col-3">
+              Task created: {{task.uploadDate.substr(0, 10)}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              Points: {{task.pointsGained}}
+            </div>
+            <div class="col-6">
+              <span class="badge badge-secondary"> {{task.tags}} </span>
+            </div>
+            <div class="col-3">
+              <!-- Task deadline: {{task.finishDate.substr(0, 10)}} -->
+              Task deadline: {{task.uploadDate.substr(0, 10)}}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
