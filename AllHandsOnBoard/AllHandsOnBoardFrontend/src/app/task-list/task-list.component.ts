@@ -10,9 +10,10 @@ import { Task } from '../data-models/task.model';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-
+  // TODO are there pages implemented?
   tasksData: Task[];
   searchFor = '';
+  // TODO tags should be taken from database
   tags = ['IT', 'Maths', 'Physics'];
 
   constructor(private auth: AuthService,
@@ -21,6 +22,7 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
     if (!this.auth.isLoggedIn()) {
+      // does it work?
       this.router.navigateByUrl('login');
     }
     this.getData(5);

@@ -4,6 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {TaskListComponent} from './task-list/task-list.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'task-list', component: TaskListComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'scoreboard', component: ScoreboardComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
