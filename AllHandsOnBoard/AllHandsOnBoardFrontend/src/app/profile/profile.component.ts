@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
     }
-    //this.user = restService.getUserTest();
+    this.user = this.restService.getUserTest();
   }
 
 }
