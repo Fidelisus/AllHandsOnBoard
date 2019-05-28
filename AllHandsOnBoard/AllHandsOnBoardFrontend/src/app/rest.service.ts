@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './data-models/user.model';
+import { Task } from './data-models/task.model';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -52,5 +53,9 @@ export class RestService {
       "keyword": "a"
     };
     return this.http.post(this.apiUrl + '/TaskList', body, this.httpOptions);
+  }
+  
+  addTask(task: Task){
+    return this.http.post(this.apiUrl + '/TaskAdder', JSON.stringify(task), this.httpOptions);
   }
 }
