@@ -27,8 +27,8 @@ CREATE TABLE tasks(
 	task_ID SERIAL PRIMARY KEY,
 	stateOfTask varchar(4) DEFAULT('TODO'),
 	uploader_ID int REFERENCES users(user_ID) ON DELETE SET NULL,
-	task_description varchar(400),
 	short_description varchar(50),
+	task_description varchar(400),
 	points_gained int NOT NULL,
 	work_start_date TIMESTAMP NOT NULL,
 	work_finish_date TIMESTAMP,
@@ -59,13 +59,13 @@ insert into users values (1, 'Lukasz', 'Sobocinski', '217737@edu.p.lodz.pl', 'st
 insert into users values (2, 'Jakub', 'Stepaniak', '456576@edu.p.lodz.pl', 'student', 456576, 'student', 'EEIA', 0, 'good123', null);
 insert into users values (3, 'Ada', 'Warkoczewska', 'aw@p.lodz.pl', 'teacher', null, 'PhD', 'EEIA', null, 'Hello', null);
 insert into users values (4, 'Sonny', 'Miel', 'sm@p.lodz.pl', 'teacher', null, 'MSc', 'IFE', 0, 'dif#@', null);
-insert into users values (5, 'Jan', 'Schyling', '344567@edu.p.lodz.pl', 'student', 344567, 'student', 'FTIMS', 0, '123', null);
+insert into users values (5, 'Jan', 'Schiling', '344567@edu.p.lodz.pl', 'student', 344567, 'student', 'FTIMS', 0, '123', null);
 insert into users values (6, 'Kozlarz', 'Babka', 'admin',  'admin', null, null, null, null, 'admin', null);
 insert into users values (7, 'Marcin', 'Kowalski', 'marcin.kowalski@p.lodz.pl', 'teacher',  'null', 'MSc', 'BiNoZ',  0, '1234', null);
 insert into users values (8, 'Bartosz', 'Stemplewski', '217789@edu.p.lodz.pl', 'student', 217789, 'student', 'IFE', 0, 'abcd', null);
 
 insert into tasks values (1, 'TODO', 3, 'Department webpage update', 'Updateing the content of the webpage for the new academic year', 15,NOW());
-insert into tasks values (2, 'TODO', 3, 'Presenation during international conference IFE', 'Presnenation about our city and student's life in Lodz for the Turkish students during the intenational conference', 20,NOW());
+insert into tasks values (2, 'TODO', 3, 'Presenation during international conference IFE', 'Presnenation about our city and student''s life in Lodz for the Turkish students during the intenational conference', 20,NOW());
 insert into tasks values (3, 'TODO', 4, 'Translation of the webpage IFE', 'Update of the French version of IFE webpage', 20,NOW());
 insert into tasks values (4, 'TODO', 7, 'Storage cleaning', 'Reorganisation of the storage in chemistry clasroom in BiNoZ department', 10,NOW());
 insert into tasks values (5, 'TODO', 7, 'Supervising the project', 'Supervising the project groups of high school students during the competition on IFE', 15,NOW());
