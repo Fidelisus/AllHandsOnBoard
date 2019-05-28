@@ -41,6 +41,7 @@ export class RestService {
   }
 
   getUser(id: number) {
+    console.log(this.apiUrl + '/Users/' + id);
     return this.http.get<User>(this.apiUrl + '/Users/' + id, this.httpOptions);
   }
 

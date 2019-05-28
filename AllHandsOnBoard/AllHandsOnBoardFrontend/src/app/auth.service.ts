@@ -49,6 +49,8 @@ export class AuthService {
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('role', authResult.occupation);
+    localStorage.setItem('userDBid', authResult.userId);
+    localStorage.setItem('points', authResult.points);
     if(authResult.occupation === 'student') {
       localStorage.setItem('userId', authResult.index_no);
     } else {

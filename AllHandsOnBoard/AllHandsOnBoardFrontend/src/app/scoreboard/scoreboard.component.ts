@@ -24,10 +24,12 @@ export class ScoreboardComponent implements OnInit {
         return this._usersData;
     }
   public set usersData(value: User[]) {
-        this._usersData = value;
+    value.forEach((a, index, arr) => { if (a.occupation.toLowerCase() !== "student") arr.splice(index, 1)});
+      this._usersData = value;
     }
 
-  currentUserData: User;
+  public currentUserData: User;
+
 
   constructor(private auth: AuthService,
     private rest: RestService,
@@ -38,8 +40,9 @@ export class ScoreboardComponent implements OnInit {
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
     }
+    console.log(+localStorage.getItem('userDBid'))
+    this.getCurrentUser(+localStorage.getItem('userDBid'));
     this.getData(10);
-   // this.getCurrentUser(+localStorage.getItem('userId'));
   }
 
   isStudent(user : User): boolean {
@@ -56,6 +59,25 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getCurrentUser(id: number): void {
-    this.rest.getUser(id).subscribe(User =>  this.currentUserData = User );
+    this.rest.getUser(id)
+      .subscribe(user => this.currentUserData = user);
   }
 }
+
+
+//< div class="container-fluid" >
+//  <div class="row" >
+//    <div class="col-md-3" >
+//      {{ currentUserData.name }}
+//</div>
+//  < div class="col-md-3" >
+//    {{ currentUserData.surname }}
+//</div>
+//  < div class="col-md-5" >
+//    {{ currentUserData.department }}
+//</div>
+//  < div class="col-md-1" >
+//    {{ currentUserData.points }}
+//</div>
+//  < /div>
+//  < /div>

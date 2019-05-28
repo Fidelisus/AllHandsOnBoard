@@ -1,20 +1,25 @@
-<!-- {{currentUserData.Name}} {{currentUserData.Surname}} {{currentUserData.Points}}  *ngIf="isStudent(user)"-->
-<div class="col-md-10">
-  <ul class="list-group" *ngFor="let user of usersData">
-    <li class="list-group-item">
+<h2 class="text-center"><small>You have </small>{{currentUserData.points}}<small> Points</small></h2>
+
+<div class="col-md-12">
+  <ol class="list-group" *ngFor="let user of usersData; let i = index">
+    <li class="list-group-item"  [class.active]="user.userId === currentUserData.userId" *ngIf="isStudent(user)">
       <div class="row">
+        <div class="col-1">
+          {{i + 1}}
+        </div>
         <div class="col-3">
           {{user.name}}
         </div>
         <div class="col-3">
           {{user.surname}}
         </div>
-        <div class="col-5">
+        <div class="col-4">
+          {{user.department}}
         </div>
         <div class="col-1">
           {{user.points}}
         </div>
       </div>
     </li>
-  </ul>
+  </ol>
 </div>
