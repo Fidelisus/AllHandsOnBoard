@@ -16,16 +16,17 @@ export class ProfileComponent implements OnInit {
   
   constructor(private restService: RestService,
               private router: Router,
-              private auth: AuthService){
-    //restService.getUser().subscribe(User => {this.user = User});
-    
-  }
+              private auth: AuthService) { }
 
   ngOnInit() {
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
     }
-    this.user = this.restService.getUserTest();
+    this.restService.getUser(parseInt(localStorage.getItem('userDBid'), 10))
+      .subscribe(data => this.user = data);
   }
 
+  back() {
+    this.router.navigateByUrl('home');
+  }
 }

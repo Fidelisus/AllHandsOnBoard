@@ -52,7 +52,7 @@ export class AuthService {
     localStorage.setItem('userDBid', authResult.userId);
     localStorage.setItem('points', authResult.points);
     if(authResult.occupation === 'student') {
-      localStorage.setItem('userId', authResult.index_no);
+      localStorage.setItem('userId', authResult.indexNo);
     } else {
       localStorage.setItem('userId', authResult.email);
     }

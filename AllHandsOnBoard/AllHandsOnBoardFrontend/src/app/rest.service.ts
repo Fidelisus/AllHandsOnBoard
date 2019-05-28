@@ -41,7 +41,6 @@ export class RestService {
   }
 
   getUser(id: number) {
-    console.log(this.apiUrl + '/Users/' + id);
     return this.http.get<User>(this.apiUrl + '/Users/' + id, this.httpOptions);
   }
 
@@ -49,13 +48,13 @@ export class RestService {
     return this.http.get<User[]>(this.apiUrl + '/Users', this.httpOptions);
   }
 
-  getNTasks(n: number, tags = [], page: number) {
+  getNTasks(n: number, search: string = '', tags: string[], page: number) {
     const body = {
       'numberOfTasks': n,
       'listTags': tags,
       'pageNumber': page,
-      "columnToSearch": "ShortDescription",
-      "keyword": "a"
+      'columnToSearch': 'ShortDescription',
+      'keyword': search
     };
     return this.http.post(this.apiUrl + '/TaskList', body, this.httpOptions);
   }

@@ -15,7 +15,7 @@ export class TaskAdderComponent implements OnInit {
   checkedList: any;
 
 
-  constructor(private restService:RestService,
+  constructor(private restService: RestService,
               private router: Router,
               private auth: AuthService){
                 this.tags = [
@@ -32,10 +32,10 @@ export class TaskAdderComponent implements OnInit {
       }
     }
 
-  getCheckedItemList(){
-    this.checkedList=[];
-    for(var i=0; i<this.tags.length; i++){
-      if(this.tags[i].isSelected)
+  getCheckedItemList() {
+    this.checkedList = [];
+    for (var i = 0; i < this.tags.length; i++) {
+      if (this.tags[i].isSelected)
       this.checkedList.push(this.tags[i]);
     }
     this.checkedList = JSON.stringify(this.checkedList);
@@ -48,24 +48,27 @@ export class TaskAdderComponent implements OnInit {
         short_description: HTMLInputElement,
         points_gained: HTMLInputElement,
         work_finish_date: HTMLInputElement): boolean{
-          var date = new Date();
-          this.task = {
-            taskId: 3,
-            uploaderId: 4,
-            uploaderName: 'jan',
-            uploaderSurname: 'schi',
-            uploaderEmail: '@gmail',
-            tags: [],
-            taskDescription: task_description.value,
-            taskShortDescription: short_description.value,
-            pointsGained: parseInt(points_gained.value, 10),
-            uploadDate: ""+date.getTime(),
-            finishDate: work_finish_date.value
-          };
-
-      //  console.log(this.task);
-        this.restService.addTask(this.task);
-        return false;
+    const date = new Date();
+    this.task = {
+      taskId: 3,
+      uploaderId: 4,
+      uploaderName: 'jan',
+      uploaderSurname: 'schi',
+      uploaderEmail: '@gmail',
+      tags: [],
+      taskDescription: task_description.value,
+      taskShortDescription: short_description.value,
+      pointsGained: parseInt(points_gained.value, 10),
+      uploadDate: date.getTime().toString(),
+      finishDate: work_finish_date.value
+    };
+    const taskBody = {
+      'task': this.task,
+      'tags': ['1, 2, 3']
+    };
+    console.log(taskBody);
+    this.restService.addTask(this.task);
+    return false;
   }
 
 

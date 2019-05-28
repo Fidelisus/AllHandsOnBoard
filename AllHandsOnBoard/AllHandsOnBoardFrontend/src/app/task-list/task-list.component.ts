@@ -22,10 +22,13 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
     if (!this.auth.isLoggedIn()) {
-      // does it work?
       this.router.navigateByUrl('login');
     }
-    this.getData(5);
+    this.getData(10);
+  }
+
+  back() {
+    this.router.navigateByUrl('home');
   }
 
   searchTag(state: boolean, tag: string) {
@@ -47,8 +50,8 @@ export class TaskListComponent implements OnInit {
     this.searchFor = input;
   }
 
-  getData(n: number, tags = [], page = 1) {
-    this.rest.getNTasks(n, tags, page)
+  getData(n: number, tags: string[] = [], page = 1) {
+    this.rest.getNTasks(n, this.searchFor, tags, page)
       .subscribe(data => {
         this.tasksData = [];
         const array = data as Array<any>;
