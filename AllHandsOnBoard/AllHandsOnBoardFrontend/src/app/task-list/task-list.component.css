@@ -2,3 +2,9 @@
   display: table-cell;
   width: 100%;
 }
+
+.right {
+  transform: scale(0.8);
+  padding-top: 2px;
+  float: right;
+}

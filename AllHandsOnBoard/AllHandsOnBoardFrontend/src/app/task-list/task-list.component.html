@@ -7,11 +7,12 @@
         </li>
         <li class="list-group-item">
           <input class="search-input" placeholder="Search" #search (keyup)="updateSearch(search.value)">
+          <button class="btn btn-outline-info right" (click)="searchMatch()">Search</button>
         </li>
         <li class="list-group-item">
           <h6>Tags</h6>
           <div *ngFor="let tag of tags">
-            <input type="checkbox" #state (click)="searchTag(state.checked, tag)"> {{tag}}
+            <input type="checkbox" #state (click)="searchTag(state.checked, tag)"> {{tag.name}}
           </div>
         </li>
       </ul>
@@ -21,7 +22,7 @@
     </div>
     <div class="col-md-10">
       <ul class="list-group" *ngFor="let task of tasksData">
-        <li class="list-group-item" *ngIf="searchMatch(task.taskShortDescription)">
+        <li class="list-group-item">
           <div class="row">
             <div class="col-1">
               {{task.taskId}}

@@ -50,12 +50,19 @@ a {
   border-radius: 2vh;
 }
 
+
 .block-scoreboard {
   height: 40vh;
   background-image: url('../../assets/scoreboard-block.png');
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: 2vh;
+}
+
+.block-blue {
+  height: 400px;
+  background-color: #20639b;
+  cursor: pointer;
 }
 
 .logout-button {

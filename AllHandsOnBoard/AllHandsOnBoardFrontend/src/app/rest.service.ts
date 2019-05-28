@@ -10,7 +10,6 @@ import { catchError } from 'rxjs/operators';
 })
 export class RestService {
 
-
   apiUrl = 'http://localhost:5000/api';
   httpOptions = {
     headers: new HttpHeaders({
@@ -20,25 +19,6 @@ export class RestService {
   };
 
   constructor(private http: HttpClient) { }
-
-  //for the testing
-  getUserTest(): User {
-    return {
-      userId: 41234,
-      name: 'Jan',
-      surname: 'Schilling',
-      email: 'mail@edu.pl',
-      occupation: 'Student',
-      indexNo: 2177,
-      academicTitle: '-',
-      department: 'IFE',
-      points: 10,
-      token: "",
-      taskAggregation: "",
-      tasks: "",
-      password: ""
-    };
-  }
 
   getUser(id: number) {
     return this.http.get<User>(this.apiUrl + '/Users/' + id, this.httpOptions);
@@ -58,8 +38,8 @@ export class RestService {
     };
     return this.http.post(this.apiUrl + '/TaskList', body, this.httpOptions);
   }
-  
-  addTask(task: Task){
+
+  addTask(task: Task) {
     return this.http.post(this.apiUrl + '/TaskAdder', JSON.stringify(task), this.httpOptions);
   }
 }

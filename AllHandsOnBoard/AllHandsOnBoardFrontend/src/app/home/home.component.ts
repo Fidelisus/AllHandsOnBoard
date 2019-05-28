@@ -32,7 +32,13 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('login');
   }
 
-  goToProfile() {
-    this.router.navigateByUrl('profile');
+  blueDirect() {
+    if (localStorage.getItem('role') === 'teacher') {
+      this.router.navigateByUrl('/task-adder');
+    } else if (localStorage.getItem('role') === 'student') {
+      return;
+    } else {
+      return;
+    }
   }
 }
