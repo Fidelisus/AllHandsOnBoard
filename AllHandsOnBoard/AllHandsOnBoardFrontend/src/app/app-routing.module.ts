@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {TaskListComponent} from './task-list/task-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { TaskAdderComponent } from './task-adder/task-adder.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'task-list', component: TaskListComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'scoreboard', component: ScoreboardComponent },
+  { path: 'task-adder', component: TaskAdderComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 

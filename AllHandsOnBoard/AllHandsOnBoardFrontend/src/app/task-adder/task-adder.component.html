@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <hr>
+      <h4>
+        <button class="btn btn-outline-success" (click)="back()">Back</button>
+        Task Adder
+      </h4>
+      <hr>
+    </div>
+  </div>
+  <form action="/action_page.php">
+    <div class="form-group">
+      <label>Task description:</label>
+      <input type="text" class="form-control" placeholder="Task Description" #task_description>
+    </div>
+    <div class="form-group">
+      <label>Short description of task:</label>
+      <input type="text" class="form-control" placeholder="Short Description" #short_description>
+    </div>
+    <div class="form-group">
+      <label>Points to gain:</label>
+      <input type="number" class="form-control" placeholder="Number of Points" #points_gained>
+    </div>
+    <div class="form-group">
+      <label>Deadline:</label>
+      <input type="date" class="form-control" placeholder="DD-MM-YYYY" #work_finish_date>
+    </div>
+    <br>
+    <h3>Tags:</h3>
+    <br>
+    <ul>
+      <li class="list-group-item" *ngFor="let item of tags">
+        <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}">
+        {{item.value}}
+      </li>
+    </ul>
+    <div class="col-md-6">
+      <code>{{checkedList}}</code>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-outline-success" (click)=submit(task_description,short_description,points_gained,work_finish_date)>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+</div>

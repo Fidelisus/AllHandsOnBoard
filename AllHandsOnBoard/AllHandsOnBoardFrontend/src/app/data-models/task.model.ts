@@ -1,17 +1,35 @@
+export interface TDataModel {
+  task: TDataModelTask;
+  tags: string[];
+  uploaderName: string;
+  uploaderSurname: string;
+  uploaderEmail: string;
+}
+
+export interface TDataModelTask {
+  taskId: number;
+  uploaderId: number;
+  taskDescription: string;
+  shortDescription: string;
+  pointsGained: number;
+  uploadDate: string;
+  workFinishDate: string;
+}
+
 export class Task {
   taskId: number;
   uploaderId: number;
   uploaderName: string;
   uploaderSurname: string;
   uploaderEmail: string;
-  tags: [];
+  tags: string[];
   taskDescription: string;
   taskShortDescription: string;
   pointsGained: number;
   uploadDate: string;
   finishDate: string;
 
-  constructor(data) {
+  constructor(data: TDataModel) {
     this.taskId = data.task.taskId;
     this.uploaderId = data.task.uploaderId;
     this.uploaderName = data.uploaderName;

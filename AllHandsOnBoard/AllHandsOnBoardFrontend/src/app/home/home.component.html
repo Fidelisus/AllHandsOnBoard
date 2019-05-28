@@ -1,26 +1,34 @@
 <div class="container emp-profile">
   <div class="row">
     <div class="col-md-6">
-      <div class="block-red">
-        <a routerLink="/profile">Profile</a>
-      </div>
+      <a routerLink="/profile">
+        <div class="block-red">
+          <h2>Profile</h2>
+        </div>
+      </a>
     </div>
     <div class="col-md-6">
-      <div class="block-yellow">
-        <a routerLink="/task-list">Task List</a>
-      </div>
+      <a routerLink="/task-list">
+        <div class="block-yellow">
+          <h2>Task List</h2>
+        </div>
+      </a>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="block-blue">
-        <h1>{{blueContent}}</h1>
-      </div>
+      <a routerLink="/task-adder">
+        <div class="block-blue">
+          <h2>{{blueContent}}</h2>
+        </div>
+      </a>
     </div>
     <div class="col-md-6">
-      <div class="block-green">
-        <a routerLink="/scoreboard">Scoreboard</a>
-      </div>
+      <a routerLink="/scoreboard">
+        <div class="block-green">
+          <h2>Scoreboard</h2>
+        </div>
+      </a>
     </div>
   </div>
   <button class="btn btn-info" (click)="logout()">Logout</button>
