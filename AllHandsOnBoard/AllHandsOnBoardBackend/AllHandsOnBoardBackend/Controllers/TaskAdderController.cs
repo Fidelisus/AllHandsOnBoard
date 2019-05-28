@@ -33,7 +33,7 @@ namespace AllHandsOnBoardBackend.Controllers
                     },
             "tags":[1,2,3...]
         } */
-        [Authorize(Roles = "teacher")]
+        [Authorize(Roles = "teacher,admin")]
         [HttpPost]
         public JsonResult Post([FromBody] addTaskRequest request)
         {

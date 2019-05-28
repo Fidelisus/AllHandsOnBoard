@@ -15,7 +15,7 @@ namespace AllHandsOnBoardBackend.Services
         TaskWithUploader getTask(int id);
         bool applyToTask(int taskId, int userId);
         bool taskStart (int taskId);
-        Tasks validateTask(int taskId);
+        Tasks validateTask(int taskId,int studentId);
         List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber, string columnToSearch, string keyword);
     }
 
@@ -37,6 +37,16 @@ namespace AllHandsOnBoardBackend.Services
         public List<int> tags { get; set; }
 
         public addTaskRequest() {; }
+    }
+
+    public class applyTaskRequest
+    {
+        public int taskId {get;set;}
+    }
+
+    public class validationRequest{
+        public int taskId{get;set;}
+        public int studentId{get;set;}
     }
 
     public class TasksService : ITasksService
@@ -158,16 +168,28 @@ namespace AllHandsOnBoardBackend.Services
             return true;
         }
 
-        public Tasks validateTask(int taskId)
+        public Tasks validateTask(int taskId,int studentId)
         {
             Tasks task = context.Tasks.Find(taskId);
+            Users student = context.Users.Find(studentId);
+            
             if (task != null)
             {
                 try
                 {
                     task.Stateoftask = "DONE";
                     task.SigningFinishDate = DateTime.Now;
+                    var taskValidated = new TasksValidated();
+                    taskValidated.TaskId = task.TaskId;
+                    taskValidated.UserId = student.UserId;
+
+                    var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId && w.UserId != student.UserId);
+                    foreach (TaskAggregation taskAgg in removeAggregation){
+                        context.TaskAggregation.Remove(taskAgg);
+                    }
                     context.SaveChanges();
+
+                    
                 }
                 catch (Exception e)
                 {

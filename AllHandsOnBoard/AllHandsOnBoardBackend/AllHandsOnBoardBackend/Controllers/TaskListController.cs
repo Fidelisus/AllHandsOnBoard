@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+
 
 namespace AllHandsOnBoardBackend.Controllers
 {
@@ -40,28 +43,35 @@ namespace AllHandsOnBoardBackend.Controllers
         }
 
         //Would have to change the userId here so that people cant apply with other account 
-        //api/TaskList/1&2
+        //api/TaskList/
         [Authorize(Roles = "student")]
-        [HttpGet("{taskId}&{userId}")]
-        public JsonResult applyToTask(int taskId, int userId ){
-            bool result = tasksService.applyToTask(taskId,userId);
+        [HttpPost("apply/")]
+        public JsonResult applyToTask(applyTaskRequest request ){
+
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var userId = Convert.ToInt32(identity.FindFirst(ClaimTypes.Name).Value);
+
+            bool result = tasksService.applyToTask(request.taskId,userId);
             return new JsonResult(result);
         }
 
-        [Authorize(Roles = "teacher")]
-        [HttpGet("validation/{id}")]
-        public JsonResult validateTask(int id){
-            Tasks result = tasksService.validateTask(id);
+        [Authorize(Roles = "teacher,admin")]
+        [HttpPost("validation/")]
+        public JsonResult validateTask(validationRequest request){
+            Tasks result = tasksService.validateTask(request.taskId, request.studentId);
             return new JsonResult(result);
         }
 
-        [Authorize(Roles = "teacher")]
+        [Authorize(Roles = "teacher,admin")]
         [HttpGet("taskStart/{id}")]
         public JsonResult taskStart(int id){
             bool result = tasksService.taskStart(id);
             return new JsonResult(result);
         }
 
+
+
+        
 
         /*Json should look like 
         {
@@ -98,36 +108,3 @@ namespace AllHandsOnBoardBackend.Controllers
     }
 }
 
-/*
-// GET: api/TaskList
-[HttpGet]
-public IEnumerable<string> Get()
-{
-    return new string[] { "value1", "value2" };
-}
-
-// GET: api/TaskList/5
-[HttpGet("{id}", Name = "Get")]
-public string Get(int id)
-{
-    return "value";
-}
-
-// POST: api/TaskList
-[HttpPost]
-public void Post([FromBody] string value)
-{
-}
-
-// PUT: api/TaskList/5
-[HttpPut("{id}")]
-public void Put(int id, [FromBody] string value)
-{
-}
-
-// DELETE: api/ApiWithActions/5
-[HttpDelete("{id}")]
-public void Delete(int id)
-{
-}
-*/

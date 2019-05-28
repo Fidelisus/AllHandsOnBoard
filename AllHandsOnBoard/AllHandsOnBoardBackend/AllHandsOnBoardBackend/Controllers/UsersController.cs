@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 using Serilog;
 using System.Json;
 using Newtonsoft.Json;
 using AllHandsOnBoardBackend.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace AllHandsOnBoardBackend.Controllers
 {
@@ -51,6 +54,26 @@ namespace AllHandsOnBoardBackend.Controllers
             else{
                 return new JsonResult(false);
             }
+        }
+
+        [Authorize(Roles ="teacher,admin")]
+        [HttpGet("history")]
+        public JsonResult getHistory(){
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var userEmail = identity.FindFirst(ClaimTypes.Email).Value;
+
+            List<Tasks> history = userService.getHistory(userEmail);
+            return new JsonResult(history);
+            
+
+        }
+
+        [Authorize(Roles ="student")]
+        [HttpGet("scoreBoard/points")]
+        public JsonResult getPointScoreBoard(scoreboardRequest request){
+            var result = userService.getPointsc(request.pageNumber, request.numberOfUser);
+            return new JsonResult(result);
+
         }
     }
 }

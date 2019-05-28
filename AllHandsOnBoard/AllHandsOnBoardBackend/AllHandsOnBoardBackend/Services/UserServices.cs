@@ -18,6 +18,13 @@ namespace AllHandsOnBoardBackend.Services
         Users Authenticate(string email, string password);
         Users getUser(int id);
         List<Users> getUsers();
+        List<Tasks> getHistory(string email);
+        List<Users> getPointsc(int pageNumber, int numberOfUser);
+    }
+
+    public class scoreboardRequest{
+        public int pageNumber {get;set;}
+        public int numberOfUser {get;set;}
     }
 
     public class UserServices : IUserService
@@ -32,7 +39,10 @@ namespace AllHandsOnBoardBackend.Services
             context = new all_hands_on_boardContext();
         }
 
+
+
         public Users getUser(int id)
+
         {
             var user = new Users();
                 user = context.Users.Find(id);
@@ -55,6 +65,31 @@ namespace AllHandsOnBoardBackend.Services
             return user;
         }
 
+        public  List<Tasks> getHistory(string email){
+            
+            var user = context.Users.SingleOrDefault(myEmail => myEmail.Email == email);
+            var id = user.UserId;
+            List<Tasks> history = new List<Tasks>();
+             if(user != null){
+               var tableJoin = ( from task in context.Tasks
+                            where task.UploaderId.Equals(id)
+                            orderby task.TaskId ascending
+                            select task
+                        ).Distinct();
+                history = tableJoin.ToList();
+            }
+            return history;
+        }
+
+        public List<Users> getPointsc(int pageNumber, int numberOfUser){
+            var request = ( from user in context.Users
+                            orderby user.Points descending
+                            select user
+                           ).Distinct();
+            List<Users> list = request.Skip((pageNumber-1)*numberOfUser).Take(numberOfUser).ToList();
+            return list;
+        }
+
 
         public Users Authenticate(string userIDParam, string password)
         {
@@ -73,12 +108,14 @@ namespace AllHandsOnBoardBackend.Services
                     else
                         key = Encoding.ASCII.GetBytes(new string("dzjdfeiofjsofijsefsefjilsefjisefslif"));
 
+                    var role = user.Occupation;
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(new Claim[]
                         {
-                            new Claim(ClaimTypes.Name, user.Email),
-                            new Claim(ClaimTypes.Role, user.Occupation == "student" ? "student" : "teacher")
+                            new Claim(ClaimTypes.Name, user.UserId.ToString()),
+                            new Claim(ClaimTypes.Email, user.Email),
+                            new Claim(ClaimTypes.Role, role)
                         }),
                         Expires = DateTime.UtcNow.AddDays(7),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

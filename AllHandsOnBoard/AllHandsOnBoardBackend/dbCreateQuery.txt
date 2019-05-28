@@ -4,10 +4,13 @@
 
 -- DROP DATABASE all_hands_on_board;
 --DROP TABLE task_aggregation;
+--DROP TABLE tasks_Validated;
+--DROP TABLE tasks_Created;
 --DROP TABLE task_Tags;
 --DROP TABLE tasks;
 --DROP TABLE users;
 --DROP TABLE tags;
+
 
 CREATE TABLE users(
 	user_ID SERIAL PRIMARY KEY,
@@ -25,10 +28,10 @@ CREATE TABLE users(
 
 CREATE TABLE tasks(
 	task_ID SERIAL PRIMARY KEY,
-	stateOfTask varchar(4) DEFAULT('TODO'),
+	stateOfTask varchar(5) DEFAULT('TODO'),
 	uploader_ID int REFERENCES users(user_ID) ON DELETE SET NULL,
-	short_description varchar(50),
-	task_description varchar(400),
+	short_description varchar(100),
+	task_description varchar(500),
 	points_gained int NOT NULL,
 	work_start_date TIMESTAMP NOT NULL,
 	work_finish_date TIMESTAMP,
@@ -55,13 +58,23 @@ CREATE TABLE task_Tags(
 	PRIMARY KEY(task_ID,tag_ID)
 );
 
+CREATE TABLE tasks_Validated(
+	task_ID int REFERENCES tasks(task_ID) ON DELETE CASCADE,
+	user_ID int REFERENCES users(user_ID) ON DELETE CASCADE,
+	PRIMARY KEY(task_ID,user_ID)
+);
+
+
+
+
+
 insert into users values (1, 'Lukasz', 'Sobocinski', '217737@edu.p.lodz.pl', 'student', 217737, 'student', 'IFE', 0, 'abc', null);
 insert into users values (2, 'Jakub', 'Stepaniak', '456576@edu.p.lodz.pl', 'student', 456576, 'student', 'EEIA', 0, 'good123', null);
 insert into users values (3, 'Ada', 'Warkoczewska', 'aw@p.lodz.pl', 'teacher', null, 'PhD', 'EEIA', null, 'Hello', null);
 insert into users values (4, 'Sonny', 'Miel', 'sm@p.lodz.pl', 'teacher', null, 'MSc', 'IFE', 0, 'dif#@', null);
 insert into users values (5, 'Jan', 'Schiling', '344567@edu.p.lodz.pl', 'student', 344567, 'student', 'FTIMS', 0, '123', null);
 insert into users values (6, 'Kozlarz', 'Babka', 'admin',  'admin', null, null, null, null, 'admin', null);
-insert into users values (7, 'Marcin', 'Kowalski', 'marcin.kowalski@p.lodz.pl', 'teacher',  'null', 'MSc', 'BiNoZ',  0, '1234', null);
+insert into users values (7, 'Marcin', 'Kowalski', 'marcin.kowalski@p.lodz.pl', 'teacher',  null, 'MSc', 'BiNoZ',  0, '1234', null);
 insert into users values (8, 'Bartosz', 'Stemplewski', '217789@edu.p.lodz.pl', 'student', 217789, 'student', 'IFE', 0, 'abcd', null);
 
 insert into tasks values (1, 'TODO', 3, 'Department webpage update', 'Updateing the content of the webpage for the new academic year', 15,NOW());
@@ -89,7 +102,7 @@ insert into tags values (8,'Forein languages');
 insert into tags values (9,'Erasmus students');
 insert into tags values (10,'Conferences');
 insert into tags values (11,'Physical');
-insert into tags values (12,'Sport')
+insert into tags values (12,'Sport');
 
 
 insert into task_Tags values (1,1);

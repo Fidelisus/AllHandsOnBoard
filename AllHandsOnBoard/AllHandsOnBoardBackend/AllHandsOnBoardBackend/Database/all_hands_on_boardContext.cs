@@ -19,6 +19,7 @@ namespace AllHandsOnBoardBackend
         public virtual DbSet<TaskAggregation> TaskAggregation { get; set; }
         public virtual DbSet<TaskTags> TaskTags { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
+        public virtual DbSet<TasksValidated> TasksValidated { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -108,7 +109,7 @@ namespace AllHandsOnBoardBackend
 
                 entity.Property(e => e.ShortDescription)
                     .HasColumnName("short_description")
-                    .HasMaxLength(50);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.SigningFinishDate).HasColumnName("signing_finish_date");
 
@@ -119,7 +120,7 @@ namespace AllHandsOnBoardBackend
 
                 entity.Property(e => e.TaskDescription)
                     .HasColumnName("task_description")
-                    .HasMaxLength(400);
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.UploadDate)
                     .HasColumnName("upload_date")
@@ -130,12 +131,30 @@ namespace AllHandsOnBoardBackend
                 entity.Property(e => e.WorkFinishDate).HasColumnName("work_finish_date");
 
                 entity.Property(e => e.WorkStartDate).HasColumnName("work_start_date");
+    
+                
+                });
 
-                entity.HasOne(d => d.Uploader)
-                    .WithMany(p => p.Tasks)
-                    .HasForeignKey(d => d.UploaderId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("tasks_uploader_id_fkey");
+            modelBuilder.Entity<TasksValidated>(entity =>
+            {
+                entity.HasKey(e => new { e.TaskId, e.UserId })
+                    .HasName("tasks_validated_pkey");
+
+                entity.ToTable("tasks_validated");
+
+                entity.Property(e => e.TaskId).HasColumnName("task_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Task)
+                    .WithMany(p => p.TasksValidated)
+                    .HasForeignKey(d => d.TaskId)
+                    .HasConstraintName("tasks_validated_task_id_fkey");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TasksValidated)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("tasks_validated_user_id_fkey");
             });
 
             modelBuilder.Entity<Users>(entity =>
