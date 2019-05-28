@@ -8,7 +8,7 @@ export class Task {
   taskDescription: string;
   taskShortDescription: string;
   pointsGained: number;
-  uploadDate: string;
+  uploadDate: number;
   finishDate: string;
 
   constructor(data) {
