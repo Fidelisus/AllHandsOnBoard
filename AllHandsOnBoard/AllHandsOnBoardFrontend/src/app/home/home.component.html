@@ -1,16 +1,21 @@
+<div class = "background">
 <div class="container emp-profile">
   <div class="row">
     <div class="col-md-6">
       <a routerLink="/profile">
-        <div class="block-red">
+        <div class="block-profile">
+          <div class = "text-field">
           <h2>Profile</h2>
+          </div>
         </div>
       </a>
     </div>
     <div class="col-md-6">
       <a routerLink="/task-list">
-        <div class="block-yellow">
+        <div class="block-tasklist">
+          <div class = "text-field">
           <h2>Task List</h2>
+          </div>
         </div>
       </a>
     </div>
@@ -18,18 +23,23 @@
   <div class="row">
     <div class="col-md-6">
       <a routerLink="/task-adder">
-        <div class="block-blue">
-          <h2>{{blueContent}}</h2>
+        <div class="block-administration">
+          <div class = "text-field">
+            <h2>Administration</h2>
+          </div>
         </div>
       </a>
     </div>
     <div class="col-md-6">
       <a routerLink="/scoreboard">
-        <div class="block-green">
-          <h2>Scoreboard</h2>
+        <div class="block-scoreboard">
+           <div class = "text-field">
+           <h2>Scoreboard</h2>
+          </div>
         </div>
       </a>
     </div>
   </div>
-  <button class="btn btn-info" (click)="logout()">Logout</button>
+  <button class="logout-button" (click)="logout()">Logout</button>
+</div>
 </div>
