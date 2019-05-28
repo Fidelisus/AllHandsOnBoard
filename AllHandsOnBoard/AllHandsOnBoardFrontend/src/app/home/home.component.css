@@ -1,7 +1,14 @@
+a {
+  color: #FFF;
+}
+
+.background{
+  background-image: url('../../assets/background.png');
+}
+
 .emp-profile{
   padding: 1%;
   border-radius: 0.5rem;
-  background: #fff;
 }
 
 .col-md-6 {
@@ -11,25 +18,52 @@
 }
 
 .col-md-6:hover {
-  transform: scale(1.08);
+  transform: scale(1.03);
 }
 
-.block-red {
-  height: 400px;
-  background: #ed553b;
+.block-profile {
+  height: 40vh;
+  background-image: url('../../assets/profile-block.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 2vh;
+}
+.text-field{
+  padding-top: 5vh;
+  padding-left: 5vh;
 }
 
-.block-yellow {
-  height: 400px;
-  background: #f6d55c;
+.block-tasklist {
+  height: 40vh;
+  background-image: url('../../assets/tasklist-block.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 2vh;
+
 }
 
-.block-blue {
-  height: 400px;
-  background-color: #20639b;
+.block-administration {
+  height: 40vh;
+  background-image: url('../../assets/administration-block.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 2vh;
 }
 
-.block-green {
-  height: 400px;
-  background: #3caea3;
+.block-scoreboard {
+  height: 40vh;
+  background-image: url('../../assets/scoreboard-block.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 2vh;
+}
+
+.logout-button {
+  padding: 1vh 4vh;
+  border: none;
+  background: #CECDB4;
+  transition: 0.3s;
+}
+.logout-button:hover {
+  transform: scale(1.03);
 }
