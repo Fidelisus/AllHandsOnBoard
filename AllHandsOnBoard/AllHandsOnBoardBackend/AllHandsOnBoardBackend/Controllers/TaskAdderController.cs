@@ -6,8 +6,11 @@ using AllHandsOnBoardBackend.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace AllHandsOnBoardBackend.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TaskAdderController : ControllerBase
@@ -30,6 +33,7 @@ namespace AllHandsOnBoardBackend.Controllers
                     },
             "tags":[1,2,3...]
         } */
+        [Authorize(Roles = "teacher")]
         [HttpPost]
         public JsonResult Post([FromBody] addTaskRequest request)
         {

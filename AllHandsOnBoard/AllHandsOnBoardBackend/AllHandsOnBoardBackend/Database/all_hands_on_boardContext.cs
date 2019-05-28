@@ -114,7 +114,7 @@ namespace AllHandsOnBoardBackend
 
                 entity.Property(e => e.Stateoftask)
                     .HasColumnName("stateoftask")
-                    .HasMaxLength(4)
+                    .HasMaxLength(5)
                     .HasDefaultValueSql("'TODO'::character varying");
 
                 entity.Property(e => e.TaskDescription)

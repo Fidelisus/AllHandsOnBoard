@@ -14,6 +14,7 @@ namespace AllHandsOnBoardBackend.Services
         bool addTask(Tasks task, List<int> tags);
         TaskWithUploader getTask(int id);
         bool applyToTask(int taskId, int userId);
+        bool taskStart (int taskId);
         Tasks validateTask(int taskId);
         List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber, string columnToSearch, string keyword);
     }
@@ -135,6 +136,23 @@ namespace AllHandsOnBoardBackend.Services
             catch (Exception e)
             {
                 Log.Error(String.Concat("Failed to add task aggregation on db : ", e.Message));
+                return false;
+            }
+            return true;
+        }
+
+
+        public bool taskStart (int taskId){
+            try
+            {
+                Tasks task = context.Tasks.Find(taskId);
+                task.WorkStartDate = DateTime.Now;
+                task.Stateoftask = "GOING";
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Log.Error(String.Concat("Failed to start the task in database: ", e.Message));
                 return false;
             }
             return true;

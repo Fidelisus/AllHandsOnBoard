@@ -6,12 +6,13 @@ using AllHandsOnBoardBackend.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AllHandsOnBoardBackend.Controllers
 {
 
   
-
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TaskListController : ControllerBase
@@ -40,16 +41,24 @@ namespace AllHandsOnBoardBackend.Controllers
 
         //Would have to change the userId here so that people cant apply with other account 
         //api/TaskList/1&2
+        [Authorize(Roles = "student")]
         [HttpGet("{taskId}&{userId}")]
         public JsonResult applyToTask(int taskId, int userId ){
             bool result = tasksService.applyToTask(taskId,userId);
             return new JsonResult(result);
         }
 
-        
+        [Authorize(Roles = "teacher")]
         [HttpGet("validation/{id}")]
         public JsonResult validateTask(int id){
             Tasks result = tasksService.validateTask(id);
+            return new JsonResult(result);
+        }
+
+        [Authorize(Roles = "teacher")]
+        [HttpGet("taskStart/{id}")]
+        public JsonResult taskStart(int id){
+            bool result = tasksService.taskStart(id);
             return new JsonResult(result);
         }
 
