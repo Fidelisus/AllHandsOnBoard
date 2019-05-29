@@ -39,7 +39,11 @@ export class RestService {
     return this.http.post(this.apiUrl + '/TaskList', body, this.httpOptions);
   }
 
-  addTask(task: Task) {
-    return this.http.post(this.apiUrl + '/TaskAdder', JSON.stringify(task), this.httpOptions);
+ addTask(task: Task, tags = []){
+    const body = {
+      "task": task,
+      "tags": tags
+    };
+    return this.http.post(this.apiUrl + '/TaskAdder', body, this.httpOptions);
   }
 }
