@@ -131,9 +131,13 @@ namespace AllHandsOnBoardBackend
                 entity.Property(e => e.WorkFinishDate).HasColumnName("work_finish_date");
 
                 entity.Property(e => e.WorkStartDate).HasColumnName("work_start_date");
-    
-                
-                });
+
+                entity.HasOne(d => d.Uploader)
+                    .WithMany(p => p.Tasks)
+                    .HasForeignKey(d => d.UploaderId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("tasks_uploader_id_fkey");
+            });
 
             modelBuilder.Entity<TasksValidated>(entity =>
             {

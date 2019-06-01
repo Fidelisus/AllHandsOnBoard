@@ -77,6 +77,8 @@ namespace AllHandsOnBoardBackend.Services
                             select task
                         ).Distinct();
                 history = tableJoin.ToList();
+                foreach(Tasks task in history)
+                    task.Uploader = null;
             }
             return history;
         }

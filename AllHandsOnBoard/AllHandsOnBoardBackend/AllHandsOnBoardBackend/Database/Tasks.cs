@@ -24,6 +24,7 @@ namespace AllHandsOnBoardBackend
         public DateTime? UploadDate { get; set; }
         public int NoOfStudents { get; set; }
 
+        public virtual Users Uploader { get; set; }
         public virtual ICollection<TaskAggregation> TaskAggregation { get; set; }
         public virtual ICollection<TaskTags> TaskTags { get; set; }
         public virtual ICollection<TasksValidated> TasksValidated { get; set; }

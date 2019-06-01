@@ -182,14 +182,13 @@ namespace AllHandsOnBoardBackend.Services
                     var taskValidated = new TasksValidated();
                     taskValidated.TaskId = task.TaskId;
                     taskValidated.UserId = student.UserId;
+                    student.Points += task.PointsGained;
 
                     var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId && w.UserId != student.UserId);
                     foreach (TaskAggregation taskAgg in removeAggregation){
                         context.TaskAggregation.Remove(taskAgg);
                     }
                     context.SaveChanges();
-
-                    
                 }
                 catch (Exception e)
                 {
@@ -215,7 +214,6 @@ namespace AllHandsOnBoardBackend.Services
             {
                 if (tagsList.Count() > 0)
                 {
-
                     table_join = (
                     from taskAgrr in context.TaskTags
                     join tasks in context.Tasks
@@ -266,8 +264,6 @@ namespace AllHandsOnBoardBackend.Services
                                     select new { tags, task_Tags }
                 );
             var tagList = tag_table.ToList();
-
-
             for (var i = 0; i < taskList.Count; i++)
             {
                 taskList[i].tags = new List<string>();
@@ -281,7 +277,6 @@ namespace AllHandsOnBoardBackend.Services
                 }
             }
             return taskList;
-
         }
     }
 

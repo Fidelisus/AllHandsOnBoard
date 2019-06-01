@@ -86,6 +86,7 @@ namespace AllHandsOnBoardBackend
             services.AddSingleton(appSettingsConfig);
             services.AddScoped<IUserService, UserServices>();
             services.AddScoped<ITasksService, TasksService>();
+            services.AddScoped<ITagsService, TagsService>();
 
 
         }

@@ -8,6 +8,7 @@ namespace AllHandsOnBoardBackend
         public Users()
         {
             TaskAggregation = new HashSet<TaskAggregation>();
+            Tasks = new HashSet<Tasks>();
             TasksValidated = new HashSet<TasksValidated>();
         }
 
@@ -24,6 +25,7 @@ namespace AllHandsOnBoardBackend
         public string Token { get; set; }
 
         public virtual ICollection<TaskAggregation> TaskAggregation { get; set; }
+        public virtual ICollection<Tasks> Tasks { get; set; }
         public virtual ICollection<TasksValidated> TasksValidated { get; set; }
     }
 }

@@ -5,7 +5,6 @@
 -- DROP DATABASE all_hands_on_board;
 --DROP TABLE task_aggregation;
 --DROP TABLE tasks_Validated;
---DROP TABLE tasks_Created;
 --DROP TABLE task_Tags;
 --DROP TABLE tasks;
 --DROP TABLE users;
