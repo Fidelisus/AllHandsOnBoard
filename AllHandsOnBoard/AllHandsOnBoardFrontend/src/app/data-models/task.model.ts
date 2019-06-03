@@ -14,6 +14,7 @@ export interface TDataModelTask {
   pointsGained: number;
   uploadDate: string;
   workFinishDate: string;
+  stateoftask: string;
 }
 
 export class Task {
@@ -28,6 +29,7 @@ export class Task {
   pointsGained: number;
   uploadDate: string;
   finishDate: string;
+  stateoftask: string;
 
   constructor(data: TDataModel) {
     this.taskId = data.task.taskId;
@@ -41,5 +43,6 @@ export class Task {
     this.pointsGained = data.task.pointsGained;
     this.uploadDate = data.task.uploadDate;
     this.finishDate = data.task.workFinishDate;
+    this.stateoftask = data.task.stateoftask;
   }
 }
