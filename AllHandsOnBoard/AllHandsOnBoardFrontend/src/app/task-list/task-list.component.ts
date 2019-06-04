@@ -42,10 +42,6 @@ export class TaskListComponent implements OnInit {
     }
     this.getData(10);
   }
-  
-  back() {
-    this.router.navigateByUrl('home');
-  }
 
   back() {
     this.router.navigateByUrl('home');
@@ -75,5 +71,9 @@ export class TaskListComponent implements OnInit {
           this.tasksData.push(new Task(item));
         }
       });
+  }
+  
+  description(task: Task){
+    this.router.navigateByUrl('task-list/' + task.taskId);
   }
 }
