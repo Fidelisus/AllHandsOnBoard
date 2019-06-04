@@ -1,3 +1,79 @@
-<div class="py-2">
-  <button class="btn btn-success" (click)="back()">Back</button>
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <button class="btn btn-success" (click)="back()">Back</button>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>About the Task</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Task Description:</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{task?.task.taskDescription}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Uploader Name:</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{task?.uploaderName}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Uploader Surname:</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{task?.uploaderSurname}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Uploader Email:</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{task?.uploaderEmail}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Deadline of the task:</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{task?.task.workFinishDate}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Points to Gain:</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{task?.task.pointsGained}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Tags:</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{task?.tags}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <button class="btn btn-success" (click)="checker()">{{blueContent}}</button>
+  </form>
 </div>
