@@ -6,6 +6,7 @@ import {TaskListComponent} from './task-list/task-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { TaskAdderComponent } from './task-adder/task-adder.component';
+import { TaskDescriptionComponent } from './task-description/task-description.component';
 
 
 const routes: Routes = [
