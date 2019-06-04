@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Collections.Generic;
+using System.Reflection;
 using Serilog;
 using System.Json;
 using Newtonsoft.Json;
@@ -46,12 +47,16 @@ namespace AllHandsOnBoardBackend.Controllers
         public JsonResult Get(int id)
         {
             var user = userService.getUser(id);
-            var rating = new{Rating = userService.getAvgRating(id)};
-            
+            var rating = userService.getAvgRating(id);
             if (user != null)
             {
-                Object[] response;
-                response = new Object[2]{user,rating};
+                Dictionary<string, object> response = new Dictionary<string, object>();
+                var type = typeof(Users);
+                foreach(PropertyInfo prop in type.GetProperties()){
+                    response.Add(prop.Name, prop.GetValue(user));
+                }
+                response.Add(nameof(rating),rating);
+               
                 return new JsonResult(response);
             }
             else{
