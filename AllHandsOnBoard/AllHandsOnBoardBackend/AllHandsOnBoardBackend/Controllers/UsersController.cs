@@ -56,7 +56,7 @@ namespace AllHandsOnBoardBackend.Controllers
                     response.Add(prop.Name, prop.GetValue(user));
                 }
                 response.Add(nameof(rating),rating);
-               
+                response["Password"] = null;
                 return new JsonResult(response);
             }
             else{
