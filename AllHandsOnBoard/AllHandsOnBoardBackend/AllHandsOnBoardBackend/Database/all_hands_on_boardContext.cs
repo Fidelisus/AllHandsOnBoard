@@ -20,6 +20,7 @@ namespace AllHandsOnBoardBackend
         public virtual DbSet<TaskTags> TaskTags { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<TasksValidated> TasksValidated { get; set; }
+        public virtual DbSet<UserRating> UserRating { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -159,6 +160,26 @@ namespace AllHandsOnBoardBackend
                     .WithMany(p => p.TasksValidated)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("tasks_validated_user_id_fkey");
+            });
+
+            modelBuilder.Entity<UserRating>(entity =>
+            {
+                entity.HasKey(e => e.Ratingid)
+                    .HasName("user_rating_pkey");
+
+                entity.ToTable("user_rating");
+
+                entity.Property(e => e.Ratingid).HasColumnName("ratingid");
+
+                entity.Property(e => e.Rating).HasColumnName("rating");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserRating)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("user_rating_user_id_fkey");
             });
 
             modelBuilder.Entity<Users>(entity =>

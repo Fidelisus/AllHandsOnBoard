@@ -15,7 +15,7 @@ namespace AllHandsOnBoardBackend.Services
         TaskWithUploader getTask(int id);
         bool applyToTask(int taskId, int userId);
         bool taskStart (int taskId);
-        Tasks validateTask(int taskId,int studentId);
+        Tasks validateTask(int taskId,int studentId,int rating);
         List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber, string columnToSearch, string keyword);
     }
 
@@ -47,6 +47,7 @@ namespace AllHandsOnBoardBackend.Services
     public class validationRequest{
         public int taskId{get;set;}
         public int studentId{get;set;}
+        public int rating{get;set;}
     }
 
     public class TasksService : ITasksService
@@ -63,6 +64,8 @@ namespace AllHandsOnBoardBackend.Services
 
         public bool addTask(Tasks task, List<int> tags)
         {
+            if(task.TaskId == -1)
+                task.TaskId = context.Tasks.Count()+1;
             try
             {
                 context.Tasks.Add(task);
@@ -168,7 +171,7 @@ namespace AllHandsOnBoardBackend.Services
             return true;
         }
 
-        public Tasks validateTask(int taskId,int studentId)
+        public Tasks validateTask(int taskId,int studentId,int rating)
         {
             Tasks task = context.Tasks.Find(taskId);
             Users student = context.Users.Find(studentId);
@@ -182,12 +185,18 @@ namespace AllHandsOnBoardBackend.Services
                     var taskValidated = new TasksValidated();
                     taskValidated.TaskId = task.TaskId;
                     taskValidated.UserId = student.UserId;
+                    context.TasksValidated.Add(taskValidated);
                     student.Points += task.PointsGained;
+                    var DBRating = new UserRating();
+                    DBRating.UserId = studentId;
+                    DBRating.Rating = rating;
+                    context.UserRating.Add(DBRating);
 
-                    var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId && w.UserId != student.UserId);
+                    var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId);
                     foreach (TaskAggregation taskAgg in removeAggregation){
                         context.TaskAggregation.Remove(taskAgg);
                     }
+                    task.TasksValidated = null;
                     context.SaveChanges();
                 }
                 catch (Exception e)

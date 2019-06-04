@@ -31,7 +31,6 @@ namespace AllHandsOnBoardBackend.Controllers
         public JsonResult Get()
         {
             var users = userService.getUsers();
-
             if (users != null)
             {
                 return new JsonResult(users);
@@ -47,9 +46,13 @@ namespace AllHandsOnBoardBackend.Controllers
         public JsonResult Get(int id)
         {
             var user = userService.getUser(id);
+            var rating = new{Rating = userService.getAvgRating(id)};
+            
             if (user != null)
             {
-                return new JsonResult(user);
+                Object[] response;
+                response = new Object[2]{user,rating};
+                return new JsonResult(response);
             }
             else{
                 return new JsonResult(false);
@@ -64,8 +67,6 @@ namespace AllHandsOnBoardBackend.Controllers
 
             List<Tasks> history = userService.getHistory(userEmail);
             return new JsonResult(history);
-            
-
         }
 
         [Authorize(Roles ="student")]

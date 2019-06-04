@@ -25,13 +25,17 @@ namespace AllHandsOnBoardBackend.Controllers
         // POST: api/TaskAdder
 
         /*
+        exemple without all the properties
         JSON : 
         {
-            "task": {
-                        blblblb
-                        for timestamp on postman use : "blbal":"{{$timestamp}}"
-                    },
-            "tags":[1,2,3...]
+         	"task":
+                {
+                    "TaskId" : -1,
+                    "task_description":"this is a test",
+                    "points_gained":10,
+                    "work_start_date":"{{$timestamp}}"
+                },
+                "tags":[1,2]
         } */
         [Authorize(Roles = "teacher,admin")]
         [HttpPost]

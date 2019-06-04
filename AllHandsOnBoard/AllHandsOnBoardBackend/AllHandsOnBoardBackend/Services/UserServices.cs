@@ -20,6 +20,8 @@ namespace AllHandsOnBoardBackend.Services
         List<Users> getUsers();
         List<Tasks> getHistory(string email);
         List<Users> getPointsc(int pageNumber, int numberOfUser);
+        //bool addRating(int userId,int rating);
+        double getAvgRating(int userId);
     }
 
     public class scoreboardRequest{
@@ -45,7 +47,7 @@ namespace AllHandsOnBoardBackend.Services
 
         {
             var user = new Users();
-                user = context.Users.Find(id);
+            user = context.Users.Find(id);
             return user;
         }
 
@@ -133,6 +135,26 @@ namespace AllHandsOnBoardBackend.Services
             }
             return null;
         }
+
+      /*  public bool addRating(int userId,int rating){
+
+            var user = context.Users.Find(userId);
+            if(user!=null){
+               var DBRating = new UserRating();
+               DBRating.UserId = userId;
+               DBRating.Rating = rating;
+               context.UserRating.Add(DBRating);
+               context.SaveChanges();
+            }
+            return false;
+
+        }*/
+
+        public double getAvgRating(int userId){
+            var avgRating = context.UserRating.Where(w => w.UserId == userId ).Select(r => r.Rating).Average();
+            return avgRating == null ? -1 : (double)avgRating;
+        }
+    
 
     }
 }

@@ -58,7 +58,7 @@ namespace AllHandsOnBoardBackend.Controllers
         [Authorize(Roles = "teacher,admin")]
         [HttpPost("validation/")]
         public JsonResult validateTask(validationRequest request){
-            Tasks result = tasksService.validateTask(request.taskId, request.studentId);
+            Tasks result = tasksService.validateTask(request.taskId, request.studentId,request.rating);
             return new JsonResult(result);
         }
 

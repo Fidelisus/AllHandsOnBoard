@@ -63,7 +63,11 @@ CREATE TABLE tasks_Validated(
 	PRIMARY KEY(task_ID,user_ID)
 );
 
-
+CREATE TABLE user_Rating(
+	ratingId SERIAL PRIMARY KEY,
+	user_ID int REFERENCES users(user_ID) ON DELETE CASCADE, 
+	rating float 	
+);
 
 
 
@@ -116,4 +120,11 @@ insert into task_Tags values (9,1);
 insert into task_Tags values (10,10);
 insert into task_Tags values (11,11);
 insert into task_Tags values (12,7);
+
+
+insert into user_Rating values(1,1,5);
+insert into user_Rating values(2,1,5);
+insert into user_Rating values(3,1,2);
+
+
 
