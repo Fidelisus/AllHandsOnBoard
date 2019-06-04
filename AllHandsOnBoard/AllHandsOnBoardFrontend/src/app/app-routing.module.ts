@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'scoreboard', component: ScoreboardComponent },
   { path: 'task-adder', component: TaskAdderComponent },
+  { path: 'task-list/:taskid', component: TaskDescriptionComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
