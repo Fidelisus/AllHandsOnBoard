@@ -42,6 +42,10 @@ export class TaskListComponent implements OnInit {
     }
     this.getData(10);
   }
+  
+  back() {
+    this.router.navigateByUrl('home');
+  }
 
   back() {
     this.router.navigateByUrl('home');
