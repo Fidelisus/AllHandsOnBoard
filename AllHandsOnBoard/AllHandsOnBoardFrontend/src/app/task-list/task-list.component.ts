@@ -72,4 +72,8 @@ export class TaskListComponent implements OnInit {
         }
       });
   }
+  
+  description(task: Task){
+    this.router.navigateByUrl('task-list/' + task.taskId);
+  }
 }

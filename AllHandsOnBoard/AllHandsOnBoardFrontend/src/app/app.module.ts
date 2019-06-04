@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from './auth.service';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { TaskAdderComponent } from './task-adder/task-adder.component';
+import { TaskDescriptionComponent } from './task-description/task-description.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TaskAdderComponent } from './task-adder/task-adder.component';
     LoginComponent,
     ProfileComponent,
     ScoreboardComponent,
-    TaskAdderComponent
+    TaskAdderComponent,
+    TaskDescriptionComponent
   ],
   imports: [
     FormsModule,

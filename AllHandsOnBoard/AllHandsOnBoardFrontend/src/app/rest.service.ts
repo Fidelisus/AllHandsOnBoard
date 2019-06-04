@@ -27,6 +27,10 @@ export class RestService {
   getUsers() {
     return this.http.get<User[]>(this.apiUrl + '/Users', this.httpOptions);
   }
+  
+  getTask(id: number) {
+    return this.http.get<Task>(this.apiUrl + '/TaskList/' + id, this.httpOptions);
+  }
 
   getNTasks(n: number, search: string = '', tags: string[], page: number) {
     const body = {

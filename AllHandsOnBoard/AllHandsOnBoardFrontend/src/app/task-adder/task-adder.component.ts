@@ -62,6 +62,7 @@ export class TaskAdderComponent implements OnInit {
             uploaderName: this.user.name,
             uploaderSurname: this.user.surname,
             uploaderEmail: this.user.email,
+            stateoftask: "",
             tags: [],
             taskDescription: task_description.value,
             taskShortDescription: short_description.value,

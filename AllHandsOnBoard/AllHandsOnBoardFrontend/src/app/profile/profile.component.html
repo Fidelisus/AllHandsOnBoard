@@ -1,100 +1,137 @@
 <div class="container emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                      <button class="btn btn-success" (click)="back()">Back</button>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-                                        {{user.name}} {{user.surname}}
-                                    </h5>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tasks done</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                      <div class="profile-img">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" alt=""/>
-                        <div class="file btn btn-lg btn-primary">
-                          Change Photo
-                          <input type="file" name="file"/>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row py-1">
-                                            <div class="col-md-4">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>{{user.name}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row py-1">
-                                            <div class="col-md-4">
-                                                <label>Surname</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>{{user.surname}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row py-1">
-                                            <div class="col-md-4">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>{{user.email}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row py-1">
-                                            <div class="col-md-4">
-                                                <label>Occupation</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>{{user.occupation}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row py-1">
-                                            <div class="col-md-4">
-                                                <label>Index Number</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>{{user.indexNo}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row py-1">
-                                            <div class="col-md-4">
-                                                <label>Department</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>{{user.department}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row py-1">
-                                            <div class="col-md-4">
-                                                <label>Number of Points</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p>{{user.points}}</p>
-                                            </div>
-                                        </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <button class="btn btn-success" (click)="back()">Back</button>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            {{user.name}} {{user.surname}}
+          </h5>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tasks done</a>
+            </li>
+          </ul>
         </div>
+      </div>
+      <div class="col-md-2">
+        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" alt="" />
+          <div class="file btn btn-lg btn-primary">
+            Change Photo
+            <input type="file" name="file" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Name</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user.name}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Surname</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user.surname}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Email</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user.email}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Occupation</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user.occupation}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Index Number</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user.indexNo}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Department</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user.department}}</p>
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="col-md-4">
+                <label>Number of Points</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user.points}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<h2 class="text-center"><small>Tasks active: </small>{{this.countTasks()}}</h2>
+<div class="col-md-12">
+  <ul class="list-group" *ngFor="let task of tasksData">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-1">
+
+        </div>
+        <div class="col-2">
+          Status: {{ task.stateoftask }}
+        </div>
+        <div class="col-5">
+          {{task.taskShortDescription}}
+        </div>
+        <div class="col-3">
+          Task uploader: {{task.uploaderName + " " + task.uploaderSurname}}
+        </div>
+        <div class="col-1">
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+
+        </div>
+        <div class="col-2">
+          Points: {{task.pointsGained}}
+        </div>
+        <div class="col-9">
+          <span class="badge badge-secondary"> {{task.tags}} </span>
+        </div>
+        <div class="col-1">
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
