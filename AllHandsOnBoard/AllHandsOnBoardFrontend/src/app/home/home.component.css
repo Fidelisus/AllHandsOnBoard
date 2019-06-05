@@ -60,9 +60,12 @@ a {
 }
 
 .block-blue {
-  height: 400px;
-  background-color: #20639b;
   cursor: pointer;
+  color: #FFF
+}
+
+.block-blue:hover {
+  text-decoration: underline;
 }
 
 .logout-button {

@@ -18,13 +18,13 @@ export class ScoreboardComponent implements OnInit {
   public get usersData(): User[] {
     if (this._usersData != null) {
       this._usersData.sort((a, b) => {
-        return b.points - a.points
+        return b.Points - a.Points
       });
     }
         return this._usersData;
     }
   public set usersData(value: User[]) {
-    value.forEach((a, index, arr) => { if (a.occupation.toLowerCase() !== "student") arr.splice(index, 1)});
+    value.forEach((a, index, arr) => { if (a.Occupation.toLowerCase() !== "student") arr.splice(index, 1)});
       this._usersData = value;
     }
 
@@ -36,6 +36,11 @@ export class ScoreboardComponent implements OnInit {
     private router: Router) {
 }
 
+  back(){
+    this.router.navigateByUrl('home');
+  }
+
+
   ngOnInit(): void {
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
@@ -46,7 +51,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   isStudent(user : User): boolean {
-    if (user.occupation.toLowerCase() == "student") {
+    if (user.Occupation.toLowerCase() == "student") {
       return true;
     } else {
       return false;

@@ -46,11 +46,11 @@ export class TaskDescriptionComponent implements OnInit {
     this.router.navigateByUrl('home');
   }
   
-  checker(){
+  checker() {
     if (localStorage.getItem('role') === 'student') {
-        console.log(`apply`);
+      console.log(`apply`);
     } else {
-        console.log(`validate`);
+      console.log(`validate`);
     }
-
+  }
 }

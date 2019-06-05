@@ -59,9 +59,9 @@ export class TaskAdderComponent implements OnInit {
           this.task = {
             taskId: 20,
             uploaderId: parseInt(localStorage.getItem('userDBid'), 10),
-            uploaderName: this.user.name,
-            uploaderSurname: this.user.surname,
-            uploaderEmail: this.user.email,
+            uploaderName: this.user.Name,
+            uploaderSurname: this.user.Surname,
+            uploaderEmail: this.user.Email,
             stateoftask: "",
             tags: [],
             taskDescription: task_description.value,

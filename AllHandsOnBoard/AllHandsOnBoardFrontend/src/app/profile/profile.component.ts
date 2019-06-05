@@ -39,12 +39,14 @@ export class ProfileComponent implements OnInit {
   }
 
   getData(n: number, page = 1) {
-    this.restService.getNTasks(n, "", [], page)
+    this.restService.getNTasks(n, '', [], page)
       .subscribe(data => {
         this.tasksData = [];
         const array = data as Array<any>;
         for (const item of array) {
-          if (item.task.stateoftask.toUpperCase() === "TODO") item.task.stateoftask = "W trakcie";
+          if (item.task.stateoftask.toUpperCase() === 'TODO') {
+            item.task.stateoftask = 'W trakcie';
+          }
           this.tasksData.push(new Task(item));
         }
       });
