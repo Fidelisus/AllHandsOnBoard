@@ -28,13 +28,15 @@ namespace AllHandsOnBoardBackend.Controllers
         }
 
         // GET: api/TaskList/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
             var task = tasksService.getTask(id);
+            List<Users> applied = tasksService.getApplied(id);
             if (task != null)
             {
-                return new JsonResult(task);
+                return new JsonResult(task,applied);
             }
             else
             {
@@ -70,7 +72,6 @@ namespace AllHandsOnBoardBackend.Controllers
         }
 
 
-
         
 
         /*Json should look like 
@@ -82,6 +83,7 @@ namespace AllHandsOnBoardBackend.Controllers
             "keyword":"cake"
         }
              */
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult GetXTasks([FromBody] GetTasksRequest request){
             try

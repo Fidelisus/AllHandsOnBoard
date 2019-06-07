@@ -63,6 +63,17 @@ namespace AllHandsOnBoardBackend.Controllers
             }
         }
 
+        [Authorize(Roles="student,admin")]
+        [HttpGet("applied")]
+        public JSonResult getTaskApplied(){
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var userEmail = identity.FindFirst(ClaimTypes.Email).Value;
+
+            var list = userService.getTaskApplied(userEmail);
+            return new JSonResult(list);
+
+        }
+
         [Authorize(Roles ="teacher,admin")]
         [HttpGet("history")]
         public JsonResult getHistory(){

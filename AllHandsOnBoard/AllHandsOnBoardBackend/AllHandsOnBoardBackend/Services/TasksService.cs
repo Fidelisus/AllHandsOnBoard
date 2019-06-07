@@ -17,6 +17,7 @@ namespace AllHandsOnBoardBackend.Services
         bool taskStart (int taskId);
         Tasks validateTask(int taskId,int studentId,int rating);
         List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber, string columnToSearch, string keyword);
+        List<Users> getApplied(int id);
     }
 
     public class GetTasksRequest
@@ -85,6 +86,19 @@ namespace AllHandsOnBoardBackend.Services
                 return false;
             }
             return true;
+        }
+
+        public List<Users> getApplied(int id){
+            
+            var aggregation = context.TaskAggregation.Where(t => t.TaskId == id);
+            List<Users> applied = new List<Users>();
+            Users tempU;
+            foreach(TaskAggregation uId in aggregation){
+                tempU = context.Users.Where(t => t.UserId == uId.UserId);
+                tempU.Password = null;
+                applied.Add(tempU);
+            }
+            return applied;
         }
 
         public TaskWithUploader getTask(int id)

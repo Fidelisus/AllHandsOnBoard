@@ -48,6 +48,7 @@ namespace AllHandsOnBoardBackend.Services
         {
             var user = new Users();
             user = context.Users.Find(id);
+            user.Password = null;
             return user;
         }
 
@@ -58,6 +59,8 @@ namespace AllHandsOnBoardBackend.Services
             try
             {
                 user = context.Users.ToList<Users>();
+                foreach(Users u in user)
+                    u.Password = null;
             }
             catch (ArgumentNullException e)
             {
@@ -65,6 +68,18 @@ namespace AllHandsOnBoardBackend.Services
                 return null;
             }
             return user;
+        }
+
+         public List<Tasks> getTaskApplied(string email){
+            
+            var aggregation = context.TaskAggregation.Where(t => t.Email == email);
+            List<Tasks> applied = new List<Tasks>();
+            Tasks tempU;
+            foreach(TaskAggregation uId in aggregation){
+                tempU = context.Tasks.Find(uId.TaskId);
+                applied.Add(tempU);
+            }
+            return applied;
         }
 
         public  List<Tasks> getHistory(string email){
