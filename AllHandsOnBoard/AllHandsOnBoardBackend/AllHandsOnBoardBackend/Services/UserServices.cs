@@ -22,6 +22,7 @@ namespace AllHandsOnBoardBackend.Services
         List<Users> getPointsc(int pageNumber, int numberOfUser);
         //bool addRating(int userId,int rating);
         double getAvgRating(int userId);
+        List<Tasks> getTaskApplied(int id);
     }
 
     public class scoreboardRequest{
@@ -70,13 +71,14 @@ namespace AllHandsOnBoardBackend.Services
             return user;
         }
 
-         public List<Tasks> getTaskApplied(string email){
+         public List<Tasks> getTaskApplied(int id){
             
-            var aggregation = context.TaskAggregation.Where(t => t.Email == email);
+            var aggregation = context.TaskAggregation.Where(t => t.UserId == id);
             List<Tasks> applied = new List<Tasks>();
             Tasks tempU;
             foreach(TaskAggregation uId in aggregation){
                 tempU = context.Tasks.Find(uId.TaskId);
+                tempU.TaskAggregation = null;
                 applied.Add(tempU);
             }
             return applied;

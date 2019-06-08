@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Reflection;
 using Serilog;
 using System.Json;
@@ -65,12 +64,13 @@ namespace AllHandsOnBoardBackend.Controllers
 
         [Authorize(Roles="student,admin")]
         [HttpGet("applied")]
-        public JSonResult getTaskApplied(){
+        public JsonResult getTaskApplied(){
             var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var userEmail = identity.FindFirst(ClaimTypes.Email).Value;
+            var userId = identity.FindFirst(ClaimTypes.Name).Value;
 
-            var list = userService.getTaskApplied(userEmail);
-            return new JSonResult(list);
+
+            var list = userService.getTaskApplied(Convert.ToInt32(userId));
+            return new JsonResult(list);
 
         }
 

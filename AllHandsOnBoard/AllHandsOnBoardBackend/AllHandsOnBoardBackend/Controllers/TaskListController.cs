@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
 using System.Threading.Tasks;
 using AllHandsOnBoardBackend.Services;
@@ -32,11 +33,14 @@ namespace AllHandsOnBoardBackend.Controllers
         [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
-            var task = tasksService.getTask(id);
+            var task = tasksService.getTaskWithoutUploader(id);
+            
             List<Users> applied = tasksService.getApplied(id);
             if (task != null)
             {
-                return new JsonResult(task,applied);
+                Dictionary<String,Object> response = new Dictionary<String,Object>{{"Task",task},{ "Applied",applied}};
+                task.TaskAggregation = null;
+                return new JsonResult(response);
             }
             else
             {
