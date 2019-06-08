@@ -31,9 +31,22 @@ namespace AllHandsOnBoardBackend.Controllers
         public JsonResult Get()
         {
             var users = userService.getUsers();
+            double rating;
             if (users != null)
             {
-                return new JsonResult(users);
+                Dictionary<string, object> listUsersWithRating = new Dictionary<string, object>();
+                var type = typeof(Users);
+                List<Object> response = new List<Object>();
+                foreach(Users u in users){
+                    foreach(PropertyInfo prop in type.GetProperties()){
+                        listUsersWithRating.Add(prop.Name, prop.GetValue(u));
+                    }
+                    rating = userService.getAvgRating(u.UserId);
+                    listUsersWithRating.Add(nameof(rating),rating);
+                    response.Add(listUsersWithRating);
+                    listUsersWithRating = new Dictionary<string, object>();
+                }
+                return new JsonResult(response);
             }
             else
             {
