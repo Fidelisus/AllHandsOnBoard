@@ -33,14 +33,14 @@ namespace AllHandsOnBoardBackend.Controllers
         [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
-            var task = tasksService.getTaskWithoutUploader(id);
+            var task = tasksService.getTaskWithApplied(id);
             
-            List<Users> applied = tasksService.getApplied(id);
+            //List<Users> applied = tasksService.getApplied(id);
             if (task != null)
             {
-                Dictionary<String,Object> response = new Dictionary<String,Object>{{"Task",task},{ "Applied",applied}};
-                task.TaskAggregation = null;
-                return new JsonResult(response);
+                //Dictionary<String,Object> response = new Dictionary<String,Object>{{"Task",task},{ "Applied",applied}};
+                //task.TaskAggregation = null;
+                return new JsonResult(task);
             }
             else
             {

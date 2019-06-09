@@ -3,6 +3,7 @@ using AllHandsOnBoardBackend.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic;
@@ -18,7 +19,7 @@ namespace AllHandsOnBoardBackend.Services
         Tasks validateTask(int taskId,int studentId,int rating);
         List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber, string columnToSearch, string keyword);
         List<Users> getApplied(int id);
-        Tasks getTaskWithoutUploader(int id);
+        TaskWithApplied getTaskWithApplied(int id);
     }
 
     public class GetTasksRequest
@@ -89,8 +90,23 @@ namespace AllHandsOnBoardBackend.Services
             return true;
         }
 
-        public Tasks getTaskWithoutUploader(int id){
-            return context.Tasks.Find(id);
+        public TaskWithApplied getTaskWithApplied(int id){
+            var taskWithUploader = getTask(id);
+            List<Users> applied = getApplied(id);
+            TaskWithApplied response = new TaskWithApplied();
+            response.task = taskWithUploader.task;
+            response.UploaderSurname = taskWithUploader.UploaderSurname;
+            response.UploaderName = taskWithUploader.UploaderName;
+            response.UploaderEmail = taskWithUploader.UploaderEmail;
+            response.tags = taskWithUploader.tags;
+            var type = typeof(Users);
+            foreach(Users u in applied){
+                foreach(PropertyInfo prop in type.GetProperties()){
+                    response.Applied.Add(prop.Name, prop.GetValue(u));
+                }
+            }
+            response.task.TaskAggregation = null;
+            return response;
         }
 
         public List<Users> getApplied(int id){
