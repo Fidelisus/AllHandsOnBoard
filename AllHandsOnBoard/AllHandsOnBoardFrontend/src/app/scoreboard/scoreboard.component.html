@@ -1,5 +1,6 @@
-<h2 class="text-center"><small>Your place: </small>{{currentUserPlace}}</h2>
-
+<div *ngIf="this.isStudentLogged()">
+  <h2 class="text-center"><small>Your place: </small>{{currentUserPlace}}</h2>
+</div>
 <div class="col-md-12">
   <ol class="list-group" *ngFor="let user of usersData; let i = index">
     <li class="list-group-item" [class.active]="user.UserId === getCurrentUserId()" *ngIf="isStudent(user)">

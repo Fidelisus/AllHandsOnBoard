@@ -20,6 +20,27 @@ export interface TDataModelTask {
   stateoftask: string;
 }
 
+export class ShortTask {
+  taskId: number;
+  uploaderId: number;
+  taskDescription: string;
+  shortDescription: string;
+  pointsGained: number;
+  uploadDate: string;
+  workFinishDate: string;
+  stateoftask: string;
+
+  constructor(data: TDataModelTask) {
+    this.taskId = data.taskId;
+    this.taskDescription = data.taskDescription;
+    this.shortDescription = data.shortDescription;
+    this.pointsGained = data.pointsGained;
+    this.uploadDate = data.uploadDate;
+    this.workFinishDate = data.workFinishDate;
+    this.stateoftask = data.stateoftask;
+  }
+}
+
 export class Task {
   taskId: number;
   uploaderId: number;

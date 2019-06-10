@@ -1,0 +1,38 @@
+<h2 class="text-center"><small>Tasks active: </small>{{tasksNumber}}</h2>
+<div class="col-md-12" >
+  <ul class="list-group" *ngFor="let task of tasksData">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-2">
+          Status: {{ task.stateoftask }}
+        </div>
+        <div class="col-5">
+          {{task.shortDescription}}
+        </div>
+        <div class="col-2">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-2">
+          Points: {{task.pointsGained}}
+        </div>
+        <div class="col-2" *ngIf="isStudent()">
+          Task uploader:
+        </div>
+        <div class="col-2" *ngIf="!isStudent()">
+        </div>
+        <div class="col-3" *ngIf="isStudent()">
+          <span class="badge badge-secondary"> {{task.tags}} </span>
+        </div>
+        <div class="col-3" *ngIf="!isStudent()">
+        </div>
+        <div class="col-2">
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

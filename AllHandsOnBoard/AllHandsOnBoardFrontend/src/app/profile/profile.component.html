@@ -11,10 +11,13 @@
           </h5>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+              <button class="nav-link active" id="home-tab" data-toggle="tab" role="tab" (click)="setButtonState(state.PROFILE)">About</button>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tasks done</a>
+              <button class="nav-link" id="active-tab" data-toggle="tab" role="tab" (click)="setButtonState(state.ACTIVE_TASK)">Active tasks</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" id="profile-tab" data-toggle="tab" role="tab"  (click)="setButtonState(state.TASK_HISTORY)">Tasks done</button>
             </li>
           </ul>
         </div>
@@ -23,7 +26,7 @@
         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="buttonState===state.PROFILE">
       <div class="col-md-4">
         <div class="profile-img">
           <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" alt="" />
@@ -98,40 +101,6 @@
     </div>
   </form>
 </div>
-<h2 class="text-center"><small>Tasks active: </small>{{this.countTasks()}}</h2>
-<div class="col-md-12">
-  <ul class="list-group" *ngFor="let task of tasksData">
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-1">
-
-        </div>
-        <div class="col-2">
-          Status: {{ task.stateoftask }}
-        </div>
-        <div class="col-5">
-          {{task.taskShortDescription}}
-        </div>
-        <div class="col-3">
-          Task uploader: {{task.uploaderName + " " + task.uploaderSurname}}
-        </div>
-        <div class="col-1">
-
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-1">
-
-        </div>
-        <div class="col-2">
-          Points: {{task.pointsGained}}
-        </div>
-        <div class="col-9">
-          <span class="badge badge-secondary"> {{task.tags}} </span>
-        </div>
-        <div class="col-1">
-        </div>
-      </div>
-    </li>
-  </ul>
+<div *ngIf="buttonState===state.ACTIVE_TASK">
+  <app-profile-tasks></app-profile-tasks>
 </div>

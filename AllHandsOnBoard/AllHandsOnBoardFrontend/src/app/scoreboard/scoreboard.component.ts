@@ -12,8 +12,6 @@ import { User } from '../data-models/user.model';
 
 
 export class ScoreboardComponent implements OnInit {
-  // TODO backend controller to return only students
-  // TODO current user
   private _usersData: User[];
   public get usersData(): User[] {
         return this._usersData;
@@ -33,7 +31,6 @@ export class ScoreboardComponent implements OnInit {
     this.router.navigateByUrl('home');
   }
 
-
   ngOnInit(): void {
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
@@ -41,7 +38,15 @@ export class ScoreboardComponent implements OnInit {
     this.getData(10);
   }
 
-  isStudent(user : User): boolean {
+  isStudentLogged(): boolean {
+    if (localStorage.getItem('role') == "student") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isStudent(user: User): boolean {
     if (user.Occupation.toLowerCase() == "student") {
       return true;
     } else {
@@ -78,21 +83,3 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 }
-
-
-//< div class="container-fluid" >
-//  <div class="row" >
-//    <div class="col-md-3" >
-//      {{ currentUserData.name }}
-//</div>
-//  < div class="col-md-3" >
-//    {{ currentUserData.surname }}
-//</div>
-//  < div class="col-md-5" >
-//    {{ currentUserData.department }}
-//</div>
-//  < div class="col-md-1" >
-//    {{ currentUserData.points }}
-//</div>
-//  < /div>
-//  < /div>

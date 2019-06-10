@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { TaskAdderComponent } from './task-adder/task-adder.component';
 import { TaskDescriptionComponent } from './task-description/task-description.component';
+import { ProfileTasksComponent } from './profile-tasks/profile-tasks.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TaskDescriptionComponent } from './task-description/task-description.co
     ProfileComponent,
     ScoreboardComponent,
     TaskAdderComponent,
-    TaskDescriptionComponent
+    TaskDescriptionComponent,
+    ProfileTasksComponent
   ],
   imports: [
     FormsModule,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './data-models/user.model';
-import { Task } from './data-models/task.model';
+import { Task, ShortTask } from './data-models/task.model';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -11,25 +11,29 @@ import { catchError } from 'rxjs/operators';
 export class RestService {
 
   apiUrl = 'http://localhost:5000/api';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
-    })
-  };
+
 
   constructor(private http: HttpClient) { }
 
+  getHttpOptions() {
+    return  {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+  }
+
   getUser(id: number) {
-    return this.http.get<User>(this.apiUrl + '/Users/' + id, this.httpOptions);
+    return this.http.get<User>(this.apiUrl + '/Users/' + id, this.getHttpOptions());
   }
 
   getUsers() {
-    return this.http.get<User[]>(this.apiUrl + '/Users', this.httpOptions);
+    return this.http.get<User[]>(this.apiUrl + '/Users', this.getHttpOptions());
   }
   
   getTask(id: number) {
-    return this.http.get<Task>(this.apiUrl + '/TaskList/' + id, this.httpOptions);
+    return this.http.get<Task>(this.apiUrl + '/TaskList/' + id, this.getHttpOptions());
   }
 
   getNTasks(n: number, search: string = '', tags: string[], page: number) {
@@ -40,7 +44,7 @@ export class RestService {
       'columnToSearch': 'ShortDescription',
       'keyword': search
     };
-    return this.http.post(this.apiUrl + '/TaskList', body, this.httpOptions);
+    return this.http.post(this.apiUrl + '/TaskList', body, this.getHttpOptions());
   }
 
  addTask(task: Task, tags = []) {
@@ -48,13 +52,21 @@ export class RestService {
       "task": task,
       "tags": tags
     };
-    return this.http.post(this.apiUrl + '/TaskAdder', body, this.httpOptions);
+   return this.http.post(this.apiUrl + '/TaskAdder', body, this.getHttpOptions());
   }
 
   applyToTask(id: number) {
     const body = {
       'taskId': id
     }
-    return this.http.post(this.apiUrl + '/TaskList/apply/', body, this.httpOptions);
+    return this.http.post(this.apiUrl + '/TaskList/apply/', body, this.getHttpOptions());
+  }
+
+  getActiveTasks() {
+    return this.http.get<ShortTask[]>(this.apiUrl + '/Users/applied', this.getHttpOptions());
+  }
+
+  getTaskHistory() {
+    return this.http.get<ShortTask[]>(this.apiUrl + '/Users/history', this.getHttpOptions());
   }
 }
