@@ -1,8 +1,8 @@
-<h2 class="text-center"><small>You have </small>{{currentUserData.Points}}<small> Points</small></h2>
+<h2 class="text-center"><small>Your place: </small>{{currentUserPlace}}</h2>
 
 <div class="col-md-12">
   <ol class="list-group" *ngFor="let user of usersData; let i = index">
-    <li class="list-group-item" [class.active]="user.UserId === currentUserData.UserId" *ngIf="isStudent(user)">
+    <li class="list-group-item" [class.active]="user.UserId === getCurrentUserId()" *ngIf="isStudent(user)">
       <div class="row">
         <div class="col-1">
           {{i + 1}}

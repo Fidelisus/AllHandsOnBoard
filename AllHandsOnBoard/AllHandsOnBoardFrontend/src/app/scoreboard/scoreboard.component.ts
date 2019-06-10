@@ -16,20 +16,13 @@ export class ScoreboardComponent implements OnInit {
   // TODO current user
   private _usersData: User[];
   public get usersData(): User[] {
-    if (this._usersData != null) {
-      this._usersData.sort((a, b) => {
-        return b.Points - a.Points
-      });
-    }
         return this._usersData;
     }
   public set usersData(value: User[]) {
-    value.forEach((a, index, arr) => { if (a.Occupation.toLowerCase() !== "student") arr.splice(index, 1)});
       this._usersData = value;
     }
 
-  public currentUserData: User;
-
+  public currentUserPlace: number;
 
   constructor(private auth: AuthService,
     private rest: RestService,
@@ -45,8 +38,6 @@ export class ScoreboardComponent implements OnInit {
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
     }
-    console.log(+localStorage.getItem('userDBid'))
-    this.getCurrentUser(+localStorage.getItem('userDBid'));
     this.getData(10);
   }
 
@@ -60,12 +51,31 @@ export class ScoreboardComponent implements OnInit {
 
   getData(n: number, page = 1): void {
     this.rest.getUsers()
-      .subscribe(users => this.usersData = users);
+      .subscribe(users => {
+        this.usersData = users;
+        this._usersData.forEach((a, index, arr) => { if (a.Occupation.toLowerCase() != "student") arr.splice(index, 1) });
+        this._usersData.forEach((a, index, arr) => { if (a.Occupation.toLowerCase() != "student") arr.splice(index, 1) });
+        if (true) {
+          this._usersData.sort((a, b) => {
+            return b.Points - a.Points;
+          });
+        }
+      },
+        err => console.error('Observer got an error: ' + err),
+        () => {
+          this.getCurrentUserPlace();
+        }
+    );
   }
 
-  getCurrentUser(id: number): void {
-    this.rest.getUser(id)
-      .subscribe(user => this.currentUserData = user);
+  getCurrentUserId(): number {
+    return +localStorage.getItem('userDBid');
+  }
+
+  getCurrentUserPlace(): void {
+    if (this._usersData != null) {
+      this._usersData.forEach((a, index, arr) => { if (a.UserId != this.getCurrentUserId()) this.currentUserPlace = index; });
+    }
   }
 }
 

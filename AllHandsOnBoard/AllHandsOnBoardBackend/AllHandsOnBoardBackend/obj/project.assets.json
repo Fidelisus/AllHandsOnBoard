@@ -13072,11 +13072,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lsobo\\Desktop\\studia\\pbl\\PBLproject\\AllHandsOnBoard\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend.csproj",
+      "projectUniqueName": "C:\\Users\\lsobo\\Desktop\\studia\\pbl\\nowyPBL\\PBLproject\\AllHandsOnBoard\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend.csproj",
       "projectName": "AllHandsOnBoardBackend",
-      "projectPath": "C:\\Users\\lsobo\\Desktop\\studia\\pbl\\PBLproject\\AllHandsOnBoard\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend.csproj",
+      "projectPath": "C:\\Users\\lsobo\\Desktop\\studia\\pbl\\nowyPBL\\PBLproject\\AllHandsOnBoard\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend.csproj",
       "packagesPath": "C:\\Users\\lsobo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lsobo\\Desktop\\studia\\pbl\\PBLproject\\AllHandsOnBoard\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend\\obj\\",
+      "outputPath": "C:\\Users\\lsobo\\Desktop\\studia\\pbl\\nowyPBL\\PBLproject\\AllHandsOnBoard\\AllHandsOnBoardBackend\\AllHandsOnBoardBackend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
