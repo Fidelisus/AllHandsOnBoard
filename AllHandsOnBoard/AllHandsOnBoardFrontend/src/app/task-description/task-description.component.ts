@@ -1,11 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { Task } from '../data-models/task.model';
-import { Tags } from '../task-adder/tags.interface';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RestService } from '../rest.service';
 import { AuthService } from '../auth.service';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-description',
@@ -14,13 +11,13 @@ import { switchMap } from 'rxjs/operators';
 })
 export class TaskDescriptionComponent implements OnInit {
 
-  task: Task;
+  task;
   blueContent: string;
 
-  constructor(private restService:RestService,
+  constructor(private restService: RestService,
               private router: Router,
               private auth: AuthService,
-              private route: ActivatedRoute){}
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     let id = parseInt(this.route.snapshot.paramMap.get('taskid'), 10);
@@ -42,15 +39,22 @@ export class TaskDescriptionComponent implements OnInit {
     this.router.navigateByUrl('task-list');
   }
 
-   home(){
+  home(){
     this.router.navigateByUrl('home');
   }
-  
+
   checker() {
     if (localStorage.getItem('role') === 'student') {
       console.log(`apply`);
+      console.log(this.task);
+      this.apply();
     } else {
       console.log(`validate`);
     }
+  }
+
+  apply() {
+    this.restService.applyToTask(this.task.task.taskId)
+      .subscribe(next => console.log(next));
   }
 }

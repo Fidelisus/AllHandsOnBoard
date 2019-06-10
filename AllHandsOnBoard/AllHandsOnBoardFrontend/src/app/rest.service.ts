@@ -14,7 +14,7 @@ export class RestService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authentication': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
     })
   };
 
@@ -43,11 +43,18 @@ export class RestService {
     return this.http.post(this.apiUrl + '/TaskList', body, this.httpOptions);
   }
 
- addTask(task: Task, tags = []){
+ addTask(task: Task, tags = []) {
     const body = {
       "task": task,
       "tags": tags
     };
     return this.http.post(this.apiUrl + '/TaskAdder', body, this.httpOptions);
+  }
+
+  applyToTask(id: number) {
+    const body = {
+      'taskId': id
+    }
+    return this.http.post(this.apiUrl + '/TaskList/apply/', body, this.httpOptions);
   }
 }

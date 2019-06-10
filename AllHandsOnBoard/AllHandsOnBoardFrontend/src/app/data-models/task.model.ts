@@ -1,9 +1,12 @@
+import { User } from './user.model';
+
 export interface TDataModel {
   task: TDataModelTask;
   tags: string[];
   uploaderName: string;
   uploaderSurname: string;
   uploaderEmail: string;
+  applied: User;
 }
 
 export interface TDataModelTask {
@@ -30,6 +33,7 @@ export class Task {
   uploadDate: string;
   finishDate: string;
   stateoftask: string;
+  applied: User;
 
   constructor(data: TDataModel) {
     this.taskId = data.task.taskId;
@@ -44,5 +48,6 @@ export class Task {
     this.uploadDate = data.task.uploadDate;
     this.finishDate = data.task.workFinishDate;
     this.stateoftask = data.task.stateoftask;
+    this.applied = data.applied;
   }
 }

@@ -1,23 +1,23 @@
-<h2 class="text-center"><small>You have </small>{{currentUserData.points}}<small> Points</small></h2>
+<h2 class="text-center"><small>You have </small>{{currentUserData.Points}}<small> Points</small></h2>
 
 <div class="col-md-12">
   <ol class="list-group" *ngFor="let user of usersData; let i = index">
-    <li class="list-group-item"  [class.active]="user.userId === currentUserData.userId" *ngIf="isStudent(user)">
+    <li class="list-group-item" [class.active]="user.UserId === currentUserData.UserId" *ngIf="isStudent(user)">
       <div class="row">
         <div class="col-1">
           {{i + 1}}
         </div>
         <div class="col-3">
-          {{user.name}}
+          {{user.Name}}
         </div>
         <div class="col-3">
-          {{user.surname}}
+          {{user.Surname}}
         </div>
         <div class="col-4">
-          {{user.department}}
+          {{user.Department}}
         </div>
         <div class="col-1">
-          {{user.points}}
+          {{user.Points}}
         </div>
       </div>
     </li>

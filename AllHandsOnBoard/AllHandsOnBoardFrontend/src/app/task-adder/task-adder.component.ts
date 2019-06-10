@@ -68,7 +68,8 @@ export class TaskAdderComponent implements OnInit {
             taskShortDescription: short_description.value,
             pointsGained: parseInt(points_gained.value, 10),
             uploadDate: date.getTime().toString(),
-            finishDate: work_finish_date.value
+            finishDate: work_finish_date.value,
+            applied: null
           };
 
         console.log(this.task);

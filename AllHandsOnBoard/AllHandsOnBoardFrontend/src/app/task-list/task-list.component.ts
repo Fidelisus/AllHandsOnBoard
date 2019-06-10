@@ -15,6 +15,8 @@ export class TaskListComponent implements OnInit {
   searchFor = '';
   tagsToSearch: string[];
   tags = [];
+  allTasks = 100;
+  page = 1;
 
   constructor(private auth: AuthService,
               private rest: RestService,
@@ -40,7 +42,7 @@ export class TaskListComponent implements OnInit {
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
     }
-    this.getData(10);
+    this.getData(this.allTasks);
   }
 
   back() {
@@ -51,11 +53,11 @@ export class TaskListComponent implements OnInit {
     const current = this.tags.find(obj => obj === tag);
     current.isSelected = !current.isSelected;
     this.tagsToSearch = this.tags.filter(obj => obj.isSelected).map(obj => obj.id);
-    this.getData(10);
+    this.getData(this.allTasks);
   }
 
   searchMatch() {
-    this.getData(10);
+    this.getData(this.allTasks);
   }
 
   updateSearch(input: string) {
@@ -70,6 +72,7 @@ export class TaskListComponent implements OnInit {
         for (const item of array) {
           this.tasksData.push(new Task(item));
         }
+        this.tasksData.sort((a, b) => { return a.taskId - b.taskId; });
       });
   }
   
