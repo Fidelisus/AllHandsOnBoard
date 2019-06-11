@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic;
-
+using System.IO;
 namespace AllHandsOnBoardBackend.Services
 {
     public interface ITasksService
@@ -229,8 +229,8 @@ namespace AllHandsOnBoardBackend.Services
                     DBRating.UserId = studentId;
                     DBRating.Rating = rating;
                     context.UserRating.Add(DBRating);
-
-                    var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId);
+                    
+                    var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId && w.UserId != studentId );
                     foreach (TaskAggregation taskAgg in removeAggregation){
                         context.TaskAggregation.Remove(taskAgg);
                     }
@@ -239,12 +239,17 @@ namespace AllHandsOnBoardBackend.Services
                 }
                 catch (Exception e)
                 {
-                    Log.Error(String.Concat("Failed to validate a task on db : ", e.Message));
-                    return task;
+                    using (StreamWriter outputFile = new StreamWriter(Path.Combine("C:\\Users\\Famille\\Desktop", "log.txt")))
+                            {
+                                outputFile.WriteLine(e.Message);
+                                outputFile.WriteLine(studentId);
+                                
+                            }                    
+                    return new Tasks();
                 }
                 return task;
             }
-            return task;
+            return null;
         }
 
         public List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tagsList, int pageNumber, string columnToSearch, string keyword)
