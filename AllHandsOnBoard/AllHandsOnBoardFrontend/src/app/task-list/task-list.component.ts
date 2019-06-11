@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { RestService } from '../rest.service';
 import { Task } from '../data-models/task.model';
+import { Tags } from '../data-models/tags.model';
 
 @Component({
   selector: 'app-task-list',
@@ -14,6 +15,7 @@ export class TaskListComponent implements OnInit {
   tasksData: Task[];
   searchFor = '';
   tagsToSearch: string[];
+  tagsData: Tags[];
   tags = [];
   allTasks = 100;
   page = 1;
@@ -21,20 +23,12 @@ export class TaskListComponent implements OnInit {
   constructor(private auth: AuthService,
               private rest: RestService,
               private router: Router) {
-    this.tags = [
-      {id: 1, name: 'IT', isSelected: false},
-      {id: 2, name: 'Maths', isSelected: false},
-      {id: 3, name: 'Physics', isSelected: false},
-      {id: 4, name: 'Chemistry', isSelected: false},
-      {id: 5, name: 'Electronics', isSelected: false},
-      {id: 6, name: 'Teaching', isSelected: false},
-      {id: 7, name: 'Presentations', isSelected: false},
-      {id: 8, name: 'Forein languages', isSelected: false},
-      {id: 9, name: 'Erasmus students', isSelected: false},
-      {id: 10, name: 'Conferences', isSelected: false},
-      {id: 11, name: 'Physical', isSelected: false},
-      {id: 12, name: 'Sport', isSelected: false}
-    ];
+    this.rest.getTags()
+      .subscribe(data => this.tagsData = data, error1 => console.log(error1), () => {
+        for(const tag of this.tagsData) {
+          this.tags.push({id: tag.tagId, name: tag.tagDescription, isSelected: false});
+        }
+      });
     this.tagsToSearch = [];
   }
 

@@ -40,16 +40,23 @@ export class TaskDescriptionComponent implements OnInit {
   }
 
   home(){
-    this.router.navigateByUrl('home');
+    console.log(this.task.applied);
+    //this.router.navigateByUrl('home');
   }
 
-  checker() {
+  isStudent() {
     if (localStorage.getItem('role') === 'student') {
-      console.log(`apply`);
-      console.log(this.task);
-      this.apply();
+      return true;
     } else {
-      console.log(`validate`);
+      return false;
+    }
+  }
+
+  isTeacher() {
+    if (localStorage.getItem('role') === 'teacher') {
+      return true;
+    } else {
+      return false;
     }
   }
 

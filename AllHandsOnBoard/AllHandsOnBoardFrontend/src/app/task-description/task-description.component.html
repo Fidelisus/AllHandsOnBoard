@@ -83,6 +83,44 @@
         </div>
       </div>
     </div>
-   <button class="btn btn-success" (click)="checker()">{{blueContent}}</button>
+    <!-- student only -->
+    <button *ngIf="isStudent()" class="btn btn-success" (click)="apply()">{{blueContent}}</button>
+    <!-- teacher only -->
+    <div *ngIf="isTeacher()" class="col-md-12">
+      <ul class="list-group" *ngFor="let applicants of task.applied">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-1">
+
+            </div>
+            <div class="col-2">
+              Status: {{ applicants.Name }}
+            </div>
+            <div class="col-5">
+              {{task.taskShortDescription}}
+            </div>
+            <div class="col-3">
+              Task uploader: {{task.uploaderName + " " + task.uploaderSurname}}
+            </div>
+            <div class="col-1">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1">
+
+            </div>
+            <div class="col-2">
+              Points: {{task.pointsGained}}
+            </div>
+            <div class="col-9">
+              <span class="badge badge-secondary"> {{task.tags}} </span>
+            </div>
+            <div class="col-1">
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </form>
 </div>

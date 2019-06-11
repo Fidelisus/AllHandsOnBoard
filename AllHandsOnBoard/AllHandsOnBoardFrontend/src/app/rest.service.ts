@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { User } from './data-models/user.model';
 import { Task, ShortTask } from './data-models/task.model';
-import { catchError } from 'rxjs/operators';
+import { Tags } from './data-models/tags.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +33,10 @@ export class RestService {
   
   getTask(id: number) {
     return this.http.get<Task>(this.apiUrl + '/TaskList/' + id, this.getHttpOptions());
+  }
+
+  getTags(){
+    return this.http.get<Tags[]>(this.apiUrl + '/Tags/', this.httpOptions);
   }
 
   getNTasks(n: number, search: string = '', tags: string[], page: number) {
