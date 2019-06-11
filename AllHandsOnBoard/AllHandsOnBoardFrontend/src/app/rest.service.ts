@@ -11,7 +11,6 @@ export class RestService {
 
   apiUrl = 'http://localhost:5000/api';
 
-
   constructor(private http: HttpClient) { }
 
   getHttpOptions() {
@@ -36,7 +35,7 @@ export class RestService {
   }
 
   getTags(){
-    return this.http.get<Tags[]>(this.apiUrl + '/Tags/', this.httpOptions);
+    return this.http.get<Tags[]>(this.apiUrl + '/Tags/', this.getHttpOptions());
   }
 
   getNTasks(n: number, search: string = '', tags: string[], page: number) {
