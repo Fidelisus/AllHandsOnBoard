@@ -11,7 +11,6 @@ export class RestService {
 
   apiUrl = 'http://localhost:5000/api';
 
-
   constructor(private http: HttpClient) { }
 
   getHttpOptions() {
@@ -36,7 +35,7 @@ export class RestService {
   }
 
   getTags(){
-    return this.http.get<Tags[]>(this.apiUrl + '/Tags/', this.httpOptions);
+    return this.http.get<Tags[]>(this.apiUrl + '/Tags/', this.getHttpOptions());
   }
 
   getNTasks(n: number, search: string = '', tags: string[], page: number) {
@@ -63,6 +62,15 @@ export class RestService {
       'taskId': id
     }
     return this.http.post(this.apiUrl + '/TaskList/apply/', body, this.getHttpOptions());
+  }
+
+  validateTask(taskId: number, studentId: number, grade: number) {
+    const body = {
+      'taskId': taskId,
+      'studentId': studentId,
+      'rating': grade
+    }
+    return this.http.post(this.apiUrl + '/TaskList/validation/', body, this.getHttpOptions());
   }
 
   getActiveTasks() {
