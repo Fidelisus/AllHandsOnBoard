@@ -64,6 +64,15 @@ export class RestService {
     return this.http.post(this.apiUrl + '/TaskList/apply/', body, this.getHttpOptions());
   }
 
+  validateTask(taskId: number, studentId: number, grade: number) {
+    const body = {
+      'taskId': taskId,
+      'studentId': studentId,
+      'rating': grade
+    }
+    return this.http.post(this.apiUrl + '/TaskList/validation/', body, this.getHttpOptions());
+  }
+
   getActiveTasks() {
     return this.http.get<ShortTask[]>(this.apiUrl + '/Users/applied', this.getHttpOptions());
   }

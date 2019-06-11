@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
-import { Task } from '../data-models/task.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RestService } from '../rest.service';
 import { AuthService } from '../auth.service';
+import { User } from '../data-models/user.model';
 
 @Component({
   selector: 'app-task-description',
@@ -13,6 +13,8 @@ export class TaskDescriptionComponent implements OnInit {
 
   task;
   blueContent: string;
+  applicants: User[];
+  id: number;
 
   constructor(private restService: RestService,
               private router: Router,
@@ -20,10 +22,10 @@ export class TaskDescriptionComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    let id = parseInt(this.route.snapshot.paramMap.get('taskid'), 10);
-    console.log(id);
-    this.restService.getTask(id)
-      .subscribe(data => this.task = data);
+    this.id = parseInt(this.route.snapshot.paramMap.get('taskid'), 10);
+    console.log(this.id);
+    this.restService.getTask(this.id)
+      .subscribe(data => this.task = data, error1 => console.error(error1), () => this.applicants = this.task.applied);
 
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
@@ -39,9 +41,8 @@ export class TaskDescriptionComponent implements OnInit {
     this.router.navigateByUrl('task-list');
   }
 
-  home(){
-    console.log(this.task.applied);
-    //this.router.navigateByUrl('home');
+  home() {
+    this.router.navigateByUrl('home');
   }
 
   isStudent() {
@@ -62,6 +63,11 @@ export class TaskDescriptionComponent implements OnInit {
 
   apply() {
     this.restService.applyToTask(this.task.task.taskId)
+      .subscribe(next => console.log(next));
+  }
+
+  validate(userId: number, grade: number) {
+    this.restService.validateTask(this.id, userId, grade)
       .subscribe(next => console.log(next));
   }
 }
