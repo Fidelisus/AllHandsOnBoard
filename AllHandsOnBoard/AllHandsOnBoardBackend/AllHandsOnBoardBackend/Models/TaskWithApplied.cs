@@ -9,7 +9,7 @@ namespace AllHandsOnBoardBackend.Models
     {
         public TaskWithApplied(){
             tags = new List<string>();
-            Applied = new Dictionary<string,object>();
+            Applied = new List<Dictionary<string,object>>();
         }
 
         public Tasks task { get; set; }
@@ -17,6 +17,6 @@ namespace AllHandsOnBoardBackend.Models
         public string UploaderName { get; set; }
         public string UploaderEmail { get; set; }
         public List<string> tags { get; set; }
-        public Dictionary<string,object> Applied {get;set;}
+        public List<Dictionary<string,object>> Applied {get;set;}
     }
 }

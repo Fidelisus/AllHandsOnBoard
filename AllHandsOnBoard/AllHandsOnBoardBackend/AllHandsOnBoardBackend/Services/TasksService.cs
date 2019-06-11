@@ -101,9 +101,11 @@ namespace AllHandsOnBoardBackend.Services
             response.tags = taskWithUploader.tags;
             var type = typeof(Users);
             foreach(Users u in applied){
+                Dictionary<string,object> list = new Dictionary<string,object>();
                 foreach(PropertyInfo prop in type.GetProperties()){
-                    response.Applied.Add(prop.Name, prop.GetValue(u));
+                    list.Add(prop.Name, prop.GetValue(u));
                 }
+                response.Applied.Add(list);
             }
             response.task.TaskAggregation = null;
             return response;
