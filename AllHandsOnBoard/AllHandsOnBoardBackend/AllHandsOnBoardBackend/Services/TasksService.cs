@@ -234,18 +234,18 @@ namespace AllHandsOnBoardBackend.Services
                     foreach (TaskAggregation taskAgg in removeAggregation){
                         context.TaskAggregation.Remove(taskAgg);
                     }
-                    task.TasksValidated = null;
                     context.SaveChanges();
+                    task.TasksValidated = null;
                 }
                 catch (Exception e)
                 {
-                    using (StreamWriter outputFile = new StreamWriter(Path.Combine("C:\\Users\\Famille\\Desktop", "log.txt")))
+                    /*using (StreamWriter outputFile = new StreamWriter(Path.Combine("C:\\Users\\Famille\\Desktop", "log.txt")))
                             {
                                 outputFile.WriteLine(e.Message);
                                 outputFile.WriteLine(studentId);
                                 
-                            }                    
-                    return new Tasks();
+                            }*/                    
+                    return null;
                 }
                 return task;
             }
