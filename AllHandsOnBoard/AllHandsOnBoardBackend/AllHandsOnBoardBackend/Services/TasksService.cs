@@ -274,7 +274,7 @@ namespace AllHandsOnBoardBackend.Services
                     on taskAgrr.TagId equals tags.TagId
                     join users in context.Users
                     on tasks.UploaderId equals users.UserId
-                    where tagsList.Contains(tags.TagId)
+                    where tagsList.Contains(tags.TagId) && tasks.Stateoftask != "DONE" 
                     select new TaskWithUploader()
                     {
                         task = tasks,
@@ -292,6 +292,7 @@ namespace AllHandsOnBoardBackend.Services
                         join users in context.Users
                         on tasks.UploaderId equals users.UserId
                         //where { columnToSearch + ".Contains" + "(\"" + keyword.ToLower() + "\")" }
+                        where tasks.Stateoftask != "DONE"
                         select new TaskWithUploader()
                         {
                             task = tasks,
