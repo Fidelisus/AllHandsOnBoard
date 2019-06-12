@@ -1,4 +1,4 @@
-<div class="container">
+<<div class="container">
   <div class="row">
     <div class="col-md-12">
       <hr>
@@ -26,75 +26,14 @@
       <label>Deadline:</label>
       <input type="date" class="form-control" placeholder="DD-MM-YYYY" #work_finish_date>
     </div>
-    <br>
-    <h3>Tags:</h3>
-    <br>
-    <div>
-      <label>
-        <input type="checkbox" name="IT"  [(ngModel)]="tags.isIt">
-        IT
+
+    <button class="btn btn-outline-success" (click)="giveTags()">Add Tags</button>
+    <form [formGroup]="form" (ngSubmit)="submit(task_description, short_description, points_gained, work_finish_date)">
+      <label formArrayName="tagsData" *ngFor="let tag of form.controls.tagsData.controls; let i = index">
+        <input type="checkbox" [formControlName]="i">
+        {{tagsData[i]?.tagDescription}} &nbsp;
       </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="Maths"  [(ngModel)]="tags.isMaths">
-        Maths
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="IT"  [(ngModel)]="tags.isPhysics">
-        Physics
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="Maths"  [(ngModel)]="tags.isChemistry">
-        Chemistry
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="IT"  [(ngModel)]="tags.isElectronics">
-        Electronics
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="Maths"  [(ngModel)]="tags.isTeaching">
-        Teaching
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" name="IT"  [(ngModel)]="tags.isPresentations">
-        Presentations
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="Maths"  [(ngModel)]="tags.isForeign_languages">
-        Foreing Languages
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="IT"  [(ngModel)]="tags.isErasmus_students">
-        Erasmus Students
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="Maths"  [(ngModel)]="tags.isConferences">
-        Conferences
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="IT"  [(ngModel)]="tags.isPhysical">
-        Physical
-      </label>
-      &nbsp; &nbsp;
-      <label>
-        <input type="checkbox" name="Maths"  [(ngModel)]="tags.isSport">
-        Sport
-      </label>
-  <pre>{{tags | json }}</pre>
-    </div>
-    <div class="pull-right">
-      <button class="btn btn-outline-success" (click)="submit(task_description,short_description,points_gained,work_finish_date)">
-        Submit
-      </button>
-    </div>
+    </form>
+    <button class="btn btn-outline-success" (click)="submit(task_description, short_description, points_gained, work_finish_date)">Submit</button>
   </form>
 </div>
