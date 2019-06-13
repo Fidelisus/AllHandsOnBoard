@@ -63,8 +63,8 @@ export class ProfileTasksComponent implements OnInit {
         for (const item of array) {
           if (item.stateoftask.toUpperCase() === 'TODO') {
             item.stateoftask = 'In progress';
+            this.tasksData.push(new ShortTask(item));
           }
-          this.tasksData.push(new ShortTask(item));
         }
         console.log(this.tasksData);
       },
@@ -73,5 +73,10 @@ export class ProfileTasksComponent implements OnInit {
           this.countTasks();
         }
       );
+  }
+
+  description(task: Task) {
+    this.router.navigateByUrl('task-list/' + task.taskId);
+    localStorage.setItem('previousPage', 'profile');
   }
 }

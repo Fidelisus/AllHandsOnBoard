@@ -37,8 +37,11 @@ export class TaskDescriptionComponent implements OnInit {
     }
   }
 
-  back(){
-    this.router.navigateByUrl('task-list');
+  back() {
+    if (localStorage.getItem('previousPage') == 'profile')
+      this.router.navigateByUrl('profile');
+    else
+      this.router.navigateByUrl('task-list');
   }
 
   home() {
@@ -66,8 +69,15 @@ export class TaskDescriptionComponent implements OnInit {
       .subscribe(next => console.log(next));
   }
 
+  getCurrentUserId(): number {
+    return +localStorage.getItem('userDBid');
+  }
+
   validate(userId: number, grade: number) {
-    this.restService.validateTask(this.id, userId, grade)
-      .subscribe(next => console.log(next));
+    if (this.task.task.uploaderId == this.getCurrentUserId()) {
+      console.log('Validating');
+      this.restService.validateTask(this.id, userId, grade)
+        .subscribe(next => console.log(next));
+    }
   }
 }

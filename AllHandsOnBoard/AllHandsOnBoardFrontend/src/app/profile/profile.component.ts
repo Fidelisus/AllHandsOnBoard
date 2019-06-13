@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
   }
 
   setButtonState(s: state): void {
-    console.log("jazda");
     this.buttonState = s;
   }
 }
