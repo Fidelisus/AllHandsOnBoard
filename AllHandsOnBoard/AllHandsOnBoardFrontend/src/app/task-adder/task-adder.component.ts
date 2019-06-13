@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Task } from '../data-models/task.model';
+import { Task, ShortTask } from '../data-models/task.model';
 import { User } from '../data-models/user.model';
 import { Tags } from '../data-models/tags.model';
 import { Router } from '@angular/router';
 import { RestService } from '../rest.service';
 import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-task-adder',
@@ -16,7 +17,7 @@ export class TaskAdderComponent implements OnInit {
   @Input()
   counter: number;
   form: FormGroup;
-  task: Task;
+  task: ShortTask;
   user: User;
   tagsData: Tags[];
 
@@ -73,25 +74,24 @@ export class TaskAdderComponent implements OnInit {
             if(this.form.value.tagsData[i] == true) {list.push(i+1);}
           }
           var date = new Date();
-          /*
-          console.log(list);
+          
+          
           this.task = {
-            taskId: 20,
+            taskId: -1,
             uploaderId: parseInt(localStorage.getItem('userDBid'), 10),
-            uploaderName: this.user.Name,
-            uploaderSurname: this.user.Surname,
-            uploaderEmail: this.user.Email,
-            stateoftask: "",
-            tags: list,
+            stateoftask: "TODO",
             taskDescription: task_description.value,
-            taskShortDescription: short_description.value,
+            shortDescription: short_description.value,
             pointsGained: parseInt(points_gained.value, 10),
-            uploadDate: date.getTime().toString(),
-            finishDate: work_finish_date.value
-          };
-          */
+            //TODO
+            uploadDate: null,//date.getTime().toString(),
+            workFinishDate: null,//work_finish_date.value,
+            signingFinishDate: null,
+            noOfStudents: 3,
+            workStartDate: null
+    };
 
-        //this.restService.addTask(this.task, list);
+        this.restService.addTask(this.task, list).subscribe();
         return false;
   }
 }

@@ -49,12 +49,24 @@ export class RestService {
     return this.http.post(this.apiUrl + '/TaskList', body, this.getHttpOptions());
   }
 
- addTask(task: Task, tags = []) {
+  addTask(task: ShortTask, tags = []) {
     const body = {
-      "task": task,
-      "tags": tags
+      'task': {
+        'taskId': task.taskId,
+        'stateoftask': 'TODO',
+        'uploaderId': task.uploaderId,
+        'taskDescription': task.taskDescription,
+        'shortDescription': task.shortDescription,
+        'pointsGained': task.pointsGained,
+        'noOfStudents': task.noOfStudents,
+        //'uploadDate': task.uploadDate,
+        //'workFinishDate': task.workFinishDate,
+        //'signingFinishDate': task.signingFinishDate,
+        //'workStartDate': task.workStartDate
+      },
+      'tags': tags
     };
-   return this.http.post(this.apiUrl + '/TaskAdder', body, this.getHttpOptions());
+    return this.http.post(this.apiUrl + '/TaskAdder', body, this.getHttpOptions());
   }
 
   applyToTask(id: number) {

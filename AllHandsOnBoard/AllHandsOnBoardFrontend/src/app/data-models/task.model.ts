@@ -18,6 +18,9 @@ export interface TDataModelTask {
   uploadDate: string;
   workFinishDate: string;
   stateoftask: string;
+  signingFinishDate: string;
+  noOfStudents: number;
+  workStartDate: string;
 }
 
 export class ShortTask {
@@ -29,6 +32,9 @@ export class ShortTask {
   uploadDate: string;
   workFinishDate: string;
   stateoftask: string;
+  signingFinishDate: string;
+  noOfStudents: number;
+  workStartDate: string;
 
   constructor(data: TDataModelTask) {
     this.taskId = data.taskId;
@@ -38,6 +44,9 @@ export class ShortTask {
     this.uploadDate = data.uploadDate;
     this.workFinishDate = data.workFinishDate;
     this.stateoftask = data.stateoftask;
+    this.signingFinishDate = data.signingFinishDate;
+    this.workStartDate = data.workStartDate;
+    this.noOfStudents = data.noOfStudents;
   }
 }
 

@@ -42,8 +42,12 @@ namespace AllHandsOnBoardBackend.Controllers
         public JsonResult Post([FromBody] addTaskRequest request)
         {
             //We need to get two things from this, a task and an array of tags to associate the task 
-            if (tasksService.addTask(request.task,request.tags))
+            if (tasksService.addTask(request.task, request.tags))
+            {
+                request.task.TaskTags = null;
                 return new JsonResult(request.task);
+            }
+                
             else
                 return new JsonResult(false);
         }

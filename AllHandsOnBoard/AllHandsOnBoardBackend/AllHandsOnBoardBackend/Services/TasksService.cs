@@ -69,14 +69,18 @@ namespace AllHandsOnBoardBackend.Services
         {
             if(task.TaskId == -1)
                 task.TaskId = context.Tasks.Count()+1;
+            //throw new Exception("aaa");
             try
             {
                 context.Tasks.Add(task);
+                
                 foreach (var tag in tags)
                 {
                     var tg = new TaskTags();
                     tg.TaskId = task.TaskId;
                     tg.TagId = tag;
+                    tg.Tag = null;
+                    tg.Task = null;
                     context.TaskTags.Add(tg);
                 }
 
