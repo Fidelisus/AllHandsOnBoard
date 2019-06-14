@@ -76,7 +76,8 @@ export class ProfileTasksComponent implements OnInit {
       );
   }
 
-  description(task) {
+  description(task: Task) {
     this.router.navigateByUrl('task-list/' + task.taskId);
+    localStorage.setItem('previousPage', 'profile');
   }
 }

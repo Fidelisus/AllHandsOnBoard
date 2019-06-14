@@ -39,8 +39,11 @@ export class TaskDescriptionComponent implements OnInit {
     }
   }
 
-  back(){
-    this.router.navigateByUrl('task-list');
+  back() {
+    if (localStorage.getItem('previousPage') == 'profile')
+      this.router.navigateByUrl('profile');
+    else
+      this.router.navigateByUrl('task-list');
   }
 
   home() {
@@ -66,6 +69,10 @@ export class TaskDescriptionComponent implements OnInit {
   apply() {
     this.restService.applyToTask(this.task.task.taskId)
       .subscribe(next => console.log(next));
+  }
+
+  getCurrentUserId(): number {
+    return +localStorage.getItem('userDBid');
   }
 
   validate(userId: number, grade: number) {
