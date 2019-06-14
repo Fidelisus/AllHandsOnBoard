@@ -40,10 +40,11 @@ export class TaskDescriptionComponent implements OnInit {
   }
 
   back() {
-    if (localStorage.getItem('previousPage') == 'profile')
+    if (localStorage.getItem('previousPage') === 'profile') {
       this.router.navigateByUrl('profile');
-    else
+    } else {
       this.router.navigateByUrl('task-list');
+    }
   }
 
   home() {

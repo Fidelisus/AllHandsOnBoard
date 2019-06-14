@@ -1,89 +1,13 @@
-a {
-  color: #FFF;
-}
-
-.background{
-  background-image: url('../../assets/background.png');
-}
-
-.emp-profile{
-  padding: 1%;
-  border-radius: 0.5rem;
-}
-
-.col-md-6 {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  transition: all 200ms ease-in-out;
-}
-
-.col-md-6:hover {
-  transform: scale(1.03);
-}
-
-.block-profile {
-  height: 40vh;
-  background-image: url('../../assets/profile-block.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  border-radius: 2vh;
-}
-.text-field{
-  padding-top: 5vh;
-  padding-left: 5vh;
-}
-
-.block-tasklist {
-  height: 40vh;
-  background-image: url('../../assets/tasklist-block.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  border-radius: 2vh;
-
-}
-
-.block-administration {
-  height: 40vh;
-  background-image: url('../../assets/administration-block.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  border-radius: 2vh;
-}
-
-
-.block-scoreboard {
-  height: 40vh;
-  background-image: url('../../assets/scoreboard-block.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  border-radius: 2vh;
-}
-
-.block-blue {
-  cursor: pointer;
-  color: #FFF
-}
-
-.block-blue:hover {
-  text-decoration: underline;
-}
-
-.logout-button {
-  padding: 1vh 4vh;
-  border: none;
-  background: #CECDB4;
-  transition: 0.3s;
-}
-.logout-button:hover {
-  transform: scale(1.03);
-}
-
 .wrapper {
   border: solid 1px black;
   background-color: #fff;
   max-width: 1500px;
   height: 815px;
   margin: 20px auto 0 auto;
+}
+
+.header-wrapper {
+  display: flex;
 }
 
 .header {
@@ -108,7 +32,6 @@ a {
 }
 
 .title-wrapper h1 {
-  letter-spacing: 2px;
   font-weight: bold;
   font-size: 60px;
   float: right;
@@ -126,12 +49,25 @@ a {
   float: right;
 }
 
+.back-wrapper {
+
+}
+
+.back-wrapper button {
+
+}
+
+
 .items-wrapper {
   display: flex;
+  padding: 80px 50px 0 80px;
+}
+
+.items-wrapper a {
+  margin: 40px;
 }
 
 .menu-item-wrapper {
-  margin: 30px;
   cursor: pointer;
   width: 250px;
   height: 325px;

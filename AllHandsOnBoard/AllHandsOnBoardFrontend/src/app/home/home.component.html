@@ -1,63 +1,20 @@
-<!--
-<div class = "background">
-  <div class="container emp-profile">
-    <div class="row">
-      <div class="col-md-6">
-        <a routerLink="/profile">
-          <div class="block-profile">
-            <div class = "text-field">
-            <h2>Profile</h2>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6">
-        <a routerLink="/task-list">
-          <div class="block-tasklist">
-            <div class = "text-field">
-            <h2>Task List</h2>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <a (click)="blueDirect()">
-          <div class="block-administration block-blue">
-            <div class="text-field">
-              <h2>{{blueContent}}</h2>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6">
-        <a routerLink="/scoreboard">
-          <div class="block-scoreboard">
-             <div class = "text-field">
-             <h2>Scoreboard</h2>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <button class="logout-button" (click)="logout()">Logout</button>
-  </div>
-</div>
--->
 <div class="wrapper">
-  <div class="header">
-    <img src="../../assets/screen(5).png">
-    <div>
-      <div class="title-wrapper">
-        <h1>ALL HANDS ON BOARD</h1>
-      </div>
-      <div class="text-wrapper">
-        <h2>Become a part of the community!</h2>
+  <div class="header-wrapper">
+    <div class="header">
+      <img src="../../assets/screen(5).png">
+      <div>
+        <div class="title-wrapper">
+          <h1>ALL HANDS ON BOARD</h1>
+        </div>
+        <div class="text-wrapper">
+          <h2>Become a part of the community!</h2>
+        </div>
       </div>
     </div>
+    <div class="back-wrapper">
+      <button class="logout-button" (click)="logout()">Logout</button>
+    </div>
   </div>
-  <button class="logout-button" (click)="logout()">Logout</button>
   <div class="items-wrapper">
     <a routerLink="/profile">
       <div class="menu-item-wrapper">
