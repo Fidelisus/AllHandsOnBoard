@@ -64,18 +64,27 @@ export class TaskAdderComponent implements OnInit {
     this.addCheckboxes();
   }
 
+  validate(task: ShortTask, list: number[]){
+    if(task.taskDescription == "") return false;
+    if(task.shortDescription == "") return false;
+    if(isNaN(task.pointsGained)) return false;
+    if(task.workFinishDate == null) return false;
+    if(task.signingFinishDate == null) return false;
+    if(list.length == 0) return false;
+  }
+
   submit(task_description: HTMLInputElement,
         short_description: HTMLInputElement,
         points_gained: HTMLInputElement,
-        work_finish_date: HTMLInputElement): boolean{
+        work_finish_date: HTMLInputElement,
+        signing_finish_date: HTMLInputElement): boolean{
           let i: number;
           var list = [];
           for(i=0; i<this.form.value.tagsData.length; i++){
             if(this.form.value.tagsData[i] == true) {list.push(i+1);}
           }
           var date = new Date();
-          
-          
+
           this.task = {
             taskId: -1,
             uploaderId: parseInt(localStorage.getItem('userDBid'), 10),
@@ -83,14 +92,19 @@ export class TaskAdderComponent implements OnInit {
             taskDescription: task_description.value,
             shortDescription: short_description.value,
             pointsGained: parseInt(points_gained.value, 10),
-            //TODO
-            uploadDate: null,//date.getTime().toString(),
-            workFinishDate: null,//work_finish_date.value,
-            signingFinishDate: null,
+            uploadDate: null,
+            workFinishDate: work_finish_date.value.toString(),
+            signingFinishDate: work_finish_date.value.toString(),
             noOfStudents: 3,
             workStartDate: null
     };
 
+        console.log(this.task);
+        console.log(list);
+        if(this.validate(this.task, list)==false){
+          window.alert("All fields including tags must be filled");
+          return false;
+        };
         this.restService.addTask(this.task, list).subscribe();
         return false;
   }

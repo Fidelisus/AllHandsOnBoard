@@ -29,7 +29,7 @@ export class RestService {
   getUsers() {
     return this.http.get<User[]>(this.apiUrl + '/Users', this.getHttpOptions());
   }
-  
+
   getTask(id: number) {
     return this.http.get<Task>(this.apiUrl + '/TaskList/' + id, this.getHttpOptions());
   }
@@ -59,9 +59,9 @@ export class RestService {
         'shortDescription': task.shortDescription,
         'pointsGained': task.pointsGained,
         'noOfStudents': task.noOfStudents,
-        //'uploadDate': task.uploadDate,
-        //'workFinishDate': task.workFinishDate,
-        //'signingFinishDate': task.signingFinishDate,
+        'uploadDate': null,
+        'workFinishDate': task.workFinishDate,
+        'signingFinishDate': task.signingFinishDate,
         //'workStartDate': task.workStartDate
       },
       'tags': tags
