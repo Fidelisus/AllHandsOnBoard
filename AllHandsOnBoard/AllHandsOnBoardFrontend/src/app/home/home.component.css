@@ -77,3 +77,87 @@ a {
 .logout-button:hover {
   transform: scale(1.03);
 }
+
+.wrapper {
+  border: solid 1px black;
+  background-color: #fff;
+  max-width: 1500px;
+  height: 815px;
+  margin: 20px auto 0 auto;
+}
+
+.header {
+  display: flex;
+  max-width: 1000px;
+  height: 200px;
+  width: 1000px;
+  margin-top: 50px;
+  background-color: rgb(208, 234, 248);
+}
+
+.header img {
+  align-self: center;
+  height: 65%;
+  margin-left: 30px;
+}
+
+.title-wrapper {
+  padding: 25px 30px 0 0;
+  width: 700px;
+  float: right;
+}
+
+.title-wrapper h1 {
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 60px;
+  float: right;
+}
+
+.text-wrapper {
+  padding: 20px 30px 20px 0;
+  width: 700px;
+  float: right;
+}
+
+.text-wrapper h2 {
+  font-weight: bold;
+  font-size: 35px;
+  float: right;
+}
+
+.items-wrapper {
+  display: flex;
+}
+
+.menu-item-wrapper {
+  margin: 30px;
+  cursor: pointer;
+  width: 250px;
+  height: 325px;
+}
+
+.image-wrapper {
+  width: 250px;
+  height: 250px;
+  border: solid 8px #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.image-wrapper img {
+  transform: scale(0.75);
+  margin: 0 auto;
+}
+
+.menu-item-text {
+  text-align: center;
+  margin: 20px;
+  color: rgb(255, 103, 18);
+}
+
+.menu-item-text h2 {
+  font-weight: bold;
+  letter-spacing: 2px;
+}

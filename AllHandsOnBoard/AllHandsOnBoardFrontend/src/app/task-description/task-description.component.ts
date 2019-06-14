@@ -25,15 +25,17 @@ export class TaskDescriptionComponent implements OnInit {
     this.id = parseInt(this.route.snapshot.paramMap.get('taskid'), 10);
     console.log(this.id);
     this.restService.getTask(this.id)
-      .subscribe(data => this.task = data, error1 => console.error(error1), () => this.applicants = this.task.applied);
+      .subscribe(data => this.task = data,
+        error1 => console.error(error1),
+        () => this.applicants = this.task.applied);
 
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
-      }
+    }
     if (localStorage.getItem('role') === 'student') {
-        this.blueContent = 'Apply';
+      this.blueContent = 'Apply';
     } else {
-        this.blueContent = 'Validate';
+      this.blueContent = 'Validate';
     }
   }
 
@@ -68,6 +70,13 @@ export class TaskDescriptionComponent implements OnInit {
 
   validate(userId: number, grade: number) {
     this.restService.validateTask(this.id, userId, grade)
-      .subscribe(next => console.log(next));
+      .subscribe(next => console.log(next),
+        error1 => console.error(error1),
+        () => {
+          this.restService.getTask(this.id)
+            .subscribe(data => this.task = data,
+              error1 => console.error(error1),
+              () => this.applicants = this.task.applied);
+        });
   }
 }

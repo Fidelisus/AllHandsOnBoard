@@ -1,45 +1,103 @@
+<!--
 <div class = "background">
-<div class="container emp-profile">
-  <div class="row">
-    <div class="col-md-6">
-      <a routerLink="/profile">
-        <div class="block-profile">
-          <div class = "text-field">
-          <h2>Profile</h2>
+  <div class="container emp-profile">
+    <div class="row">
+      <div class="col-md-6">
+        <a routerLink="/profile">
+          <div class="block-profile">
+            <div class = "text-field">
+            <h2>Profile</h2>
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-6">
-      <a routerLink="/task-list">
-        <div class="block-tasklist">
-          <div class = "text-field">
-          <h2>Task List</h2>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a routerLink="/task-list">
+          <div class="block-tasklist">
+            <div class = "text-field">
+            <h2>Task List</h2>
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-6">
+        <a (click)="blueDirect()">
+          <div class="block-administration block-blue">
+            <div class="text-field">
+              <h2>{{blueContent}}</h2>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a routerLink="/scoreboard">
+          <div class="block-scoreboard">
+             <div class = "text-field">
+             <h2>Scoreboard</h2>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <button class="logout-button" (click)="logout()">Logout</button>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <a (click)="blueDirect()">
-        <div class="block-administration block-blue">
-          <div class="text-field">
-            <h2>{{blueContent}}</h2>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-6">
-      <a routerLink="/scoreboard">
-        <div class="block-scoreboard">
-           <div class = "text-field">
-           <h2>Scoreboard</h2>
-          </div>
-        </div>
-      </a>
+</div>
+-->
+<div class="wrapper">
+  <div class="header">
+    <img src="../../assets/screen(5).png">
+    <div>
+      <div class="title-wrapper">
+        <h1>ALL HANDS ON BOARD</h1>
+      </div>
+      <div class="text-wrapper">
+        <h2>Become a part of the community!</h2>
+      </div>
     </div>
   </div>
   <button class="logout-button" (click)="logout()">Logout</button>
-</div>
+  <div class="items-wrapper">
+    <a routerLink="/profile">
+      <div class="menu-item-wrapper">
+        <div class="image-wrapper">
+          <img src="../../assets/screen(1).png">
+        </div>
+        <div class="menu-item-text">
+          <h2>Profile</h2>
+        </div>
+      </div>
+    </a>
+    <a routerLink="/task-list">
+      <div class="menu-item-wrapper">
+        <div class="image-wrapper">
+          <img src="../../assets/screen(2).png">
+        </div>
+        <div class="menu-item-text">
+          <h2>Task list</h2>
+        </div>
+      </div>
+    </a>
+    <a routerLink="/scoreboard">
+      <div class="menu-item-wrapper">
+        <div class="image-wrapper">
+          <img src="../../assets/screen(4).png">
+        </div>
+        <div class="menu-item-text">
+          <h2>Scoreboard</h2>
+        </div>
+      </div>
+    </a>
+    <a (click)="blueDirect()">
+      <div class="menu-item-wrapper">
+        <div class="image-wrapper">
+          <img src="../../assets/screen(3).png">
+        </div>
+        <div class="menu-item-text">
+          <h2>{{blueContent}}</h2>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>

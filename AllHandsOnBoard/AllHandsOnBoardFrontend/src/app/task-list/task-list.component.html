@@ -27,7 +27,7 @@
             <div class="col-1">
               {{task.taskId}}
             </div>
-            <div class="col-8">
+            <div class="col-8" title="{{task.taskShortDescription}}">
               {{task.taskShortDescription}}
             </div>
             <div class="col-3">
@@ -39,7 +39,7 @@
               Points: {{task.pointsGained}}
             </div>
             <div class="col-6">
-              <span class="badge badge-secondary"> {{task.tags}} </span>
+              <span class="badge badge-secondary px-2" *ngFor="let tag of task.tags"> {{tag}} </span>
             </div>
             <div class="col-3">
               <!-- Task deadline: {{task.finishDate.substr(0, 10)}} -->

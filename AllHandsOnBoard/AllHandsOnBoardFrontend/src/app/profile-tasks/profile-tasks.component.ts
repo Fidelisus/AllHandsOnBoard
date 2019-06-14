@@ -14,11 +14,12 @@ export class ProfileTasksComponent implements OnInit {
   tasksNumber: number;
 
   constructor(private restService: RestService,
-    private router: Router,
-    private auth: AuthService) { }
+              private router: Router,
+              private auth: AuthService) {
+  }
 
   ngOnInit() {
-    if (localStorage.getItem('role') == 'teacher')
+    if (localStorage.getItem('role') === 'teacher')
       this.getTaskHistory(100);
     else
       this.getTasksActive(100);
@@ -29,7 +30,7 @@ export class ProfileTasksComponent implements OnInit {
   }
 
   isStudent(): boolean {
-    if (localStorage.getItem('role') == 'student')
+    if (localStorage.getItem('role') === 'student')
       return true;
     else
       return false;
@@ -38,40 +39,44 @@ export class ProfileTasksComponent implements OnInit {
   getTaskHistory(n: number, page = 1) {
     this.restService.getTaskHistory()
       .subscribe(data => {
-        this.tasksData = [];
-        const array = data as Array<any>;
-        for (const item of array) {
-          if (item.stateoftask.toUpperCase() === 'TODO') {
-            item.stateoftask = 'In progress';
+          this.tasksData = [];
+          const array = data as Array<any>;
+          for (const item of array) {
+            if (item.stateoftask.toUpperCase() === 'TODO') {
+              item.stateoftask = 'In progress';
+            }
+            this.tasksData.push(new ShortTask(item));
           }
-          this.tasksData.push(new ShortTask(item));
-        }
-        console.log(this.tasksData);
-      },
+          console.log(this.tasksData);
+        },
         err => console.error('Observer got an error: ' + err),
-          () => {
-            this.countTasks();
-          }
+        () => {
+          this.countTasks();
+        }
       );
   }
 
   getTasksActive(n: number, page = 1) {
     this.restService.getActiveTasks()
       .subscribe(data => {
-        this.tasksData = [];
-        const array = data as Array<any>;
-        for (const item of array) {
-          if (item.stateoftask.toUpperCase() === 'TODO') {
-            item.stateoftask = 'In progress';
+          this.tasksData = [];
+          const array = data as Array<any>;
+          for (const item of array) {
+            if (item.stateoftask.toUpperCase() === 'TODO') {
+              item.stateoftask = 'In progress';
+            }
+            this.tasksData.push(new ShortTask(item));
           }
-          this.tasksData.push(new ShortTask(item));
-        }
-        console.log(this.tasksData);
-      },
+          console.log(this.tasksData);
+        },
         err => console.error('Observer got an error: ' + err),
         () => {
           this.countTasks();
         }
       );
+  }
+
+  description(task) {
+    this.router.navigateByUrl('task-list/' + task.taskId);
   }
 }

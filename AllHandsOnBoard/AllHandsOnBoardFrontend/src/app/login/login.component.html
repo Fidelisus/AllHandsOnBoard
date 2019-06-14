@@ -1,18 +1,31 @@
-<div class="login-background">
-  <form class="custom-center">
-    <div class="input-wrapper">
-      <input type="text" placeholder="Your ID" #login
-             (keypress)="enterHandler(login, pass, $event)">
+<div class="wrapper">
+  <div class="logo">
+    <h1>
+      ALL<br>
+      HANDS<br>
+      ON<br>
+      BOARD</h1>
+    <img src="../../assets/screen(5).png">
+  </div>
+  <div class="login-wrapper">
+    <div class="login-data">
+      <div class="input-wrapper">
+        <label>Login</label>
+        <input type="text" #login (keypress)="enterHandler(login, pass, $event)">
+      </div>
+      <div class="input-wrapper">
+        <label>Password</label>
+        <input type="password" #pass (keypress)="enterHandler(login, pass, $event)">
+      </div>
+      <div class="submit-wrapper">
+        <button type="button" class="login-button"
+                (click)="clickHandler(login, pass)">
+          Login
+        </button>
+      </div>
     </div>
-    <div class="input-wrapper" >
-      <input type="password" placeholder="Password" #pass
-             (keypress)="enterHandler(login, pass, $event)">
+    <div class="quote">
+      <h2>Nobody can do everything but<br>everybody can do something</h2>
     </div>
-    <div class="input-wrapper">
-      <button type="button" class="login-button"
-              (click)="clickHandler(login, pass)">
-        Login
-      </button>
-    </div>
-  </form>
+  </div>
 </div>

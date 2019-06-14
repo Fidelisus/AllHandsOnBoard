@@ -1,7 +1,7 @@
 <h2 class="text-center"><small>Tasks active: </small>{{tasksNumber}}</h2>
 <div class="col-md-12" >
   <ul class="list-group" *ngFor="let task of tasksData">
-    <li class="list-group-item">
+    <li class="list-group-item" (click)="description(task)">
       <div class="row">
         <div class="col-3">
         </div>
