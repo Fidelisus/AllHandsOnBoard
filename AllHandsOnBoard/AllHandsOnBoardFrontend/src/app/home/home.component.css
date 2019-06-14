@@ -1,5 +1,4 @@
 .wrapper {
-  border: solid 1px black;
   background-color: #fff;
   max-width: 1500px;
   height: 815px;
@@ -53,11 +52,6 @@
 
 }
 
-.back-wrapper button {
-
-}
-
-
 .items-wrapper {
   display: flex;
   padding: 80px 50px 0 80px;
@@ -73,6 +67,10 @@
   height: 325px;
 }
 
+.menu-item-wrapper:hover>.image-wrapper {
+  transform: scale(1.1);
+}
+
 .image-wrapper {
   width: 250px;
   height: 250px;
@@ -80,6 +78,7 @@
   border-radius: 50%;
   display: flex;
   align-items: center;
+  transition: all 0.2s ease-in;
 }
 
 .image-wrapper img {

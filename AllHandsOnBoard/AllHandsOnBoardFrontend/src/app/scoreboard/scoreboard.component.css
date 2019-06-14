@@ -1,0 +1,83 @@
+.wrapper {
+  border: solid 1px black;
+  display: flex;
+  max-width: 1500px;
+  height: 815px;
+  margin: 20px auto 0 auto;
+}
+
+.side-panel {
+  height: 100%;
+  width: 250px;
+  background-color: rgb(208, 234, 248);
+}
+
+.orange-box {
+  margin-top: 50px;
+  width: 100%;
+  height: 250px;
+  background-color: rgb(255, 103, 18);
+}
+
+.box-text-wrapper {
+  padding: 25px 50px;
+}
+
+.box-text-wrapper h2 {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.input-box-wrapper {
+  width: 40%;
+  height: 50px;
+  margin-left: 30%;
+  padding: 0 3%;
+}
+
+.input-box {
+  background-color: rgb(242, 169, 128);
+  text-align: center;
+  height: 100%;
+}
+
+.input-box-text {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.page-wrapper {
+  display: flex;
+}
+
+.content-wrapper {
+  max-width: 900px;
+}
+
+.title-wrapper {
+  margin-left: 5px;
+  padding: 70px 0 0 70px;
+  border-bottom: solid 3px #000;
+}
+
+.title-wrapper h1 {
+  font-weight: bold;
+  font-size: 60px;
+  padding-right: 350px;
+  color: rgb(255, 103, 18);
+}
+
+.list-wrapper {
+  padding: 50px 0 50px 50px;
+}
+
+.list-group-item {
+  border: solid 3px #000;
+  border-radius: 0px;
+  margin: 5px 0;
+}
+
+.active {
+  background-color: rgb(242, 169, 128);
+  color: #000;
+}
