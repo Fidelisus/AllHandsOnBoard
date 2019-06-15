@@ -26,8 +26,8 @@ export class ProfileComponent implements OnInit {
   
   constructor(private restService: RestService,
               private router: Router,
-    private auth: AuthService) {
-    this.buttonState = state.PROFILE
+              private auth: AuthService) {
+    this.buttonState = state.PROFILE;
   }
 
   ngOnInit() {

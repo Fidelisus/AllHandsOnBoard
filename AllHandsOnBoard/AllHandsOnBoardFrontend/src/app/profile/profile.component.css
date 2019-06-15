@@ -79,3 +79,83 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+
+.wrapper {
+  border: solid 1px black;
+  display: flex;
+  max-width: 1500px;
+  height: 815px;
+  margin: 20px auto 0 auto;
+}
+
+.side-panel {
+  height: 100%;
+  width: 250px;
+  background-color: rgb(208, 234, 248);
+}
+
+.page-wrapper {
+  display: flex;
+}
+
+.content-wrapper {
+  max-width: 900px;
+}
+
+.title-wrapper {
+  margin-left: 5px;
+  padding: 70px 0 0 70px;
+  border-bottom: solid 3px #000;
+}
+
+.title-wrapper h1 {
+  font-weight: bold;
+  font-size: 55px;
+  padding-right: 335px;
+  color: rgb(255, 103, 18);
+}
+
+.nav-bar {
+  display: flex;
+  padding: 0 20px;
+}
+
+.nav-bar .nav-button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: auto;
+  max-width: 250px;
+  margin-left: 50px;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.list-wrapper {
+  padding: 20px 0 50px 75px;
+}
+
+.profile {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.button-wrapper {
+  margin: 50px 0 50px 150px;
+}
+
+.image-wrapper {
+  width: 200px;
+  height: 200px;
+  border: solid 4px #000;
+  display: flex;
+  align-items: center;
+  margin: 5px 0 50px 75px;
+}
+
+.image-wrapper img {
+  transform: scale(0.95);
+  margin: 0 auto;
+}

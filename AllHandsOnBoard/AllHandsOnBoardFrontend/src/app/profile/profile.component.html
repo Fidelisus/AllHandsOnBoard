@@ -1,3 +1,4 @@
+<!--
 <div class="container emp-profile">
   <form method="post">
     <div class="row">
@@ -100,7 +101,97 @@
       </div>
     </div>
   </form>
+  <div *ngIf="buttonState===state.ACTIVE_TASK">
+    <app-profile-tasks></app-profile-tasks>
+  </div>
 </div>
-<div *ngIf="buttonState===state.ACTIVE_TASK">
-  <app-profile-tasks></app-profile-tasks>
+-->
+
+<div class="wrapper">
+  <div class="side-panel"></div>
+  <div class="page-wrapper">
+    <div class="content-wrapper">
+      <div class="title-wrapper">
+        <h1>{{user?.Name}} {{user?.Surname}}</h1> <!-- make it scale itself -->
+      </div>
+      <div class="nav-bar">
+        <button class="nav-button" (click)="setButtonState(state.PROFILE)">ABOUT</button>
+        <button class="nav-button" (click)="setButtonState(state.ACTIVE_TASK)">ACTIVE TASKS</button>
+        <button class="nav-button" (click)="setButtonState(state.TASK_HISTORY)">TASKS DONE</button>
+      </div>
+      <div class="list-wrapper">
+        <div class="row profile" *ngIf="buttonState===state.PROFILE">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-4">
+                <label>Name</label>
+              </div>
+              <div class="col-8">
+                <p>{{user?.Name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Surname</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user?.Surname}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Email</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user?.Email}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Occupation</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user?.Occupation}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Index Number</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user?.IndexNo}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Department</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user?.Department}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Number of Points</label>
+              </div>
+              <div class="col-md-8">
+                <p>{{user?.Points}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="buttonState===state.ACTIVE_TASK">
+          <app-profile-tasks></app-profile-tasks>
+        </div>
+      </div>
+    </div>
+    <div class="back-wrapper">
+      <div class="button-wrapper">
+        <button class="nav-button" (click)="back()">Back</button>
+      </div>
+      <div class="image-wrapper">
+        <img src="../../assets/screen(1).png">
+      </div>
+    </div>
+  </div>
 </div>
