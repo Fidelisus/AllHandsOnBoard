@@ -3,6 +3,7 @@
   max-width: 1500px;
   height: 815px;
   margin: 20px auto 0 auto;
+  position: relative;
 }
 
 .header-wrapper {
@@ -49,12 +50,15 @@
 }
 
 .back-wrapper {
-
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .items-wrapper {
   display: flex;
-  padding: 80px 50px 0 80px;
+  padding: 80px 0;
+  justify-content: center;
 }
 
 .items-wrapper a {
