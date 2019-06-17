@@ -16,7 +16,8 @@ namespace AllHandsOnBoardBackend.Services
         TaskWithUploader getTask(int id);
         bool applyToTask(int taskId, int userId);
         bool taskStart (int taskId);
-        Tasks validateTask(int taskId,int studentId,int rating);
+        Tasks validateTask(int taskId,List<int> studentId,List<double> rating);
+        Tasks studentSelection(int taskId,List<int> studentId);
         List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tags, int pageNumber, string columnToSearch, string keyword);
         List<Users> getApplied(int id);
         TaskWithApplied getTaskWithApplied(int id);
@@ -49,8 +50,13 @@ namespace AllHandsOnBoardBackend.Services
 
     public class validationRequest{
         public int taskId{get;set;}
-        public int studentId{get;set;}
-        public int rating{get;set;}
+        public List<int> studentId{get;set;}
+        public List<double> rating{get;set;}
+    }
+
+    public class studentSelectRequest{
+        public int taskId{get;set;}
+        public List<int> studentId{get;set;}
     }
 
     public class TasksService : ITasksService
@@ -213,10 +219,10 @@ namespace AllHandsOnBoardBackend.Services
             return true;
         }
 
-        public Tasks validateTask(int taskId,int studentId,int rating)
+        public Tasks validateTask(int taskId,List<int> studentId,List<double> rating)
         {
             Tasks task = context.Tasks.Find(taskId);
-            Users student = context.Users.Find(studentId);
+            //Users student = context.Users.Find(studentId);
             
             if (task != null)
             {
@@ -224,19 +230,23 @@ namespace AllHandsOnBoardBackend.Services
                 {
                     task.Stateoftask = "DONE";
                     task.SigningFinishDate = DateTime.Now;
-                    var taskValidated = new TasksValidated();
-                    taskValidated.TaskId = task.TaskId;
-                    taskValidated.UserId = student.UserId;
-                    context.TasksValidated.Add(taskValidated);
-                    student.Points += task.PointsGained;
-                    var DBRating = new UserRating();
-                    DBRating.UserId = studentId;
-                    DBRating.Rating = rating;
-                    context.UserRating.Add(DBRating);
-                    
-                    var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId && w.UserId != studentId );
-                    foreach (TaskAggregation taskAgg in removeAggregation){
-                        context.TaskAggregation.Remove(taskAgg);
+                    int iterator = 0;                
+                    foreach(int userId in studentId){
+                        var taskValidated = new TasksValidated();
+                        taskValidated.TaskId = task.TaskId;
+                        taskValidated.UserId = userId;
+                        context.TasksValidated.Add(taskValidated);
+                        Users student = context.Users.Find(userId);
+                        student.Points += task.PointsGained;
+                        var DBRating = new UserRating();
+                        DBRating.UserId = userId;
+                        DBRating.Rating = rating.ElementAt(iterator);
+                        context.UserRating.Add(DBRating);
+                        var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId);
+                        foreach (TaskAggregation taskAgg in removeAggregation){
+                            context.TaskAggregation.Remove(taskAgg);
+                        }
+                        iterator++;
                     }
                     context.SaveChanges();
                     task.TasksValidated = null;
@@ -255,6 +265,35 @@ namespace AllHandsOnBoardBackend.Services
             }
             return null;
         }
+
+        public Tasks studentSelection(int taskId, List<int> studentId){
+            
+            Tasks task = context.Tasks.Find(taskId);
+            if(task != null){
+                try{
+                    task.Stateoftask = "ACC";
+                    var removeAggregation = context.TaskAggregation.Where(w => w.TaskId == task.TaskId);
+                    foreach (TaskAggregation taskAgg in removeAggregation){
+                        if(!studentId.Contains(taskAgg.UserId))
+                            context.TaskAggregation.Remove(taskAgg);
+                    }
+                    context.SaveChanges();
+                    task.TaskAggregation = null;
+                }
+                catch(Exception e){
+                    /*using (StreamWriter outputFile = new StreamWriter(Path.Combine("C:\\Users\\Famille\\Desktop", "log.txt")))
+                            {
+                                outputFile.WriteLine(e.Message);
+                                outputFile.WriteLine(studentId);
+                                
+                            }*/                    
+                    return null;
+                }
+                return task;
+            }
+                return null;
+        }
+
 
         public List<TaskWithUploader> getTasks(int numberOfTasks, List<int> tagsList, int pageNumber, string columnToSearch, string keyword)
         {

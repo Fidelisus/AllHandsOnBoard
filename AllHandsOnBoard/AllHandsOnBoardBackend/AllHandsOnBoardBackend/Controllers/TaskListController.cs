@@ -72,6 +72,16 @@ namespace AllHandsOnBoardBackend.Controllers
         }
 
         [Authorize(Roles = "teacher,admin")]
+        [HttpPost("selection/")]
+        public JsonResult studentSelection(studentSelectRequest request){
+            Tasks result = tasksService.studentSelection(request.taskId, request.studentId);
+            if(result != null){
+                return new JsonResult(result);
+            }
+            return new JsonResult(false);
+        }
+
+        [Authorize(Roles = "teacher,admin")]
         [HttpGet("taskStart/{id}")]
         public JsonResult taskStart(int id){
             bool result = tasksService.taskStart(id);
