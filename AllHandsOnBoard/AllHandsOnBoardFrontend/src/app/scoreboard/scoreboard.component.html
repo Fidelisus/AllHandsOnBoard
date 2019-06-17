@@ -1,33 +1,3 @@
-<!--
-<div *ngIf="this.isStudentLogged()">
-  <h2 class="text-center"><small>Your place: </small>{{currentUserPlace}}</h2>
-</div>
-<div class="col-md-12">
-  <ol class="list-group" *ngFor="let user of usersData; let i = index">
-    <li class="list-group-item" [class.active]="user.UserId === getCurrentUserId()" *ngIf="isStudent(user)">
-      <div class="row">
-        <div class="col-1">
-          {{i + 1}}
-        </div>
-        <div class="col-3">
-          {{user.Name}}
-        </div>
-        <div class="col-3">
-          {{user.Surname}}
-        </div>
-        <div class="col-4">
-          {{user.Department}}
-        </div>
-        <div class="col-1">
-          {{user.Points}}
-        </div>
-      </div>
-    </li>
-  </ol>
-</div>
-
-<button class="btn btn-outline-success" (click)="back()">Back</button>
--->
 <div class="wrapper">
   <div class="side-panel">
     <div class="orange-box" *ngIf="isStudentLogged()">
@@ -43,36 +13,36 @@
       </div>
     </div>
   </div>
-  <div class="page-wrapper">
-    <div class="content-wrapper">
-      <div class="title-wrapper">
-        <h1>BEST PLAYERS</h1>
-      </div>
-      <div class="list-wrapper">
-        <ol class="list-group" *ngFor="let user of usersData; let i = index">
-          <li class="list-group-item" [class.active]="user.UserId === getCurrentUserId()" *ngIf="isStudent(user)">
-            <div class="row">
-              <div class="col-2">
-                {{i + 1}}
-              </div>
-              <div class="col-2">
-                {{user.Name}}
-              </div>
-              <div class="col-3">
-                {{user.Surname}}
-              </div>
-              <div class="col-3">
-                {{user.Department}}
-              </div>
-              <div class="col-2 font-weight-bold">
-                {{user.Points}}
-              </div>
-            </div>
-          </li>
-        </ol>
-      </div>
+  <div class="content-wrapper">
+    <div class="title-wrapper">
+      <h1>BEST PLAYERS</h1>
     </div>
-    <div class="back-wrapper">
+    <div class="list-wrapper">
+      <ol class="list-group" *ngFor="let user of usersData; let i = index">
+        <li class="list-group-item" [class.active]="user.UserId === getCurrentUserId()" *ngIf="isStudent(user)">
+          <div class="row">
+            <div class="col-2">
+              {{i + 1}}
+            </div>
+            <div class="col-2">
+              {{user.Name}}
+            </div>
+            <div class="col-3">
+              {{user.Surname}}
+            </div>
+            <div class="col-3">
+              {{user.Department}}
+            </div>
+            <div class="col-2 font-weight-bold">
+              {{user.Points}}
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="back-wrapper">
+    <div class="button-wrapper">
       <button class="nav-button" (click)="back()">Back</button>
     </div>
   </div>

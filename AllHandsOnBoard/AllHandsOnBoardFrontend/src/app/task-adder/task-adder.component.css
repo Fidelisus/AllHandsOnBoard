@@ -1,3 +1,55 @@
-{
-  
+.wrapper {
+  border: solid 1px black;
+  display: flex;
+  max-width: 1500px;
+  margin: 20px auto 0 auto;
+}
+
+.side-panel {
+  width: 250px;
+  background-color: rgb(208, 234, 248);
+}
+
+.back-wrapper {
+  width: 250px;
+}
+
+.button-wrapper {
+  margin: 50px 25px 50px 75px;
+}
+
+.content-wrapper {
+  width: 1000px;
+}
+
+.title-wrapper {
+  margin-left: 5px;
+  padding: 70px 0 0 70px;
+  border-bottom: solid 3px #000;
+}
+
+.title-wrapper h1 {
+  font-weight: bold;
+  font-size: 55px;
+  padding-right: 335px;
+  color: rgb(255, 103, 18);
+}
+
+.form-wrapper {
+  padding: 20px 50px;
+}
+
+form label {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+form input {
+  border: solid 3px #000;
+  border-radius: 0px;
+  margin: 5px 0;
+}
+
+form .nav-button {
+  margin: 10px;
 }

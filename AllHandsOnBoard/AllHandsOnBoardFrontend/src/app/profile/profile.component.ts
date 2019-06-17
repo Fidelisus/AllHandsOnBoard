@@ -3,7 +3,6 @@ import { User } from '../data-models/user.model';
 import { RestService } from '../rest.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { Task } from '../data-models/task.model';
 
 enum state {
   PROFILE,

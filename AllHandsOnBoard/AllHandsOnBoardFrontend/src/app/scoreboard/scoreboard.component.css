@@ -47,12 +47,8 @@
   line-height: 40px;
 }
 
-.page-wrapper {
-  display: flex;
-}
-
 .content-wrapper {
-  max-width: 900px;
+  width: 1000px;
 }
 
 .title-wrapper {
@@ -81,4 +77,12 @@
 .active {
   background-color: rgb(242, 169, 128);
   color: #000;
+}
+
+.back-wrapper {
+  width: 250px;
+}
+
+.button-wrapper {
+  margin: 50px 25px 50px 75px;
 }

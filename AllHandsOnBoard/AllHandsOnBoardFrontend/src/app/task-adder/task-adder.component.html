@@ -1,4 +1,5 @@
-<<div class="container">
+<!--
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <hr>
@@ -9,7 +10,7 @@
       <hr>
     </div>
   </div>
-  <form action="/action_page.php">
+  <form>
     <div class="form-group">
       <label>Task description:</label>
       <input type="text" class="form-control" placeholder="Task Description" #task_description>
@@ -40,4 +41,52 @@
     </form>
     <button class="btn btn-outline-success" (click)="submit(task_description, short_description, points_gained, work_finish_date, signing_finish_date)">Submit</button>
   </form>
+</div>
+-->
+<div class="wrapper">
+  <div class="side-panel">
+  </div>
+  <div class="content-wrapper">
+    <div class="title-wrapper">
+      <h1>Task adder</h1>
+    </div>
+    <div class="form-wrapper">
+      <form>
+        <div class="form-group">
+          <label>Task description:</label>
+          <input type="text" class="form-control" placeholder="Task Description" #task_description>
+        </div>
+        <div class="form-group">
+          <label>Short description of task:</label>
+          <input type="text" class="form-control" placeholder="Short Description" #short_description>
+        </div>
+        <div class="form-group">
+          <label>Points to gain:</label>
+          <input type="number" class="form-control" placeholder="Number of Points" #points_gained>
+        </div>
+        <div class="form-group">
+          <label>Signing finish date:</label>
+          <input type="date" class="form-control" placeholder="DD-MM-YYYY" #work_finish_date>
+        </div>
+        <div class="form-group">
+          <label>Deadline of task:</label>
+          <input type="date" class="form-control" placeholder="DD-MM-YYYY" #signing_finish_date>
+        </div>
+
+        <button class="nav-button" (click)="giveTags()">Add Tags</button>
+        <form [formGroup]="form" (ngSubmit)="submit(task_description, short_description, points_gained, work_finish_date)">
+          <label formArrayName="tagsData" *ngFor="let tag of form.controls.tagsData.controls; let i = index">
+            <input type="checkbox" [formControlName]="i">
+            {{tagsData[i]?.tagDescription}} &nbsp;
+          </label>
+        </form>
+        <button class="nav-button" (click)="submit(task_description, short_description, points_gained, work_finish_date, signing_finish_date)">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="back-wrapper">
+    <div class="button-wrapper">
+      <button class="nav-button" (click)="back()">Back</button>
+    </div>
+  </div>
 </div>

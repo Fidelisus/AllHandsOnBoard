@@ -5,3 +5,7 @@
   width: 800px;
   cursor: pointer;
 }
+
+.list-wrapper {
+  padding: 0 0 50px 60px;
+}

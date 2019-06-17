@@ -1,4 +1,5 @@
 .wrapper {
+  border: solid 1px black;
   background-color: #fff;
   max-width: 1500px;
   height: 815px;
@@ -49,10 +50,10 @@
   float: right;
 }
 
-.back-wrapper {
+.back-wrapper .nav-button{
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 50px;
+  right: 50px;
 }
 
 .items-wrapper {
