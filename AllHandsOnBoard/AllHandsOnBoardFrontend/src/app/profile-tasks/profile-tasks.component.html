@@ -3,20 +3,16 @@
   <ul class="list-group" *ngFor="let task of tasksData">
     <li class="list-group-item" *ngIf="task.stateoftask=='In progress'" (click)="description(task)">
       <div class="row">
-        <div class="col-3">
-        </div>
-        <div class="col-2">
+        <div class="col-4">
           Status: {{ task?.stateoftask }}
         </div>
-        <div class="col-5">
+        <div class="col-6">
           {{task?.shortDescription}}
         </div>
         <div class="col-2">
         </div>
       </div>
       <div class="row">
-        <div class="col-3">
-        </div>
         <div class="col-2">
           Points: {{task?.pointsGained}}
         </div>
@@ -29,8 +25,6 @@
           <span class="badge badge-secondary"> {{task?.tags}} </span>
         </div>
         <div class="col-3" *ngIf="!isStudent()">
-        </div>
-        <div class="col-2">
         </div>
       </div>
     </li>

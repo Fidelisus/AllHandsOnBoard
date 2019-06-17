@@ -79,7 +79,7 @@ export class ScoreboardComponent implements OnInit {
 
   getCurrentUserPlace(): void {
     if (this._usersData != null) {
-      this._usersData.forEach((a, index, arr) => { if (a.UserId != this.getCurrentUserId()) this.currentUserPlace = index; });
+      this._usersData.forEach((a, index, arr) => { if (a.UserId === this.getCurrentUserId()) this.currentUserPlace = index + 1; });
     }
   }
 }

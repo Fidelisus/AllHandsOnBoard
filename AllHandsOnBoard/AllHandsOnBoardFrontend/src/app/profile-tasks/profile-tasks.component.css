@@ -1,0 +1,7 @@
+.list-group-item {
+  border: solid 3px #000;
+  border-radius: 0px;
+  margin: 5px 0;
+  width: 800px;
+  cursor: pointer;
+}
