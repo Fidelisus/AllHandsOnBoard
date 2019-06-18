@@ -1,3 +1,4 @@
+/*
 body{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
@@ -68,4 +69,58 @@ body{
 .profile-tab p{
     font-weight: 600;
     color: #0062cc;
+}
+*/
+
+.wrapper {
+  border: solid 1px black;
+  display: flex;
+  height: 815px;
+  max-width: 1500px;
+  margin: 20px auto 0 auto;
+}
+
+.side-panel {
+  width: 250px;
+  background-color: rgb(208, 234, 248);
+}
+
+.back-wrapper {
+  width: 250px;
+}
+
+.content-wrapper {
+  width: 1000px;
+}
+
+.title-wrapper {
+  margin-left: 5px;
+  padding: 70px 0 0 70px;
+  border-bottom: solid 3px #000;
+}
+
+.title-wrapper h1 {
+  font-weight: bold;
+  font-size: 55px;
+  padding-right: 335px;
+  color: rgb(255, 103, 18);
+}
+
+.content-wrapper h2 {
+  font-size: 40px;
+  margin-left: 75px;
+  letter-spacing: 2px;
+  color: rgb(255, 103, 18);
+}
+
+.list-wrapper {
+  padding: 20px 0 50px 75px;
+}
+
+.button-wrapper {
+  margin: 50px 25px 50px 75px;
+}
+
+.apply-button-wrapper {
+ margin: 25px 0;
 }
