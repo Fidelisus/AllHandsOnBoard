@@ -76,13 +76,21 @@ export class RestService {
     return this.http.post(this.apiUrl + '/TaskList/apply/', body, this.getHttpOptions());
   }
 
-  validateTask(taskId: number, studentId: number, grade: number) {
+  validateTask(taskId: number, studentId: number[], grade: number[]) {
     const body = {
       'taskId': taskId,
       'studentId': studentId,
       'rating': grade
     }
     return this.http.post(this.apiUrl + '/TaskList/validation/', body, this.getHttpOptions());
+  }
+
+  selectStudents(taskId: number, studentId: number[]){
+    const body = {
+      'taskId': taskId,
+      'studentId': studentId
+    }
+    return this.http.post(this.apiUrl + '/TaskList/selection/', body, this.getHttpOptions());
   }
 
   getActiveTasks() {

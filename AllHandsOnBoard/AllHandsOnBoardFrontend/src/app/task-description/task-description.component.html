@@ -87,6 +87,7 @@
     <button *ngIf="isStudent()" class="btn btn-success" (click)="apply()">{{blueContent}}</button>
     <!-- teacher only -->
     <div *ngIf="isTeacher()" class="col-md-12">
+      <div *ngIf="stateOfTask(); else validation" class="col-md-12">
       <h3 class="text-center">Applicants:</h3>
       <ul class="list-group" *ngFor="let applicant of this.applicants; let i=index">
         <li class="list-group-item">
@@ -96,19 +97,6 @@
             </div>
             <div class="col-8">
               {{ applicant.Name }} {{ applicant.Surname}}
-            </div>
-            <div class="col-1">
-              <select name="grade" #grade>
-                <option value="5">5</option>
-                <option value="4.5">4.5</option>
-                <option value="4">4</option>
-                <option value="3.5">3.5</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-              </select>
-            </div>
-            <div class="col-2">
-              <button class="btn btn-success" (click)="validate(applicant.UserId, +grade.value)">Validate</button>
             </div>
           </div>
           <div class="row">
@@ -120,11 +108,49 @@
             <div class="col-3">
               Department: {{ applicant.Department }}
             </div>
-            <div class="col-5">
-            </div>
+            <input type="checkbox" #state (click)="check(state.checked, applicant.UserId)">
           </div>
         </li>
       </ul>
+      <button class="btn btn-success" (click)="select()">Select</button>
+      </div>
+      <ng-template #validation>
+        <h3 class="text-center">Students:</h3>
+        <ul class="list-group" *ngFor="let applicant of this.applicants; let i=index">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-1">
+                 {{ i + 1 }}:
+              </div>
+              <div class="col-8">
+                {{ applicant.Name }} {{ applicant.Surname}}
+              </div>
+              <div class="col-1">
+              <select name="grade" #grade>
+                <option value="5">5</option>
+                <option value="4.5">4.5</option>
+                <option value="4">4</option>
+                <option value="3.5">3.5</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+              </select>
+              <button class="btn btn-success" [disabled]="clicked" (click)="grading(+grade.value, i); clicked = true;">Add grade</button>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-1">
+              </div>
+              <div class="col-3">
+                Index number: {{ applicant.IndexNo }}
+              </div>
+              <div class="col-3">
+                Department: {{ applicant.Department }}
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button class="btn btn-success" (click)="validate(grade)">Validate</button>
+      </ng-template>
     </div>
   </form>
 </div>
