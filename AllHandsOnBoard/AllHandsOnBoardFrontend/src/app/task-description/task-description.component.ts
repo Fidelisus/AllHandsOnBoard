@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RestService } from '../rest.service';
 import { AuthService } from '../auth.service';
 import { User } from '../data-models/user.model';
+import { ShortTask } from '../data-models/task.model';
 
 @Component({
   selector: 'app-task-description',
@@ -19,6 +20,7 @@ export class TaskDescriptionComponent implements OnInit {
   blueContent: string;
   applicants: User[];
   id: number;
+  canApply: boolean;
 
   constructor(private restService: RestService,
               private router: Router,
@@ -28,14 +30,19 @@ export class TaskDescriptionComponent implements OnInit {
   ngOnInit() {
     this.id = parseInt(this.route.snapshot.paramMap.get('taskid'), 10);
     this.restService.getTask(this.id)
-      .subscribe(data => this.task = data,
+      .subscribe(data => {
+        this.task = data;
+        this.canApply = false;
+        if (!this.isTeacher()) this.hasUserApplied();
+      },
         error1 => console.error(error1),
-        () => this.applicants = this.task.applied);
-
-    this.restService.getTask(this.id)
-      .subscribe(data => this.task = data,
-        error1 => console.error(error1),
-        () => this.state = this.task.task.stateoftask);
+        () => {
+          this.applicants = this.task.applied;
+          this.state = this.task.task.stateoftask;
+          if (this.task.task.stateoftask == 'ACC') {
+            this.task.task.stateoftask = 'In progress';
+          }
+        });
 
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
@@ -76,15 +83,16 @@ export class TaskDescriptionComponent implements OnInit {
   }
 
   stateOfTask(){
-    if (this.state == 'ACC')
-      return false;
-    else if (this.state == 'TODO')
+    if (this.state == 'TODO')
       return true;
+    else
+      return false;
   }
 
   apply() {
+    
     this.restService.applyToTask(this.task.task.taskId)
-      .subscribe(next => console.log(next));
+      .subscribe(next => this.hasUserApplied());
   }
 
   check(state: boolean, studentId: number){
@@ -97,7 +105,6 @@ export class TaskDescriptionComponent implements OnInit {
     else{
       this.list.splice(this.list.indexOf(studentId), 1);
     }
-    console.log(this.list);
   }
 
   isLast(index: number){
@@ -132,8 +139,27 @@ export class TaskDescriptionComponent implements OnInit {
       this.studentIDs[i] = this.applicants[i].UserId;
     }
     this.restService.validateTask(this.id, this.studentIDs, this.grades).
-      subscribe(next => console.log(next));
-    window.location.reload();
+      subscribe(next => {
+        console.log(next),
+        window.location.reload();
+      }
+      );
+    
   }
 
+  hasUserApplied() {
+    if (this.task) {
+      this.restService.getActiveTasks()
+        .subscribe(data => {
+          const array = data as Array<any>;
+          for (const item of array) {
+            if (item.taskId == +this.task.task.taskId) {
+              this.canApply = true;
+            }
+          }
+        }
+      );
+    }
+    return this.canApply;
+  }
 }

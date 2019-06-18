@@ -25,7 +25,7 @@
         <li class="list-group-item" *ngIf="task.stateoftask=='TODO'" (click)="description(task)">
           <div class="row">
             <div class="col-2">
-              {{task.taskId}}
+              Id: {{task.taskId}}
             </div>
             <div class="col-7" title="{{task.taskShortDescription}}">
               {{task.taskShortDescription}}

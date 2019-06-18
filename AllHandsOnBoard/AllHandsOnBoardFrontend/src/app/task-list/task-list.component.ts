@@ -23,16 +23,16 @@ export class TaskListComponent implements OnInit {
   constructor(private auth: AuthService,
               private rest: RestService,
               private router: Router) {
-    this.rest.getTags()
-      .subscribe(data => this.tagsData = data, error1 => console.log(error1), () => {
-        for(const tag of this.tagsData) {
-          this.tags.push({id: tag.tagId, name: tag.tagDescription, isSelected: false});
-        }
-      });
-    this.tagsToSearch = [];
   }
 
   ngOnInit() {
+    this.rest.getTags()
+      .subscribe(data => this.tagsData = data, error1 => console.log(error1), () => {
+        for (const tag of this.tagsData) {
+          this.tags.push({ id: tag.tagId, name: tag.tagDescription, isSelected: false });
+        }
+      });
+    this.tagsToSearch = [];
     if (!this.auth.isLoggedIn()) {
       this.router.navigateByUrl('login');
     }

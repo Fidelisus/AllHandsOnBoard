@@ -42,12 +42,11 @@ export class ProfileTasksComponent implements OnInit {
           this.tasksData = [];
           const array = data as Array<any>;
           for (const item of array) {
-            if (item.stateoftask.toUpperCase() === 'TODO') {
-              item.stateoftask = 'In progress';
+            if (item.stateoftask.toUpperCase() != 'DONE') {
+              item.stateoftask = 'Pending';
             }
             this.tasksData.push(new ShortTask(item));
           }
-          console.log(this.tasksData);
         },
         err => console.error('Observer got an error: ' + err),
         () => {
@@ -63,6 +62,9 @@ export class ProfileTasksComponent implements OnInit {
           const array = data as Array<any>;
           for (const item of array) {
             if (item.stateoftask.toUpperCase() === 'TODO') {
+              item.stateoftask = 'Pending';
+            }
+            if (item.stateoftask.toUpperCase() === 'ACC') {
               item.stateoftask = 'In progress';
             }
             this.tasksData.push(new ShortTask(item));

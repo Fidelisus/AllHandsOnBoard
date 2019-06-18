@@ -35,6 +35,7 @@ export class ShortTask {
   signingFinishDate: string;
   noOfStudents: number;
   workStartDate: string;
+  tags: string[];
 
   constructor(data: TDataModelTask) {
     this.taskId = data.taskId;
