@@ -10,9 +10,9 @@ export class User {
   Points: number;
   Password: string;
   Token: string;
+  rating: number;
   TaskAggregation: [];
   Tasks: [];
   TasksValidated: [];
   UserRating: [];
-  rating: number;
 }

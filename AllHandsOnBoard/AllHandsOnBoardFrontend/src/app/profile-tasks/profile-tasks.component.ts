@@ -12,6 +12,7 @@ import { Task, ShortTask } from '../data-models/task.model';
 export class ProfileTasksComponent implements OnInit {
   tasksData: ShortTask[];
   tasksNumber: number;
+  allTasks = 10000;
 
   constructor(private restService: RestService,
               private router: Router,
@@ -20,9 +21,9 @@ export class ProfileTasksComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('role') === 'teacher')
-      this.getTaskHistory(100);
+      this.getTaskHistory(this.allTasks);
     else
-      this.getTasksActive(100);
+      this.getTasksActive(this.allTasks);
   }
 
   countTasks(): void {
@@ -44,8 +45,8 @@ export class ProfileTasksComponent implements OnInit {
           for (const item of array) {
             if (item.stateoftask.toUpperCase() != 'DONE') {
               item.stateoftask = 'Pending';
+              this.tasksData.push(new ShortTask(item));
             }
-            this.tasksData.push(new ShortTask(item));
           }
         },
         err => console.error('Observer got an error: ' + err),
@@ -63,13 +64,13 @@ export class ProfileTasksComponent implements OnInit {
           for (const item of array) {
             if (item.stateoftask.toUpperCase() === 'TODO') {
               item.stateoftask = 'Pending';
+              this.tasksData.push(new ShortTask(item));
             }
-            if (item.stateoftask.toUpperCase() === 'ACC') {
+            else if (item.stateoftask.toUpperCase() === 'ACC') {
               item.stateoftask = 'In progress';
+              this.tasksData.push(new ShortTask(item));
             }
-            this.tasksData.push(new ShortTask(item));
           }
-          console.log(this.tasksData);
         },
         err => console.error('Observer got an error: ' + err),
         () => {

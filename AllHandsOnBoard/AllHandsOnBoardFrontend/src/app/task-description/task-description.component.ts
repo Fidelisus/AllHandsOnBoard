@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RestService } from '../rest.service';
 import { AuthService } from '../auth.service';
 import { User } from '../data-models/user.model';
-import { ShortTask } from '../data-models/task.model';
 
 @Component({
   selector: 'app-task-description',
@@ -37,7 +36,11 @@ export class TaskDescriptionComponent implements OnInit {
       },
         error1 => console.error(error1),
         () => {
-          this.applicants = this.task.applied;
+          this.applicants = [];
+          for (const user of this.task.applied) { 
+          this.restService.getUser(parseInt(user.UserId, 10))
+            .subscribe(data => this.applicants.push(data));
+        }
           this.state = this.task.task.stateoftask;
           if (this.task.task.stateoftask == 'ACC') {
             this.task.task.stateoftask = 'In progress';
@@ -82,6 +85,10 @@ export class TaskDescriptionComponent implements OnInit {
     }
   }
 
+  getLoggedUserId(): number {
+    return +localStorage.getItem('userDBid');
+  }
+
   stateOfTask(){
     if (this.state == 'TODO')
       return true;
@@ -90,7 +97,6 @@ export class TaskDescriptionComponent implements OnInit {
   }
 
   apply() {
-    
     this.restService.applyToTask(this.task.task.taskId)
       .subscribe(next => this.hasUserApplied());
   }
@@ -118,7 +124,10 @@ export class TaskDescriptionComponent implements OnInit {
       return false;
     }
     this.restService.selectStudents(this.task.task.taskId, this.list).
-      subscribe(next => console.log(next));
+      subscribe(next => {
+        window.location.reload();
+      }
+      );
     window.location.reload();
   }
 

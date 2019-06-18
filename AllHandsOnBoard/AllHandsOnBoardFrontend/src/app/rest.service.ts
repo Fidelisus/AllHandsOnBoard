@@ -62,7 +62,6 @@ export class RestService {
         'uploadDate': null,
         'workFinishDate': task.workFinishDate,
         'signingFinishDate': task.signingFinishDate,
-        //'workStartDate': task.workStartDate
       },
       'tags': tags
     };

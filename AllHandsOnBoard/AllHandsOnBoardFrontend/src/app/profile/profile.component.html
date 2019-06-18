@@ -68,6 +68,14 @@
               <p>{{user?.Points}}</p>
             </div>
           </div>
+          <div class="row" *ngIf="user?.Occupation.toLowerCase() === 'student'">
+            <div class="col-md-4">
+              <label>User rating</label>
+            </div>
+            <div class="col-md-8">
+              <p>{{user?.rating}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

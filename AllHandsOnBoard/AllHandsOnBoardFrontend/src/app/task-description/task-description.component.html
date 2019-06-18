@@ -37,8 +37,7 @@
                 <label>Uploader Email:</label>
               </div>
               <div class="col-md-8">
-                <p>{{task?.uploaderEmail
-                  }}
+                <p>{{task?.uploaderEmail}}
                 </p>
               </div>
             </div>
@@ -63,7 +62,7 @@
                 <label>Deadline of the task:</label>
               </div>
               <div class="col-md-8">
-                <p>{{task?.task.finishDate}}</p>
+                <p>{{task?.task.uploadDate?.substr(0, 10)}}</p>
               </div>
             </div>
             <div class="row py-1">
@@ -89,26 +88,27 @@
     <!-- student only -->
     <button *ngIf="isStudent()&&!canApply" class="btn btn-success" (click)="apply()">{{blueContent}}</button>
     <!-- teacher only -->
-    <div *ngIf="isTeacher()" class="col-md-12">
+    <div *ngIf="isTeacher()&&task?.task.uploaderId==getLoggedUserId()" class="col-md-12">
       <div *ngIf="stateOfTask(); else validation" class="col-md-12">
         <h3 class="text-center">Applicants:</h3>
-        <ul class="list-group" *ngFor="let applicant of this.applicants; let i=index">
+        <ul class="list-group" *ngFor="let applicant of applicants; let i=index">
           <li class="list-group-item">
             <div class="row">
-              <div class="col-1">
+              <div class="col-2">
                 {{ i + 1 }}:
               </div>
-              <div class="col-8">
+              <div class="col-7">
                 {{ applicant.Name }} {{ applicant.Surname}}
               </div>
             </div>
             <div class="row">
-              <div class="col-1">
+              <div class="col-2">
+                Rating: {{ applicant.rating.toString().substring(0,4) }}
               </div>
               <div class="col-3">
                 Index number: {{ applicant.IndexNo }}
               </div>
-              <div class="col-3">
+              <div class="col-2">
                 Department: {{ applicant.Department }}
               </div>
               <input type="checkbox" #state (click)="check(state.checked, applicant.UserId)">
@@ -116,6 +116,7 @@
           </li>
         </ul>
         <button class="btn btn-success" (click)="select()">Select</button>
+        <button class="btn btn-success"> Delete task</button>
       </div>
       <ng-template #validation>
         <h3 class="text-center">Students:</h3>

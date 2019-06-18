@@ -27,23 +27,22 @@
             <div class="col-2">
               Id: {{task.taskId}}
             </div>
-            <div class="col-7" title="{{task.taskShortDescription}}">
+            <div class="col-6" title="{{task.taskShortDescription}}">
               {{task.taskShortDescription}}
             </div>
-            <div class="col-3">
-              Task created: {{task.uploadDate.substr(0, 10)}}
+            <div class="col-4">
+              Signing deadline: {{task.uploadDate.substr(0, 10)}}
             </div>
           </div>
           <div class="row">
             <div class="col-2">
               Points: {{task.pointsGained}}
             </div>
-            <div class="col-7">
+            <div class="col-6">
               <span class="badge badge-secondary px-2" *ngFor="let tag of task.tags"> {{tag}} </span>
             </div>
-            <div class="col-3">
-              <!--Task deadline: {{task.finishDate.substr(0, 10)}}-->
-              Task deadline: {{task.uploadDate.substr(0, 10)}}
+            <div class="col-4">
+              Finish deadline: {{task.finishDate?.substr(0, 10)}}
             </div>
           </div>
         </li>

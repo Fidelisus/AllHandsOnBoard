@@ -96,7 +96,8 @@ export class TaskAdderComponent implements OnInit {
             workFinishDate: work_finish_date.value.toString(),
             signingFinishDate: work_finish_date.value.toString(),
             noOfStudents: 3,
-            workStartDate: null
+            workStartDate: null,
+            tags: null
     };
 
         console.log(this.task);
@@ -105,7 +106,8 @@ export class TaskAdderComponent implements OnInit {
           window.alert("All fields including tags must be filled");
           return false;
         };
-        this.restService.addTask(this.task, list).subscribe();
+    this.restService.addTask(this.task, list).subscribe();
+    window.location.reload();
         return false;
   }
 }

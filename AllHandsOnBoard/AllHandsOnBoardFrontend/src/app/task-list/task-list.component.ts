@@ -17,7 +17,7 @@ export class TaskListComponent implements OnInit {
   tagsToSearch: string[];
   tagsData: Tags[];
   tags = [];
-  allTasks = 100;
+  allTasks = 10000;
   page = 1;
 
   constructor(private auth: AuthService,
