@@ -1,3 +1,4 @@
+<!--
 <div class="container emp-profile">
   <form method="post">
     <div class="row">
@@ -85,9 +86,9 @@
         </div>
       </div>
     </div>
-    <!-- student only -->
+    &lt;!&ndash; student only &ndash;&gt;
     <button *ngIf="isStudent()&&!canApply" class="btn btn-success" (click)="apply()">{{blueContent}}</button>
-    <!-- teacher only -->
+    &lt;!&ndash; teacher only &ndash;&gt;
     <div *ngIf="isTeacher()&&task?.task.uploaderId==getLoggedUserId()" class="col-md-12">
       <div *ngIf="stateOfTask(); else validation" class="col-md-12">
         <h3 class="text-center">Applicants:</h3>
@@ -158,4 +159,184 @@
       </ng-template>
     </div>
   </form>
+</div>
+-->
+<div class="wrapper">
+  <div class="side-panel"></div>
+  <div class="content-wrapper">
+    <div class="title-wrapper">
+      <h1>Task description</h1>
+    </div>
+    <h2>{{task?.task.shortDescription}}</h2>
+    <div class="list-wrapper">
+      <div class="row py-3">
+        <div class="col-md-3">
+          <label>Task Description:</label>
+        </div>
+        <div class="col-md-9">
+          <p>{{task?.task.taskDescription}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="row py-1">
+            <div class="col-md-6">
+              <label>State of task:</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{task?.task.stateoftask}}</p>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-md-6">
+              <label>Deadline of the task:</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{task?.task.uploadDate?.substr(0, 10)}}</p>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-md-6">
+              <label>Points to Gain:</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{task?.task.pointsGained}}</p>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-md-6">
+              <label>Number of students needed:</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{task?.task.noOfStudents}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row py-1">
+            <div class="col-md-6">
+              <label>Uploader Name:</label>
+            </div>
+            <div class="col-md-6">
+              <p> {{ task?.uploaderName }} </p>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-md-6">
+              <label>Uploader Surname:</label>
+            </div>
+            <div class="col-md-6">
+              <p> {{task?.uploaderSurname }} </p>
+            </div>
+          </div>
+          <div class="row py-1">
+            <div class="col-md-6">
+              <label>Uploader Email:</label>
+            </div>
+            <div class="col-md-6">
+              <p> {{ task?.uploaderEmail }} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row py-1">
+        <div class="col-md-3">
+          <label>Tags:</label>
+        </div>
+        <div class="col-md-9">
+          <span class="badge badge-secondary px-2" *ngFor="let tag of task.tags"> {{tag}} </span>
+        </div>
+      </div>
+      <!--student only-->
+      <button *ngIf="isStudent()&&!canApply" class="nav-button" (click)="apply()">{{blueContent}}</button>
+      <!--teacher only-->
+      <div *ngIf="isTeacher()&&task?.task.uploaderId==getLoggedUserId()">
+        <div *ngIf="stateOfTask(); else validation">
+          <h3 class="text-center">Applicants:</h3>
+          <ul class="list-group" *ngFor="let applicant of applicants; let i=index">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-10">
+                  <div class="row">
+                    <div class="col-3">
+                      {{ i + 1 }}:
+                    </div>
+                    <div class="col-9">
+                      {{ applicant.Name }} {{ applicant.Surname}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      Rating: {{ applicant.rating.toString().substring(0,4) }}
+                    </div>
+                    <div class="col-5">
+                      Index number: {{ applicant.IndexNo }}
+                    </div>
+                    <div class="col-4">
+                      Department: {{ applicant.Department }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2 custom-center">
+                  <input type="checkbox" #state (click)="check(state.checked, applicant.UserId)">
+                </div>
+              </div>
+            </li>
+          </ul>
+          <button class="nav-button"> Delete task</button>
+          <button class="nav-button float-right" (click)="select()">Select</button>
+        </div>
+        <ng-template #validation>
+          <h3 class="text-center">Students:</h3>
+          <ul class="list-group" *ngFor="let applicant of this.applicants; let i=index">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-8">
+                  <div class="row">
+                    <div class="col-3">
+                      {{ i + 1 }}:
+                    </div>
+                    <div class="col-9">
+                      {{ applicant.Name }} {{ applicant.Surname}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      Rating: {{ applicant.rating.toString().substring(0,4) }}
+                    </div>
+                    <div class="col-5">
+                      Index number: {{ applicant.IndexNo }}
+                    </div>
+                    <div class="col-4">
+                      Department: {{ applicant.Department }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="validate-wrapper">
+                    <select name="grade" #grade>
+                      <option value="5">5</option>
+                      <option value="4.5">4.5</option>
+                      <option value="4">4</option>
+                      <option value="3.5">3.5</option>
+                      <option value="3">3</option>
+                      <option value="2">2</option>
+                      <option value="2">0</option>
+                    </select>
+                    <button class="nav-button" [disabled]="clicked" (click)="grading(+grade.value, i); clicked = true;">Add grade</button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <button class="nav-button" (click)="validate(grade)">Validate</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="back-wrapper">
+    <div class="button-wrapper">
+      <button class="nav-button" (click)="back()">Back</button>
+    </div>
+  </div>
 </div>

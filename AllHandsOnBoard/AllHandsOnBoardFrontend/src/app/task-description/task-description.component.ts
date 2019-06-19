@@ -37,12 +37,12 @@ export class TaskDescriptionComponent implements OnInit {
         error1 => console.error(error1),
         () => {
           this.applicants = [];
-          for (const user of this.task.applied) { 
-          this.restService.getUser(parseInt(user.UserId, 10))
-            .subscribe(data => this.applicants.push(data));
-        }
+          for (const user of this.task.applied) {
+            this.restService.getUser(parseInt(user.UserId, 10))
+              .subscribe(data => this.applicants.push(data));
+          }
           this.state = this.task.task.stateoftask;
-          if (this.task.task.stateoftask == 'ACC') {
+          if (this.task.task.stateoftask === 'ACC') {
             this.task.task.stateoftask = 'In progress';
           }
         });
@@ -89,8 +89,8 @@ export class TaskDescriptionComponent implements OnInit {
     return +localStorage.getItem('userDBid');
   }
 
-  stateOfTask(){
-    if (this.state == 'TODO')
+  stateOfTask() {
+    if (this.state === 'TODO')
       return true;
     else
       return false;
@@ -114,7 +114,7 @@ export class TaskDescriptionComponent implements OnInit {
   }
 
   isLast(index: number){
-    if(this.applicants.length == (index + 1))
+    if(this.applicants.length === (index + 1))
       return true;
   }
 
@@ -123,12 +123,10 @@ export class TaskDescriptionComponent implements OnInit {
       window.alert("No students chosen");
       return false;
     }
-    this.restService.selectStudents(this.task.task.taskId, this.list).
-      subscribe(next => {
+    this.restService.selectStudents(this.task.task.taskId, this.list)
+      .subscribe(next => {
         window.location.reload();
-      }
-      );
-    window.location.reload();
+      });
   }
 
   getCurrentUserId(): number {

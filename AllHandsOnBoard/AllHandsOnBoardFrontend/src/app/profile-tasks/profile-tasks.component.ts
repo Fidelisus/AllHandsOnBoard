@@ -43,8 +43,11 @@ export class ProfileTasksComponent implements OnInit {
           this.tasksData = [];
           const array = data as Array<any>;
           for (const item of array) {
-            if (item.stateoftask.toUpperCase() != 'DONE') {
+            if (item.stateoftask.toUpperCase() === 'TODO') {
               item.stateoftask = 'Pending';
+              this.tasksData.push(new ShortTask(item));
+            } else if (item.stateoftask.toUpperCase() === 'ACC') {
+              item.stateoftask = 'In progress';
               this.tasksData.push(new ShortTask(item));
             }
           }
@@ -65,8 +68,7 @@ export class ProfileTasksComponent implements OnInit {
             if (item.stateoftask.toUpperCase() === 'TODO') {
               item.stateoftask = 'Pending';
               this.tasksData.push(new ShortTask(item));
-            }
-            else if (item.stateoftask.toUpperCase() === 'ACC') {
+            } else if (item.stateoftask.toUpperCase() === 'ACC') {
               item.stateoftask = 'In progress';
               this.tasksData.push(new ShortTask(item));
             }
