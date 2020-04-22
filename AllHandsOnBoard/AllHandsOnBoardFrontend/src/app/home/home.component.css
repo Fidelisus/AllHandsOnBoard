@@ -87,7 +87,8 @@
 }
 
 .image-wrapper img {
-  transform: scale(0.75);
+  width: 180px;
+  height: 180px;
   margin: 0 auto;
 }
 

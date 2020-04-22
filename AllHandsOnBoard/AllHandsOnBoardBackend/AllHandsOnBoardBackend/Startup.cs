@@ -49,7 +49,7 @@ namespace AllHandsOnBoardBackend
                     builder =>
                     {
 
-                         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                         //builder.WithOrigins("http://localhost:4200");
                     });
             });

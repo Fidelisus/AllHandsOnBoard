@@ -22,21 +22,6 @@ namespace AllHandsOnBoardBackend.Controllers
             tasksService = userServiceParam;
         }
 
-        // POST: api/TaskAdder
-
-        /*
-        exemple without all the properties
-        JSON : 
-        {
-         	"task":
-                {
-                    "TaskId" : -1,
-                    "task_description":"this is a test",
-                    "points_gained":10,
-                    "work_start_date":"{{$timestamp}}"
-                },
-                "tags":[1,2]
-        } */
         [Authorize(Roles = "teacher,admin")]
         [HttpPost]
         public JsonResult Post([FromBody] addTaskRequest request)

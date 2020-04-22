@@ -38,8 +38,6 @@ namespace AllHandsOnBoardBackend.Controllers
             //List<Users> applied = tasksService.getApplied(id);
             if (task != null)
             {
-                //Dictionary<String,Object> response = new Dictionary<String,Object>{{"Task",task},{ "Applied",applied}};
-                //task.TaskAggregation = null;
                 return new JsonResult(task);
             }
             else
@@ -88,18 +86,6 @@ namespace AllHandsOnBoardBackend.Controllers
             return new JsonResult(result);
         }
 
-
-        
-
-        /*Json should look like 
-        {
-            "numberOfTasks":1,
-            "listTags":[],
-            "pageNumber":1,
-            "columnToSearch":"ShortDescription",
-            "keyword":"cake"
-        }
-             */
         [AllowAnonymous]
         [HttpPost]
         public JsonResult GetXTasks([FromBody] GetTasksRequest request){
